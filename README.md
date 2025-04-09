@@ -9,6 +9,7 @@
 - **Feedback Mechanism:**  
 - **反馈机制**  
   When a square is selected,it will show the number of mines around it.  
+  选中格子时，显示周围雷的数量。    
 ### 🛠️ Inplementation 项目实现:  
 - **Module:**  
 - **模块:**  
