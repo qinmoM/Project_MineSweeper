@@ -1,5 +1,4 @@
-# Game Project: Mine Sweeper  
-游戏项目：扫雷  
+# Game Project: Mine Sweeper 游戏项目：扫雷  
 ## This is a classic project of Minesweeper game.As a practice of implementing a project implementation during my C language learning.  
 这是一个经典的扫雷游戏项目，作为我学习c语言时的项目实现练习，  
 ### 🌟 Core Feartrue 核心功能:  
@@ -17,7 +16,7 @@
   随机数和二维数组。  
 - **Technology Stack:**  
 - **技术栈:**  
-  The development environment is Visual Studio 2022.  
-  本项目开发环境为VS2022。  
+  The development environment is Visual Studio 2022.Use C lanuage as the development language.  
+  本项目开发环境为VS2022，编程语言为C语言。  
 > - Welcome to discuss.  
 > - 欢迎讨论。  
