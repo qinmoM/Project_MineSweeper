@@ -21,7 +21,7 @@
   本项目开发环境为VS2022，编程语言为C语言。  
   The graphics library is "easyx".  
   图形库为easyx。  
-### 版权声明:  
+## Copyright Notice<br>版权声明:  
 - The project uses the [easyx graphics library](https://easyx.cn/),and its copyright retained by the original author.  
 - 本项目使用[easyx图形库](https://easyx.cn/)，其版权归原作者所有。  
 > - Welcome to discuss.  
