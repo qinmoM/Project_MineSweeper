@@ -5,7 +5,44 @@
 MOUSEMSG msg;
 
 bool type = 1;// 判断是否在主界面
+int bk = 0;// 默认白色主题
 const wchar_t* symbol[8] = { L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8" };// 用于提示数字
+
+void SetBkColor()// 设置主题色
+{
+	switch (bk)
+	{
+	case 0:
+		setbkcolor(WHITE);
+		break;
+	case 1:
+		setbkcolor(COLOR);
+		break;
+	case 2:
+		setbkcolor(RGB(204, 213, 240));
+		break;
+	case 3:
+		setbkcolor(RGB(220, 200, 160));
+		break;
+	}
+}
+
+void SetFillColor()// 设置主题色
+{
+	switch (bk)
+	{
+	case 0:
+	case 1:
+		setfillcolor(COLOR);
+		break;
+	case 2:
+		setfillcolor(RGB(204, 213, 240));
+		break;
+	case 3:
+		setfillcolor(RGB(220, 200, 160));
+		break;
+	}
+}
 
 void init_board(char arr[ROWS][COLS], char set)
 {
@@ -40,7 +77,12 @@ void random(char arr1[ROWS][COLS], int mine)
 void Menu()// 绘制主界面
 {
 	BeginBatchDraw();//防止闪烁
+	SetBkColor();// 设置背景色
 	cleardevice();// 刷新背景
+	settextstyle(IFONT_SIZE, 0, L"宋体");// 设置字体样式
+	rectangle(10, 10, 11 + textwidth(L"切换主题颜色"), 11 + textheight(L"切换主题颜色"));// 主题色选项卡
+	outtextxy(11, 11, L"切换主题颜色");// 切换主题颜色
+	settextstyle(FONT_SIZE, 0, L"宋体");// 设置字体样式
 	rectangle(SIZE * COL / 2 - 100, SIZE * ROW / 2 - 110,
 		SIZE * COL / 2 + 100, SIZE * ROW / 2 - 30);// 绘制选项卡
 	rectangle(SIZE * COL / 2 - 100, SIZE * ROW / 2 + 30,
@@ -61,12 +103,7 @@ void BoardDraw(char arr1[ROWS][COLS], char arr2[ROWS][COLS])// 绘制游戏内容
 		{
 			if ('*' == arr2[i][j])// 未翻起
 			{
-				setfillcolor(COLOR);// 暗色
-				fillrectangle(SIZE * (i - 1), SIZE * (j - 1), SIZE * i, SIZE * j);
-			}
-			else if ('0' == arr2[i][j])// 翻起但是为0
-			{
-				setfillcolor(WHITE);// 白色
+				SetFillColor();// 主题填充色
 				fillrectangle(SIZE * (i - 1), SIZE * (j - 1), SIZE * i, SIZE * j);
 			}
 			else if ('1' == arr1[i][j])// 雷
@@ -74,11 +111,17 @@ void BoardDraw(char arr1[ROWS][COLS], char arr2[ROWS][COLS])// 绘制游戏内容
 				setfillcolor(RED);// 红色
 				fillrectangle(SIZE * (i - 1), SIZE * (j - 1), SIZE * i, SIZE * j);
 			}
+			else if ('0' == arr2[i][j])// 翻起但是为0
+			{
+				setfillcolor(WHITE);// 白色
+				fillrectangle(SIZE * (i - 1), SIZE * (j - 1), SIZE * i, SIZE * j);
+			}
 			else// 其他数字
 			{
 				int number = arr2[i][j] - '0' - 1;
 				setfillcolor(WHITE);// 白色
 				fillrectangle(SIZE * (i - 1), SIZE * (j - 1), SIZE * i, SIZE * j);
+				setbkcolor(WHITE);// 背景白色
 				outtextxy((SIZE * (2 * i - 1) - textwidth(symbol[number])) / 2,
 					(SIZE * (2 * j - 1) - textheight(symbol[number])) / 2,
 					symbol[number]);
@@ -159,6 +202,13 @@ void GameControl(char arr1[ROWS][COLS], char arr2[ROWS][COLS])//鼠标信息控制
 				{
 					exit(0);
 				}
+				else if (msg.x > 10 && msg.y > 10 &&
+					msg.x < 11 + IFONT_SIZE * 6 && msg.y < 11 + IFONT_SIZE * 1)
+				{
+					bk = (bk + 1) % BKCOLOR;
+					printf(",,,,,");
+					Menu();
+				}
 			}
 			else// 局内
 			{
@@ -171,10 +221,10 @@ void GameControl(char arr1[ROWS][COLS], char arr2[ROWS][COLS])//鼠标信息控制
 int main()
 {
 	initgraph(SIZE * COL, SIZE * ROW);
-	setbkcolor(COLOR);// 设置背景色
+	SetBkColor();// 设置主题色
 	setlinecolor(BLACK);// 设置线条颜色
 	settextcolor(BLACK);// 设置字体颜色
-	settextstyle(35, 0, L"宋体");// 设置字体样式
+	settextstyle(FONT_SIZE, 0, L"宋体");// 设置字体样式
 	int i = 0, j = 0, m = 0, input = 0, round = 0, u = 0;
 	char arr1[ROWS][COLS] = { 0 };
 	char arr2[ROWS][COLS] = { 0 };

@@ -5,6 +5,7 @@
 #include<stdlib.h>
 #include <graphics.h>
 
+#define BKCOLOR 4// 背景颜色数量
 #define ROW 6//行数(可改)
 #define COL 6//列数(可改)
 #define ROWS ROW + 2
@@ -12,7 +13,11 @@
 #define MINE 6//雷数(可改)
 #define SIZE 100// 格子大小
 #define COLOR RGB(210, 210, 210)// 背景颜色
+#define FONT_SIZE 35// 字体大小
+#define IFONT_SIZE 30// 非正规字体大小
 
+void SetBkColor();// 设置主题色
+void SetFillColor();// 设置填充色
 void init_board(char arr[ROWS][COLS], char set);//初始化棋盘为'set'字符
 void random(char arr1[ROWS][COLS], int mine);//对棋盘随机下mine个雷
 void Menu();// 绘制主界面
