@@ -24,10 +24,22 @@ void SetBkColor()// 设置主题色
 	case 3:
 		setbkcolor(RGB(220, 200, 160));
 		break;
+	case 4:
+		setbkcolor(RGB(250, 200, 250));
+		break;
+	case 5:
+		setbkcolor(RGB(200, 255, 255));
+		break;
+	case 6:
+		setbkcolor(RGB(255, 255, 200));
+		break;
+	case 7:
+		setbkcolor(RGB(200, 255, 200));
+		break;
 	}
 }
 
-void SetFillColor()// 设置主题色
+void SetFillColor()// 设置填充色
 {
 	switch (bk)
 	{
@@ -40,6 +52,18 @@ void SetFillColor()// 设置主题色
 		break;
 	case 3:
 		setfillcolor(RGB(220, 200, 160));
+		break;
+	case 4:
+		setfillcolor(RGB(240, 200, 240));
+		break;
+	case 5:
+		setfillcolor(RGB(200, 255, 255));
+		break;
+	case 6:
+		setfillcolor(RGB(255, 255, 200));
+		break;
+	case 7:
+		setfillcolor(RGB(200, 255, 200));
 		break;
 	}
 }
