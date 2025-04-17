@@ -22,6 +22,8 @@ void init_board(char arr[ROWS][COLS], char set);//初始化棋盘为'set'字符
 void random(char arr1[ROWS][COLS], int mine);//对棋盘随机下mine个雷
 void Menu();// 绘制主界面
 void BoardDraw(char arr1[ROWS][COLS], char arr2[ROWS][COLS]);// 绘制游戏内容
+char Calculate(char arr1[ROWS][COLS], short x, short y);// 计算周围雷数量
+void Recursion(char arr1[ROWS][COLS], char arr2[ROWS][COLS], int x, int y);// 迭代周围
 int Judge(char arr2[ROWS][COLS]);// 遍历arr2中的未翻起元素数量
 void Control(char arr1[ROWS][COLS], char arr2[ROWS][COLS], short m, short n);// 局内控制
 void GameControl(char arr1[ROWS][COLS], char arr2[ROWS][COLS]);//鼠标信息控制

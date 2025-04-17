@@ -123,12 +123,97 @@ void BoardDraw(char arr1[ROWS][COLS], char arr2[ROWS][COLS])// »æÖÆÓÎÏ·ÄÚÈİ
 				fillrectangle(SIZE * (i - 1), SIZE * (j - 1), SIZE * i, SIZE * j);
 				setbkcolor(WHITE);// ±³¾°°×É«
 				outtextxy((SIZE * (2 * i - 1) - textwidth(symbol[number])) / 2,
-					(SIZE * (2 * j - 1) - textheight(symbol[number])) / 2,
-					symbol[number]);
+					(SIZE * (2 * j - 1) - textheight(symbol[number])) / 2, symbol[number]);
 			}
 		}
 	}
 	EndBatchDraw();// ¹Ø±ÕË«»º³å»æÍ¼
+}
+
+char Calculate(char arr1[ROWS][COLS], short x, short y)// ¼ÆËãÖÜÎ§À×ÊıÁ¿
+{
+	return arr1[x - 1][y - 1] + arr1[x][y - 1] + arr1[x + 1][y - 1] + arr1[x - 1][y]
+		+ arr1[x + 1][y] + arr1[x - 1][y + 1] + arr1[x][y + 1] + arr1[x + 1][y + 1] - 7 * '0';
+}
+
+void Recursion(char arr1[ROWS][COLS], char arr2[ROWS][COLS], int x, int y)// µü´úÖÜÎ§
+{
+	// ¼ì²âÃ¿¸ö½ÇÂäÊÇ·ñĞèÒªµü´ú
+	if ('0' == arr2[x][y] && !(arr1[x][y] - '0'))// Îª0²Åµü´úÖÜÎ§
+	{
+		if (x < 6 && y < 6)// ÓÒÏÂ
+		{
+			if ('*' == arr2[x + 1][y])// Èç¹ûÎ´·­Æğ
+			{
+				arr2[x + 1][y] = Calculate(arr1, x + 1, y);
+				Recursion(arr1, arr2, x + 1, y);// µü´úÖÜÎ§
+			}
+			if ('*' == arr2[x][y + 1])// Èç¹ûÎ´·­Æğ
+			{
+				arr2[x][y + 1] = Calculate(arr1, x, y + 1);
+				Recursion(arr1, arr2, x, y + 1);// µü´úÖÜÎ§
+			}
+			if ('*' == arr2[x + 1][y + 1])// Èç¹ûÎ´·­Æğ
+			{
+				arr2[x + 1][y + 1] = Calculate(arr1, x + 1, y + 1);
+				Recursion(arr1, arr2, x + 1, y + 1);// µü´úÖÜÎ§
+			}
+		}
+		if (x > 1 && y < 6)// ×óÏÂ
+		{
+			if ('*' == arr2[x - 1][y])// Èç¹ûÎ´·­Æğ
+			{
+				arr2[x - 1][y] = Calculate(arr1, x - 1, y);
+				Recursion(arr1, arr2, x - 1, y);// µü´úÖÜÎ§
+			}
+			if ('*' == arr2[x][y + 1])// Èç¹ûÎ´·­Æğ
+			{
+				arr2[x][y + 1] = Calculate(arr1, x, y + 1);
+				Recursion(arr1, arr2, x, y + 1);// µü´úÖÜÎ§
+			}
+			if ('*' == arr2[x - 1][y + 1])// Èç¹ûÎ´·­Æğ
+			{
+				arr2[x - 1][y + 1] = Calculate(arr1, x - 1, y + 1);
+				Recursion(arr1, arr2, x - 1, y + 1);// µü´úÖÜÎ§
+			}
+		}
+		if (x < 6 && y > 1)// ÓÒÉÏ
+		{
+			if ('*' == arr2[x + 1][y])// Èç¹ûÎ´·­Æğ
+			{
+				arr2[x + 1][y] = Calculate(arr1, x + 1, y);
+				Recursion(arr1, arr2, x + 1, y);// µü´úÖÜÎ§
+			}
+			if ('*' == arr2[x][y - 1])// Èç¹ûÎ´·­Æğ
+			{
+				arr2[x][y - 1] = Calculate(arr1, x, y - 1);
+				Recursion(arr1, arr2, x, y - 1);// µü´úÖÜÎ§
+			}
+			if ('*' == arr2[x + 1][y - 1])// Èç¹ûÎ´·­Æğ
+			{
+				arr2[x + 1][y - 1] = Calculate(arr1, x + 1, y - 1);
+				Recursion(arr1, arr2, x + 1, y - 1);// µü´úÖÜÎ§
+			}
+		}
+		if (x > 1 && y > 1)// ×óÉÏ
+		{
+			if ('*' == arr2[x - 1][y])// Èç¹ûÎ´·­Æğ
+			{
+				arr2[x - 1][y] = Calculate(arr1, x - 1, y);
+				Recursion(arr1, arr2, x - 1, y);// µü´úÖÜÎ§
+			}
+			if ('*' == arr2[x][y - 1])// Èç¹ûÎ´·­Æğ
+			{
+				arr2[x][y - 1] = Calculate(arr1, x, y - 1);
+				Recursion(arr1, arr2, x, y - 1);// µü´úÖÜÎ§
+			}
+			if ('*' == arr2[x - 1][y - 1])// Èç¹ûÎ´·­Æğ
+			{
+				arr2[x - 1][y - 1] = Calculate(arr1, x - 1, y - 1);
+				Recursion(arr1, arr2, x - 1, y - 1);// µü´úÖÜÎ§
+			}
+		}
+	}
 }
 
 int Judge(char arr2[ROWS][COLS])// ±éÀúarr2ÖĞµÄÎ´·­ÆğÔªËØÊıÁ¿
@@ -158,25 +243,25 @@ void Control(char arr1[ROWS][COLS], char arr2[ROWS][COLS], short m, short n)// ¾
 	{
 		y = 6;
 	}
-	arr2[x][y] = arr1[x - 1][y - 1] + arr1[x][y - 1] + arr1[x + 1][y - 1] + arr1[x - 1][y]
-		+ arr1[x + 1][y] + arr1[x - 1][y + 1] + arr1[x][y + 1] + arr1[x + 1][y + 1] - 7 * '0';
-		BoardDraw(arr1, arr2);
-		if ('1' == arr1[x][y])// ÅĞ¶ÏÊÇ·ñ²ÈÀ×
-		{
-			Sleep(1500);
-			FlushMouseMsgBuffer();// Çå¿ÕÊó±êĞÅÏ¢
-			type = !type;// ÇĞ»»Êó±ê¿ØÖÆÂß¼­
-			Menu();// »æÖÆÖ÷½çÃæ
-			outtextxy((getwidth() - textwidth(L"ÄúÒÑÕóÍö")) / 2,
-				SIZE * ROW / 2 - 110 - textheight(L"ÄúÒÑÕóÍö") - 20, L"ÄúÒÑÕóÍö");// »æÖÆÊä
-		}
-		if (MINE == Judge(arr2))// ÅĞ¶ÏÊÇ·ñÓ®
-		{
-			type = !type;// ÇĞ»»Êó±ê¿ØÖÆÂß¼­
-			Menu();// »æÖÆÖ÷½çÃæ
-			outtextxy((getwidth() - textwidth(L"¹§Ï²Ê¤Àû")) / 2,
-				SIZE * ROW / 2 - 110 - textheight(L"¹§Ï²Ê¤Àû") - 20, L"¹§Ï²Ê¤Àû");// »æÖÆÓ®
-		}
+	arr2[x][y] = Calculate(arr1, x, y);
+	Recursion(arr1, arr2, x, y);// Á¬Ğø¿Õ×ø±êÖÜÎ§È«²¿ÏÔÊ¾
+	BoardDraw(arr1, arr2);// »æÖÆÓÎÏ·ÄÚ
+	if ('1' == arr1[x][y])// ÅĞ¶ÏÊÇ·ñ²ÈÀ×
+	{
+		Sleep(1500);
+		FlushMouseMsgBuffer();// Çå¿ÕÊó±êĞÅÏ¢
+		type = !type;// ÇĞ»»Êó±ê¿ØÖÆÂß¼­
+		Menu();// »æÖÆÖ÷½çÃæ
+		outtextxy((getwidth() - textwidth(L"ÄúÒÑÕóÍö")) / 2,
+			SIZE * ROW / 2 - 110 - textheight(L"ÄúÒÑÕóÍö") - 20, L"ÄúÒÑÕóÍö");// »æÖÆÊä
+	}
+	if (MINE == Judge(arr2))// ÅĞ¶ÏÊÇ·ñÓ®
+	{
+		type = !type;// ÇĞ»»Êó±ê¿ØÖÆÂß¼­
+		Menu();// »æÖÆÖ÷½çÃæ
+		outtextxy((getwidth() - textwidth(L"¹§Ï²Ê¤Àû")) / 2,
+			SIZE * ROW / 2 - 110 - textheight(L"¹§Ï²Ê¤Àû") - 20, L"¹§Ï²Ê¤Àû");// »æÖÆÓ®
+	}
 }
 
 void GameControl(char arr1[ROWS][COLS], char arr2[ROWS][COLS])//Êó±êĞÅÏ¢¿ØÖÆ
@@ -206,7 +291,6 @@ void GameControl(char arr1[ROWS][COLS], char arr2[ROWS][COLS])//Êó±êĞÅÏ¢¿ØÖÆ
 					msg.x < 11 + IFONT_SIZE * 6 && msg.y < 11 + IFONT_SIZE * 1)
 				{
 					bk = (bk + 1) % BKCOLOR;
-					printf(",,,,,");
 					Menu();
 				}
 			}
