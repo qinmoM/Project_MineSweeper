@@ -5,7 +5,7 @@
 #include<stdlib.h>
 #include <graphics.h>
 
-#define BKCOLOR 4// 背景颜色数量
+#define BKCOLOR 8// 背景颜色数量
 #define ROW 6//行数(可改)
 #define COL 6//列数(可改)
 #define ROWS ROW + 2
