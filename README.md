@@ -15,20 +15,22 @@
   用户可以选择不同的颜色主题。  
 ---
 ## 🛠️ Inplementation 项目实现:  
-- **Module:**  
-- **模块:**  
+### Module:<br>模块:  
   Random and 2D array.  
   随机数和二维数组。  
-- **Technology Stack:**  
-- **技术栈:**  
-  The development environment is Visual Studio 2022.Use C lanuage as the development language.  
-  本项目开发环境为VS2022，编程语言为C语言。  
-  The graphics library is "easyx".  
-  图形库为easyx。  
+### Technology Stack:<br>技术栈:  
+#### Current Version:<br>当前版本:  
+  The development environment is Visual Studio Code + CMake.Use C plus plus as the development language.  
+  本项目开发环境为 VSCode + CMake ，编程语言为C++。  
+  The graphics library is "raylib".  
+  图形库为raylib。  
+#### History Version:<br>历史版本:  
+  C language and [easyx](https://easyx.cn/) graphics library.  
+  C语言和[easyx](https://easyx.cn/)图形库。  
 ---
-## 🤝 Copyright Notice 版权声明:  
-- The project uses the [easyx graphics library](https://easyx.cn/),and its copyright retained by the original author.  
-- 本项目使用[easyx图形库](https://easyx.cn/)，其版权归原作者所有。  
+## 🤝 Copyright Notice 版权声明:   
+- The project uses the [raylib graphics library](https://github.com/raysan5/raylib),and its copyright retained by the original author.  
+- 本项目使用[raylib图形库](https://github.com/raysan5/raylib)，其版权归原作者所有。  
 ---
 > - This is a classic project of Minesweeper game.As a practice of implementing a project implementation during my C language learning.  
 > - 这是一个经典的扫雷游戏项目，作为我学习c语言时的项目实现练习。  
