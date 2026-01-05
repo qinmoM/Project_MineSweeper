@@ -26,11 +26,11 @@ public:
     virtual void drawLine(int startX, int startY, int endX, int endY, int thick, const Base::ColorBase& color) override;
     virtual void drawLineAngle(int startX, int startY, float angle, float length, int thick, const Base::ColorBase& color);
     virtual void drawRectangle(int posX, int posY, int width, int height, int thick, const Base::ColorBase& color) override;
-    virtual void drawRectangleRound(int posX, int posY, int width, int height, float roundness, int segments, int thick, const Base::ColorBase& color) override;
+    virtual void drawRectangleRound(int posX, int posY, int width, int height, float roundness, int thick, const Base::ColorBase& color) override;
     virtual void drawCircle(int posX, int posY, float innerRadius, float outerRadius, const Base::ColorBase& color) override;
 
     virtual void drawRectangleFill(int posX, int posY, int width, int height, const Base::ColorBase& color) override;
-    virtual void drawRectangleRoundFill(int posX, int posY, int width, int height, float roundness, int segments, const Base::ColorBase& color) override;
+    virtual void drawRectangleRoundFill(int posX, int posY, int width, int height, float roundness, const Base::ColorBase& color) override;
     virtual void drawCircleFill(int posX, int posY, float radius, const Base::ColorBase& color) override;
 public:
     RendererRaylib& operator=(const RendererRaylib& renderer) = delete;

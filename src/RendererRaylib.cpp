@@ -83,9 +83,9 @@ void RendererRaylib::drawRectangle(int posX, int posY, int width, int height, in
     DrawRectangleLinesEx({static_cast<float>(posX), static_cast<float>(posY), static_cast<float>(width), static_cast<float>(height)}, static_cast<float>(thick), {color.r, color.g, color.b, color.a});
 }
 
-void RendererRaylib::drawRectangleRound(int posX, int posY, int width, int height, float roundness, int segments, int thick, const Base::ColorBase& color)
+void RendererRaylib::drawRectangleRound(int posX, int posY, int width, int height, float roundness, int thick, const Base::ColorBase& color)
 {
-    DrawRectangleRoundedLinesEx({static_cast<float>(posX), static_cast<float>(posY), static_cast<float>(width), static_cast<float>(height)}, roundness, segments, thick, {color.r, color.g, color.b, color.a});
+    DrawRectangleRoundedLinesEx({static_cast<float>(posX), static_cast<float>(posY), static_cast<float>(width), static_cast<float>(height)}, roundness, static_cast<int>(0.4f * roundness * std::min(posX, posY)), thick, {color.r, color.g, color.b, color.a});
 }
 
 void RendererRaylib::drawCircle(int posX, int posY, float innerRadius, float outerRadius, const Base::ColorBase& color)
@@ -100,9 +100,9 @@ void RendererRaylib::drawRectangleFill(int posX, int posY, int width, int height
     DrawRectangle(posX, posY, width, height, {color.r, color.g, color.b, color.a});
 }
 
-void RendererRaylib::drawRectangleRoundFill(int posX, int posY, int width, int height, float roundness, int segments, const Base::ColorBase& color)
+void RendererRaylib::drawRectangleRoundFill(int posX, int posY, int width, int height, float roundness, const Base::ColorBase& color)
 {
-    DrawRectangleRounded({static_cast<float>(posX), static_cast<float>(posY), static_cast<float>(width), static_cast<float>(height)}, roundness, segments, {color.r, color.g, color.b, color.a});
+    DrawRectangleRounded({static_cast<float>(posX), static_cast<float>(posY), static_cast<float>(width), static_cast<float>(height)}, roundness, static_cast<int>(0.4f * roundness * std::min(posX, posY)), {color.r, color.g, color.b, color.a});
 }
 
 void RendererRaylib::drawCircleFill(int posX, int posY, float radius, const Base::ColorBase& color)
