@@ -24,4 +24,6 @@ public:
     virtual void drawRectangleFill(int posX, int posY, int width, int height, const Base::ColorBase& color) = 0;
     virtual void drawRectangleRoundFill(int posX, int posY, int width, int height, float roundness, int segments, const Base::ColorBase& color) = 0;
     virtual void drawCircleFill(int posX, int posY, float radius, const Base::ColorBase& color) = 0;
+public:
+    virtual ~RendererBase() = default;
 };
