@@ -1,0 +1,13 @@
+#include "GameStateBase.h"
+
+class GameStateMenu : public GameStateBase
+{
+public:
+    virtual void enter() override;
+    virtual void exit() override;
+
+    virtual void update(float delta) override;
+    virtual void render() override;
+public:
+    virtual ~GameStateMenu() = default;
+};
