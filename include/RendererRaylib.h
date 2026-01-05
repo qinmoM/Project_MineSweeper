@@ -17,6 +17,7 @@ public:
     virtual void FPSDelay() override;
     virtual int FPSget() override;
     virtual int FPSsetValueGet() override;
+    virtual float FPSgetFrameTime() override;
 
     virtual void drawingBegin() override;
     virtual void drawingEnd() override;

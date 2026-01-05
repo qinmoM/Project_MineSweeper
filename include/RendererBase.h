@@ -26,6 +26,9 @@ public:
     virtual int FPSget() = 0;
     /// @brief get the maximum FPS limit
     virtual int FPSsetValueGet() = 0;
+    /// @brief get the time elapsed since the last frame
+    /// @return now to last frame time in seconds
+    virtual float FPSgetFrameTime() = 0;
 
 
     /// @brief enable the drawing buffer

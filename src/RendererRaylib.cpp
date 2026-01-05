@@ -45,6 +45,11 @@ int RendererRaylib::FPSsetValueGet()
     return FPSmax_;
 }
 
+float RendererRaylib::FPSgetFrameTime()
+{
+    return GetFrameTime();
+}
+
 
 
 void RendererRaylib::drawingBegin()
