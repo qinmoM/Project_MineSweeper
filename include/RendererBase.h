@@ -10,6 +10,11 @@ public:
     virtual void windowClose() = 0;
     virtual bool windowExists() = 0;
 
+    virtual void FPSset(int fps) = 0;
+    virtual void FPSDelay() = 0;
+    virtual int FPSget() = 0;
+    virtual int FPSsetValueGet() = 0;
+
     virtual void drawingBegin() = 0;
     virtual void drawingEnd() = 0;
 

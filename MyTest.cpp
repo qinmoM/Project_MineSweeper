@@ -13,6 +13,7 @@ int main()
         ;
 
         renderer.drawingEnd();
+        renderer.FPSDelay();
     }
 
     renderer.windowClose();
