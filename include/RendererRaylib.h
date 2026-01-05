@@ -13,6 +13,11 @@ public:
     virtual void windowClose() override;
     virtual bool windowExists() override;
 
+    virtual void FPSset(int fps) override;
+    virtual void FPSDelay() override;
+    virtual int FPSget() override;
+    virtual int FPSsetValueGet() override;
+
     virtual void drawingBegin() override;
     virtual void drawingEnd() override;
 
@@ -33,4 +38,6 @@ public:
 private:
     RendererRaylib() = default;
     ~RendererRaylib() = default;
+private:
+    int FPSmax_ = 0;
 };

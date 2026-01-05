@@ -5,6 +5,8 @@ int main()
     RendererBase& renderer = RendererRaylib::getInstance();
     renderer.windowInit(600, 700, "test");
 
+    renderer.FPSset(60);
+
     while (renderer.windowExists())
     {
         renderer.drawingBegin();
@@ -13,6 +15,7 @@ int main()
         ;
 
         renderer.drawingEnd();
+        renderer.FPSDelay();
     }
 
     renderer.windowClose();

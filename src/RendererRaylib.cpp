@@ -25,6 +25,28 @@ bool RendererRaylib::windowExists()
 
 
 
+void RendererRaylib::FPSset(int fps)
+{
+    SetTargetFPS(FPSmax_ = fps);
+}
+
+void RendererRaylib::FPSDelay()
+{
+    // drawingEnd() function will wait automatically.
+}
+
+int RendererRaylib::FPSget()
+{
+    return GetFPS();
+}
+
+int RendererRaylib::FPSsetValueGet()
+{
+    return FPSmax_;
+}
+
+
+
 void RendererRaylib::drawingBegin()
 {
     BeginDrawing();
