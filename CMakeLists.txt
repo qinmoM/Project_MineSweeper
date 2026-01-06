@@ -13,7 +13,13 @@ set(path_raylib ${PROJECT_SOURCE_DIR}/external/open/raylib)
 
 # 头文件路径
 set(include_raylib ${path_raylib}/include)
-set(include_project ${PROJECT_SOURCE_DIR}/include)
+set(include_project
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/include/core
+    ${PROJECT_SOURCE_DIR}/include/common
+    ${PROJECT_SOURCE_DIR}/include/gameState
+    ${PROJECT_SOURCE_DIR}/include/render
+)
 # 将头文件全部加入
 include_directories(
     ${include_project}
