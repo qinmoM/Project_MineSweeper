@@ -2,22 +2,22 @@
 
 void Game::run()
 {
-    RendererBase& renderer = RendererRaylib::getInstance();
+    WindowProxy window(RendererRaylib::getInstance());
     GameManager gameManager;
-    renderer.windowInit(600, 700, "test");
-    renderer.FPSset(60);
+    window.windowInit(600, 700, "test");
+    window.FPSset(60);
 
-    while (renderer.windowExists())
+    while (window.windowExists())
     {
-        renderer.drawingBegin();
-        renderer.clearBackground(Base::ColorBase{255, 255, 255, 0});
+        window.drawingBegin();
+        window.clearBackground(Base::ColorBase{255, 255, 255, 0});
 
-        gameManager.update(renderer.FPSgetFrameTime());
+        gameManager.update(window.FPSgetFrameTime());
         gameManager.render();
 
-        renderer.drawingEnd();
-        renderer.FPSDelay();
+        window.drawingEnd();
+        window.FPSDelay();
     }
 
-    renderer.windowClose();
+    window.windowClose();
 }

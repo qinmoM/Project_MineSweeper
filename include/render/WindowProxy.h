@@ -1,0 +1,27 @@
+#pragma once
+
+#include "RendererBase.h"
+
+class WindowProxy
+{
+public:
+    void windowInit(int width, int height, const std::string& str);
+    void windowClose();
+    bool windowExists();
+
+    void FPSset(int fps);
+    void FPSDelay();
+    int FPSget();
+    int FPSsetValueGet();
+    float FPSgetFrameTime();
+
+    void drawingBegin();
+    void drawingEnd();
+
+    void clearBackground(const Base::ColorBase& color);
+public:
+    WindowProxy(RendererBase& renderer) : renderer_(renderer) { }
+    ~WindowProxy() = default;
+private:
+    RendererBase& renderer_;
+};
