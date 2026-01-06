@@ -1,5 +1,7 @@
 #pragma once
 
+#include "RendererBase.h"
+
 class GameStateBase
 {
 public:
@@ -9,5 +11,8 @@ public:
     virtual void update(float delta) = 0;
     virtual void render() = 0;
 public:
-    ~GameStateBase() = default;
+    GameStateBase(RendererBase& renderer) : renderer_(renderer) {}
+    virtual~GameStateBase() = default;
+protected:
+    RendererBase& renderer_;
 };
