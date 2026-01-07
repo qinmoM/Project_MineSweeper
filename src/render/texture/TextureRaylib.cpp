@@ -6,3 +6,8 @@ TextureRaylib::TextureRaylib(RendererBase::TextureToken, RendererRaylib& rendere
     if (0 == texture_.id)
         throw std::runtime_error("Failed to load texture : " + path + " | TextureRaylib::TextureRaylib.\n");
 }
+
+TextureRaylib::~TextureRaylib()
+{
+    UnloadTexture(texture_);
+}

@@ -12,5 +12,6 @@ class TextureRaylib final : public TextureBase
 {
 public:
     TextureRaylib(RendererBase::TextureToken, RendererRaylib& renderer, const std::string& path);
+    ~TextureRaylib();
     Texture2D texture_;
 };

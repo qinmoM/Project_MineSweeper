@@ -6,3 +6,8 @@ FontRaylib::FontRaylib(RendererBase::FontToken, RendererRaylib& renderer, const 
     if (0 == font_.baseSize)
         throw std::runtime_error("Failed to load font : " + path + " | FontRaylib::FontRaylib\n");
 }
+
+FontRaylib::~FontRaylib()
+{
+    UnloadFont(font_);
+}

@@ -12,5 +12,6 @@ class FontRaylib final : public FontBase
 {
 public:
     FontRaylib(RendererBase::FontToken, RendererRaylib& renderer, const std::string& path);
+    ~FontRaylib();
     Font font_;
 };
