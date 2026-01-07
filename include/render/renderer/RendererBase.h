@@ -2,6 +2,7 @@
 
 #include "Base.h"
 #include "TextureBase.h"
+#include "SpriteBase.h"
 #include <string>
 #include <memory>
 
@@ -100,10 +101,15 @@ public:
 
 public:
     virtual ~RendererBase() = default;
+
 public:
     struct TextureToken
     {
     private:
-        TextureToken() = default;
+        explicit TextureToken() = default;
+        friend class RendererBase;
     };
+
+protected:
+    TextureToken getTextureToken();
 };

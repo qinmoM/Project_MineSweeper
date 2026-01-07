@@ -3,10 +3,10 @@
 void Game::run()
 {
     WindowProxy window(RendererRaylib::getInstance());
-    GameManager gameManager(RendererRaylib::getInstance());
     window.windowInit(1200, 1000, "test");
     window.FPSset(120);
 
+    GameManager gameManager(RendererRaylib::getInstance());
     while (window.windowExists())
     {
         window.drawingBegin();
