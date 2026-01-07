@@ -18,7 +18,8 @@ set(include_project
     ${PROJECT_SOURCE_DIR}/include/core
     ${PROJECT_SOURCE_DIR}/include/common
     ${PROJECT_SOURCE_DIR}/include/gameState
-    ${PROJECT_SOURCE_DIR}/include/render
+    ${PROJECT_SOURCE_DIR}/include/render/renderer
+    ${PROJECT_SOURCE_DIR}/include/render/proxy
 )
 # 将头文件全部加入
 include_directories(
