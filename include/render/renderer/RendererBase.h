@@ -99,6 +99,27 @@ public:
     /// @param path image file path
     /// @return a texture object shared pointer
     virtual std::shared_ptr<TextureBase> loadTexture(const std::string& path) = 0;
+    /// @brief draw a image from texture object shared pointer
+    /// @param posX X-coordinate
+    /// @param posY X-coordinate
+    /// @param scaleX scaling of X-direction
+    /// @param scaleY scaling of Y-direction
+    /// @param texture image texture object shared pointer
+    /// @param color color filter(weights for each of the three color channels)
+    virtual void drawTexture(int posX, int posY, float scaleX, float scaleY, const std::shared_ptr<TextureBase>& texture, const Base::ColorBase& color = {255, 255, 255, 255}) = 0;
+
+    /// @brief load a font from path
+    /// @param path font file path
+    /// @return a font object shared pointer
+    virtual std::shared_ptr<FontBase> loadFont(const std::string& path) = 0;
+    /// @brief draw a text with font object shared pointer
+    /// @param posX X-coordinate
+    /// @param posY Y-coordinate
+    /// @param size size of the text
+    /// @param text text to be drawn
+    /// @param font font object shared pointer
+    /// @param color font color
+    virtual void drawText(int posX, int posY, int size, const std::string& text, const std::shared_ptr<FontBase>& font, const Base::ColorBase& color) = 0;
 
 public:
     virtual ~RendererBase() = default;

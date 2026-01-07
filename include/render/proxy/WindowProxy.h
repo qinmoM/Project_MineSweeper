@@ -2,7 +2,7 @@
 
 #include "RendererBase.h"
 
-class WindowProxy
+class WindowProxy final
 {
 public:
     void windowInit(int width, int height, const std::string& str);

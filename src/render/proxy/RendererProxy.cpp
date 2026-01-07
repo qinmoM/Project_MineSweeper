@@ -10,10 +10,14 @@ int RendererProxy::FPSsetValueGet()
     return renderer_.FPSsetValueGet();
 }
 
+
+
 void RendererProxy::clearBackground(const Base::ColorBase& color)
 {
     renderer_.clearBackground(color);
 }
+
+
 
 void RendererProxy::drawLine(int startX, int startY, int endX, int endY, int thick, const Base::ColorBase& color)
 {
@@ -41,6 +45,7 @@ void RendererProxy::drawCircle(int posX, int posY, float innerRadius, float oute
 }
 
 
+
 void RendererProxy::drawRectangleFill(int posX, int posY, int width, int height, const Base::ColorBase& color)
 {
     renderer_.drawRectangleFill(posX, posY, width, height, color);
@@ -54,4 +59,28 @@ void RendererProxy::drawRectangleRoundFill(int posX, int posY, int width, int he
 void RendererProxy::drawCircleFill(int posX, int posY, float radius, const Base::ColorBase& color)
 {
     renderer_.drawCircleFill(posX, posY, radius, color);
+}
+
+
+
+std::shared_ptr<TextureBase> RendererProxy::loadTexture(const std::string& path)
+{
+    return renderer_.loadTexture(path);
+}
+
+void RendererProxy::drawTexture(int posX, int posY, float scaleX, float scaleY, const std::shared_ptr<TextureBase>& texture, const Base::ColorBase& color)
+{
+    renderer_.drawTexture(posX, posY, scaleX, scaleY, texture, color);
+}
+
+
+
+std::shared_ptr<FontBase> RendererProxy::loadFont(const std::string& path)
+{
+    return renderer_.loadFont(path);
+}
+
+void RendererProxy::drawText(int posX, int posY, int size, const std::string& text, const std::shared_ptr<FontBase>& font, const Base::ColorBase& color)
+{
+    renderer_.drawText(posX, posY, size, text, font, color);
 }

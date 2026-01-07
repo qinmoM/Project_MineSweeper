@@ -114,3 +114,41 @@ void RendererRaylib::drawCircleFill(int posX, int posY, float radius, const Base
 {
     DrawCircle(posX, posY, radius, {color.r, color.g, color.b, color.a});
 }
+
+
+
+
+std::shared_ptr<TextureBase> RendererRaylib::loadTexture(const std::string& path)
+{
+    return std::make_shared<TextureRaylib>(getTextureToken(), *this, path);
+}
+
+void RendererRaylib::drawTexture(int posX, int posY, float scaleX, float scaleY, const std::shared_ptr<TextureBase>& texture, const Base::ColorBase& color)
+{
+    Texture2D tex = static_cast<TextureRaylib*>(texture.get())->texture_;
+    Rectangle origin = {0.0f, 0.0f, static_cast<float>(tex.width), static_cast<float>(tex.height)};
+    Rectangle next = {0.0f, 0.0f, origin.width * scaleX, origin.height * scaleY};
+    DrawTexturePro(
+        tex,
+        origin,
+        next,
+        {0.0f, 0.0f},
+        0.0f,
+        {color.r, color.g, color.b, color.a}
+    );
+}
+
+
+
+
+
+std::shared_ptr<FontBase> RendererRaylib::loadFont(const std::string& path)
+{
+    return std::make_shared<FontRaylib>(getFontToken(), *this, path);
+}
+
+void RendererRaylib::drawText(int posX, int posY, int size, const std::string& text, const std::shared_ptr<FontBase>& font, const Base::ColorBase& color)
+{
+    DrawText(text.c_str(), posX, posY, size, {color.r, color.g, color.b, color.a});
+}
+

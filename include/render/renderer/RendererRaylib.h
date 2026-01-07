@@ -3,6 +3,7 @@
 #include "raylib.h"
 #include "RendererBase.h"
 #include "TextureRaylib.h"
+#include "FontRaylib.h"
 #include <cmath>
 
 class RendererRaylib : public RendererBase
@@ -36,6 +37,10 @@ public:
     virtual void drawCircleFill(int posX, int posY, float radius, const Base::ColorBase& color) override;
 
     virtual std::shared_ptr<TextureBase> loadTexture(const std::string& path) override;
+    virtual void drawTexture(int posX, int posY, float scaleX, float scaleY, const std::shared_ptr<TextureBase>& texture, const Base::ColorBase& color = {255, 255, 255, 255}) override;
+
+    virtual std::shared_ptr<FontBase> loadFont(const std::string& path) override;
+    virtual void drawText(int posX, int posY, int size, const std::string& text, const std::shared_ptr<FontBase>& font, const Base::ColorBase& color) override;
 public:
     RendererRaylib& operator=(const RendererRaylib& renderer) = delete;
     RendererRaylib(const RendererRaylib& renderer) = delete;
