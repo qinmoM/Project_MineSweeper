@@ -2,6 +2,7 @@
 
 #include "Base.h"
 #include "TextureBase.h"
+#include "FontBase.h"
 #include "SpriteBase.h"
 #include <string>
 #include <memory>
@@ -110,6 +111,14 @@ public:
         friend class RendererBase;
     };
 
+    struct FontToken
+    {
+    private:
+        explicit FontToken() = default;
+        friend class RendererBase;
+    };
+
 protected:
     TextureToken getTextureToken();
+    FontToken getFontToken();
 };
