@@ -1,13 +1,14 @@
 #include "GameManager.h"
 
-GameManager::GameManager()
+GameManager::GameManager(RendererBase& renderer) : rendererProxy_(std::make_shared<RendererProxy>(renderer))
 {
     init();
 }
 
 void GameManager::init()
 {
-    changeState(std::move(std::unique_ptr<GameStateMenu>()));
+    std::unique_ptr<GameStateBase> newState = std::make_unique<GameStateMenu>(rendererProxy_);
+    changeState(std::move(newState));
     currState_->enter();
 }
 

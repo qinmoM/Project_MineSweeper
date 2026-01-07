@@ -2,12 +2,12 @@
 
 int RendererProxy::FPSget()
 {
-    renderer_.FPSget();
+    return renderer_.FPSget();
 }
 
 int RendererProxy::FPSsetValueGet()
 {
-    renderer_.FPSsetValueGet();
+    return renderer_.FPSsetValueGet();
 }
 
 void RendererProxy::clearBackground(const Base::ColorBase& color)

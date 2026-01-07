@@ -12,7 +12,7 @@ void WindowProxy::windowClose()
 
 bool WindowProxy::windowExists()
 {
-    renderer_.windowExists();
+    return renderer_.windowExists();
 }
 
 
@@ -30,17 +30,17 @@ void WindowProxy::FPSDelay()
 
 int WindowProxy::FPSget()
 {
-    renderer_.FPSget();
+    return renderer_.FPSget();
 }
 
 int WindowProxy::FPSsetValueGet()
 {
-    renderer_.FPSsetValueGet();
+    return renderer_.FPSsetValueGet();
 }
 
 float WindowProxy::FPSgetFrameTime()
 {
-    renderer_.FPSgetFrameTime();
+    return renderer_.FPSgetFrameTime();
 }
 
 
