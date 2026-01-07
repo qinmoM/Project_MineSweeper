@@ -4,6 +4,7 @@
 #include "raylib.h"
 #include "RendererBase.h"
 #include <string>
+#include <stdexcept>
 
 class RendererRaylib;
 
