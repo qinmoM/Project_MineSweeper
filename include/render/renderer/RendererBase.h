@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Base.h"
+#include "TextureBase.h"
 #include <string>
+#include <memory>
 
 class RendererBase
 {
@@ -91,6 +93,17 @@ public:
     /// @param radius the radius of the circle
     virtual void drawCircleFill(int posX, int posY, float radius, const Base::ColorBase& color) = 0;
 
+    /// @brief load a texture from path
+    /// @param path image file path
+    /// @return a texture object shared pointer
+    virtual std::shared_ptr<TextureBase> loadTexture(const std::string& path) = 0;
+
 public:
     virtual ~RendererBase() = default;
+public:
+    struct TextureToken
+    {
+    private:
+        TextureToken() = default;
+    };
 };

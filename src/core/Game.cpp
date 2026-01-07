@@ -5,7 +5,7 @@ void Game::run()
     WindowProxy window(RendererRaylib::getInstance());
     GameManager gameManager(RendererRaylib::getInstance());
     window.windowInit(1200, 1000, "test");
-    window.FPSset(60);
+    window.FPSset(120);
 
     while (window.windowExists())
     {
