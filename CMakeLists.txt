@@ -20,6 +20,7 @@ set(include_project
     ${PROJECT_SOURCE_DIR}/include/gameState
     ${PROJECT_SOURCE_DIR}/include/render/renderer
     ${PROJECT_SOURCE_DIR}/include/render/proxy
+    ${PROJECT_SOURCE_DIR}/include/render/texture
 )
 # 将头文件全部加入
 include_directories(
