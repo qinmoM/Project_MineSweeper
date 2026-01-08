@@ -3,7 +3,7 @@
 namespace Base
 {
 
-struct ColorBase
+struct Color
 {
     unsigned char r;        // Color red value
     unsigned char g;        // Color green value

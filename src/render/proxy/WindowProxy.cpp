@@ -59,7 +59,7 @@ void WindowProxy::drawingEnd()
 
 
 
-void WindowProxy::clearBackground(const Base::ColorBase& color)
+void WindowProxy::clearBackground(const Base::Color& color)
 {
     renderer_.clearBackground(color);
 }

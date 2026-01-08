@@ -18,7 +18,7 @@ public:
     void drawingBegin();
     void drawingEnd();
 
-    void clearBackground(const Base::ColorBase& color);
+    void clearBackground(const Base::Color& color);
 public:
     WindowProxy(RendererBase& renderer) : renderer_(renderer) { }
     ~WindowProxy() = default;
