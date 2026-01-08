@@ -6,10 +6,11 @@ class KeyBoardBase
 {
 public:
     // sustained check
-    virtual void keyDown(Base::Key key) = 0;
+    virtual bool keyDown(Base::Key key) const = 0;
+
     // signal check
-    virtual void keyPressed(Base::Key key) = 0;
-    virtual void keyReleased(Base::Key key) = 0;
+    virtual bool keyPressed(Base::Key key) const = 0;
+    virtual bool keyReleased(Base::Key key) const = 0;
 
 public:
     virtual ~KeyBoardBase() = default;
