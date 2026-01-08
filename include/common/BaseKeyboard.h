@@ -50,7 +50,6 @@ enum class Key : char
     Backspace,      // Backspace
     Enter,          // Enter
     ShiftRight,     // rightShift
-    Escape,         // Escape
     CtrlRight,      // rightControl
     AltLeft,        // leftAlt
     Space,          // Space
