@@ -1,5 +1,11 @@
 #include "KeyboardRaylib.h"
 
+KeyboardBase& KeyboardRaylib::getInstance()
+{
+    static KeyboardRaylib instance;
+    return instance;
+}
+
 bool KeyboardRaylib::keyDown(Base::Key key) const
 {
     return IsKeyDown(mapKey(key));

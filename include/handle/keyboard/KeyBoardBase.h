@@ -2,7 +2,7 @@
 
 #include "BaseKeyboard.h"
 
-class KeyBoardBase
+class KeyboardBase
 {
 public:
     // sustained check
@@ -13,5 +13,5 @@ public:
     virtual bool keyReleased(Base::Key key) const = 0;
 
 public:
-    virtual ~KeyBoardBase() = default;
+    virtual ~KeyboardBase() = default;
 };
