@@ -23,6 +23,11 @@ bool RendererRaylib::windowExists()
     return !WindowShouldClose();
 }
 
+bool RendererRaylib::windowFocused()
+{
+    return IsWindowFocused();
+}
+
 
 
 void RendererRaylib::FPSset(int fps)

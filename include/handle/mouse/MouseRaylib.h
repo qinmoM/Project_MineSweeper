@@ -17,6 +17,7 @@ public:
 
     // position
     Base::Point getPosition() override;
+    bool inWindow() override;
     void setPosition(const Base::Point& position) override;
 
     // wheel

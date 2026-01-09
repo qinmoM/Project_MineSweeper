@@ -8,6 +8,7 @@ public:
     void windowInit(int width, int height, const std::string& str);
     void windowClose();
     bool windowExists();
+    bool windowFocused();
 
     void FPSset(int fps);
     void FPSDelay();

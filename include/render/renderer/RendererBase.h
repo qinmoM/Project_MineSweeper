@@ -19,6 +19,9 @@ public:
     /// @brief draw API can be used if return true
     /// @return true if the window exists
     virtual bool windowExists() = 0;
+    /// @brief check if the window is focused
+    /// @return true if the window is focused
+    virtual bool windowFocused() = 0;
 
 
     /// @brief set the maximum FPS limit

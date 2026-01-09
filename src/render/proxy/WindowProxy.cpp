@@ -15,6 +15,11 @@ bool WindowProxy::windowExists()
     return renderer_.windowExists();
 }
 
+bool WindowProxy::windowFocused()
+{
+    return renderer_.windowFocused();
+}
+
 
 
 
