@@ -15,6 +15,7 @@ public:
 
     // position
     virtual Base::Point getPosition() = 0;
+    virtual bool inWindow() = 0;
     virtual void setPosition(const Base::Point& position) = 0;
 
     // wheel

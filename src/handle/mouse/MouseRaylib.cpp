@@ -8,23 +8,29 @@ MouseBase& MouseRaylib::getInstance()
 
 bool MouseRaylib::buttonDown(Base::MouseButton button)
 {
-    IsMouseButtonDown(mapButton(button));
+    return IsMouseButtonDown(mapButton(button));
 }
 
 bool MouseRaylib::buttonPressed(Base::MouseButton button)
 {
-    IsMouseButtonPressed(mapButton(button));
+    return IsMouseButtonPressed(mapButton(button));
 }
 
 bool MouseRaylib::buttonReleased(Base::MouseButton button)
 {
-    IsMouseButtonReleased(mapButton(button));
+    return IsMouseButtonReleased(mapButton(button));
 }
 
 Base::Point MouseRaylib::getPosition()
 {
     Vector2 position = GetMousePosition();
     return {position.x, position.y};
+}
+
+bool MouseRaylib::inWindow()
+{
+    return GetMouseX() >= 0 && GetMouseX() < GetScreenWidth()
+        && GetMouseY() >= 0 && GetMouseY() < GetScreenHeight();
 }
 
 void MouseRaylib::setPosition(const Base::Point& position)
