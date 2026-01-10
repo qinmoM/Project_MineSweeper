@@ -6,7 +6,12 @@ void Game::run()
     window.windowInit(1200, 1000, "test");
     window.FPSset(120);
 
-    GameManager gameManager(RendererRaylib::getInstance());
+    GameManager gameManager(
+        RendererRaylib::getInstance(),
+        std::make_shared<HandleInputRaylib>(
+            MouseRaylib::getInstance(),
+            KeyboardRaylib::getInstance()
+        ));
     while (window.windowExists())
     {
         window.drawingBegin();
