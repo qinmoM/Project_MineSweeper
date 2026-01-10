@@ -6,28 +6,28 @@ MouseBase& MouseRaylib::getInstance()
     return instance;
 }
 
-bool MouseRaylib::buttonDown(Base::MouseButton button)
+bool MouseRaylib::buttonDown(Base::MouseButton button) const
 {
     return IsMouseButtonDown(mapButton(button));
 }
 
-bool MouseRaylib::buttonPressed(Base::MouseButton button)
+bool MouseRaylib::buttonPressed(Base::MouseButton button) const
 {
     return IsMouseButtonPressed(mapButton(button));
 }
 
-bool MouseRaylib::buttonReleased(Base::MouseButton button)
+bool MouseRaylib::buttonReleased(Base::MouseButton button) const
 {
     return IsMouseButtonReleased(mapButton(button));
 }
 
-Base::Point MouseRaylib::getPosition()
+Base::Point MouseRaylib::getPosition() const
 {
     Vector2 position = GetMousePosition();
     return {position.x, position.y};
 }
 
-bool MouseRaylib::inWindow()
+bool MouseRaylib::inWindow() const
 {
     return GetMouseX() >= 0 && GetMouseX() < GetScreenWidth()
         && GetMouseY() >= 0 && GetMouseY() < GetScreenHeight();
@@ -38,7 +38,7 @@ void MouseRaylib::setPosition(const Base::Point& position)
     SetMousePosition(position.x, position.y);
 }
 
-float MouseRaylib::getWheelMove()
+float MouseRaylib::getWheelMove() const
 {
     return GetMouseWheelMove();
 }
@@ -48,7 +48,7 @@ void MouseRaylib::setCursor(Base::MouseCursor cursor)
     SetMouseCursor(mapCursor(cursor));
 }
 
-MouseButton MouseRaylib::mapButton(Base::MouseButton button)
+MouseButton MouseRaylib::mapButton(Base::MouseButton button) const
 {
     switch (button)
     {
@@ -61,7 +61,7 @@ MouseButton MouseRaylib::mapButton(Base::MouseButton button)
     throw std::invalid_argument("Invalid mouse button. | MouseRaylib::mapButton()\n");
 }
 
-MouseCursor MouseRaylib::mapCursor(Base::MouseCursor cursor)
+MouseCursor MouseRaylib::mapCursor(Base::MouseCursor cursor) const
 {
     switch (cursor)
     {

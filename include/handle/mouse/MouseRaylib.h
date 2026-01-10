@@ -10,18 +10,18 @@ public:
     static MouseBase& getInstance();
 public:
     // sustained check
-    bool buttonDown(Base::MouseButton button) override;
+    bool buttonDown(Base::MouseButton button) const override;
     // single check
-    bool buttonPressed(Base::MouseButton button) override;
-    bool buttonReleased(Base::MouseButton button) override;
+    bool buttonPressed(Base::MouseButton button) const override;
+    bool buttonReleased(Base::MouseButton button) const override;
 
     // position
-    Base::Point getPosition() override;
-    bool inWindow() override;
+    Base::Point getPosition() const override;
+    bool inWindow() const override;
     void setPosition(const Base::Point& position) override;
 
     // wheel
-    float getWheelMove() override;
+    float getWheelMove() const override;
 
     // cursor
     void setCursor(Base::MouseCursor cursor) override;
@@ -32,9 +32,9 @@ public:
 
 private:
     // button
-    MouseButton mapButton(Base::MouseButton button);
+    MouseButton mapButton(Base::MouseButton button) const;
     // cursor
-    MouseCursor mapCursor(Base::MouseCursor cursor);
+    MouseCursor mapCursor(Base::MouseCursor cursor) const;
 
 private:
     MouseRaylib() = default;
