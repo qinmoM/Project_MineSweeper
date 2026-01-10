@@ -1,13 +1,15 @@
 #include "GameManager.h"
 
-GameManager::GameManager(RendererBase& renderer) : rendererProxy_(std::make_shared<RendererProxy>(renderer))
+GameManager::GameManager(RendererBase& renderer, std::shared_ptr<HandleInputBase> handleInput)
+    : rendererProxy_(std::make_shared<RendererProxy>(renderer))
+    , handleInput_(handleInput)
 {
     init();
 }
 
 void GameManager::init()
 {
-    std::unique_ptr<GameStateBase> newState = std::make_unique<GameStateMenu>(rendererProxy_);
+    std::unique_ptr<GameStateBase> newState = std::make_unique<GameStateMenu>(rendererProxy_, handleInput_);
     changeState(std::move(newState));
     currState_->enter();
 }
@@ -26,6 +28,10 @@ void GameManager::changeState(std::unique_ptr<GameStateBase> newState)
 
 void GameManager::update(float delta)
 {
+    // update input io
+    handleInput_->update();
+
+    // update game state
     if (currState_)
         currState_->update(delta);
 }

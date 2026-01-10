@@ -7,7 +7,7 @@
 class GameManager
 {
 public:
-    GameManager(RendererBase& renderer);
+    GameManager(RendererBase& renderer, std::shared_ptr<HandleInputBase> handleInput);
     ~GameManager() = default;
 public:
     void init();
@@ -18,4 +18,5 @@ public:
 private:
     std::unique_ptr<GameStateBase> currState_;
     std::shared_ptr<RendererProxy> rendererProxy_;
+    std::shared_ptr<HandleInputBase> handleInput_;
 };
