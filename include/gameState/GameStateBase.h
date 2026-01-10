@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RendererProxy.h"
+#include "HandleInputBase.h"
 #include <memory>
 
 class GameStateBase
@@ -12,8 +13,9 @@ public:
     virtual void update(float delta) = 0;
     virtual void render() = 0;
 public:
-    GameStateBase(std::shared_ptr<RendererProxy> renderer) : renderer_(renderer) { }
+    GameStateBase(std::shared_ptr<RendererProxy> renderer, std::shared_ptr<HandleInputBase> handleInput) : renderer_(renderer), handleInput_(handleInput) { }
     virtual ~GameStateBase() = default;
 protected:
     std::shared_ptr<RendererProxy> renderer_;
+    std::shared_ptr<HandleInputBase> handleInput_;
 };
