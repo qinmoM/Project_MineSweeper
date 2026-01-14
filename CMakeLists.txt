@@ -16,7 +16,8 @@ set(include_raylib ${path_raylib}/include)
 set(include_project
     ${PROJECT_SOURCE_DIR}/include
     ${PROJECT_SOURCE_DIR}/include/core
-    ${PROJECT_SOURCE_DIR}/include/common
+    ${PROJECT_SOURCE_DIR}/include/common/base
+    ${PROJECT_SOURCE_DIR}/include/common/tool
     ${PROJECT_SOURCE_DIR}/include/gameState
     ${PROJECT_SOURCE_DIR}/include/render/renderer
     ${PROJECT_SOURCE_DIR}/include/render/proxy
