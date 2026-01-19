@@ -1,8 +1,11 @@
 #include "HandleInputSemantic.h"
 
 
-HandleInputSemantic::HandleInputSemantic(std::shared_ptr<HandleInputBase> handle)
+HandleInputSemantic::HandleInputSemantic(std::shared_ptr<HandleInputBase> handle, float maxClickTime, float maxMoveDistance, float minLongPressTime)
     : handle_(handle)
+    , maxClickTime_(maxClickTime)
+    , maxMoveDistance_(maxMoveDistance)
+    , minLongPressTime_(minLongPressTime)
 {
     mouseClickStates_[Base::MouseButton::Left] = ClickState();
     mouseClickStates_[Base::MouseButton::Right] = ClickState();
