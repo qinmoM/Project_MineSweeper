@@ -1,7 +1,8 @@
 #include "HandleInputSemantic.h"
 
 
-HandleInputSemantic::HandleInputSemantic(std::shared_ptr<HandleInputBase> handle) : handle_(handle)
+HandleInputSemantic::HandleInputSemantic(std::shared_ptr<HandleInputBase> handle)
+    : handle_(handle)
 {
     mouseClickStates_[Base::MouseButton::Left] = ClickState();
     mouseClickStates_[Base::MouseButton::Right] = ClickState();
@@ -14,11 +15,6 @@ HandleInputSemantic::HandleInputSemantic(std::shared_ptr<HandleInputBase> handle
 bool HandleInputSemantic::mouseClicked(Base::MouseButton button) const
 {
     return mouseClickStates_.at(button).thisFrame_;
-}
-
-bool HandleInputSemantic::mouseDoubleClicked(Base::MouseButton button) const
-{
-    return mouseClickStates_.at(button).thisDoubleFrame_;
 }
 
 bool HandleInputSemantic::mouseLongPressed(Base::MouseButton button) const
@@ -34,7 +30,6 @@ void HandleInputSemantic::update(float delta)
     for (auto& [button, state] : mouseClickStates_)
     {
         state.thisFrame_ = false;
-        state.thisDoubleFrame_ = false;
 
         if (mouseDown(button))
             state.time_ += delta;
@@ -45,29 +40,13 @@ void HandleInputSemantic::update(float delta)
             state.position_ = mousePosition();
         }
 
-        if (state.isAfterClick_)
-        {
-            state.lastClickTime_ += delta;
-            if (state.lastClickTime_ >= maxDoubleClickTime_ - maxClickTime_)
-                state.isAfterClick_ = false;
-        }
-
         if (mouseReleased(button))
         {
             Base::Point dPosition = mousePosition() - state.position_;
             if ((state.time_ <= maxClickTime_) && (dPosition.x * dPosition.x + dPosition.y * dPosition.y <= maxMoveDistance_ * maxMoveDistance_))
             {
                 state.thisFrame_ = true;
-                if (state.isAfterClick_)
-                {
-                    state.thisDoubleFrame_ = true;
-                    state.isAfterClick_ = false;
-                }
-                else
-                {
-                    state.lastClickTime_ = 0.0f;
-                    state.isAfterClick_ = true;
-                }
+                state.time_ = 0.0f;
             }
         }
     }

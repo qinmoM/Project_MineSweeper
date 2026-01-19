@@ -4,16 +4,7 @@
 #include "ToolClock.h"
 #include <memory>
 #include <unordered_map>
-
-struct ClickState
-{
-    Base::Point position_{0.0f, 0.0f};
-    float time_ = 0.0f;
-    float lastClickTime_ = 0.0f;
-    bool thisFrame_ = false;
-    bool thisDoubleFrame_ = false;
-    bool isAfterClick_ = false;
-};
+#include <vector>
 
 class HandleInputSemantic
 {
@@ -22,7 +13,6 @@ public:
     //              semantic
 
     bool mouseClicked(Base::MouseButton button) const;
-    bool mouseDoubleClicked(Base::MouseButton button) const;
     bool mouseLongPressed(Base::MouseButton button) const;
 
     //              base
@@ -43,11 +33,18 @@ public:
     void mouseSetCursor(Base::MouseCursor cursor);
 public:
     HandleInputSemantic(std::shared_ptr<HandleInputBase> handle);
+
+protected:
+    struct ClickState
+    {
+        Base::Point position_{0.0f, 0.0f};
+        float time_ = 0.0f;
+        bool thisFrame_ = false;
+    };
 protected:
     std::shared_ptr<HandleInputBase> handle_;
     std::unordered_map<Base::MouseButton, ClickState> mouseClickStates_;
     float maxClickTime_ = 0.5f;
     float maxMoveDistance_ = 5.0f;
-    float maxDoubleClickTime_ = 2.0f;
     float minLongPressTime_ = 1.0f;
 };
