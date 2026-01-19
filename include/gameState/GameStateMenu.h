@@ -9,6 +9,6 @@ public:
     virtual void update(float delta) override;
     virtual void render() override;
 public:
-    GameStateMenu(std::shared_ptr<RendererProxy> rendererProxy, std::shared_ptr<HandleInputBase> handleInput) : GameStateBase(rendererProxy, handleInput) { };
+    GameStateMenu(std::shared_ptr<RendererProxy> rendererProxy, std::shared_ptr<HandleInputSemantic> handleInput) : GameStateBase(rendererProxy, handleInput) { };
     virtual ~GameStateMenu() = default;
 };

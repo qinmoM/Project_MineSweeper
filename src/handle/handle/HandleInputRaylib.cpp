@@ -1,9 +1,11 @@
 #include "HandleInputRaylib.h"
 
-void HandleInputRaylib::update()
+void HandleInputRaylib::update(float delta)
 {
     // raylib will automatioally update
 }
+
+
 
 // keyboard
 bool HandleInputRaylib::keyDown(Base::Key key) const
@@ -20,6 +22,8 @@ bool HandleInputRaylib::keyReleased(Base::Key key) const
 {
     return keyboard_.keyReleased(key);
 }
+
+
 
 // mouse
 bool HandleInputRaylib::mouseDown(Base::MouseButton button) const

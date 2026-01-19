@@ -8,7 +8,7 @@
 class HandleInputRaylib : public HandleInputBase
 {
 public:
-    void update() override;
+    void update(float delta) override;
 
     // keyboard
     bool keyDown(Base::Key key) const override;

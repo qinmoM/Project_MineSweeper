@@ -2,7 +2,7 @@
 
 GameManager::GameManager(RendererBase& renderer, std::shared_ptr<HandleInputBase> handleInput)
     : rendererProxy_(std::make_shared<RendererProxy>(renderer))
-    , handleInput_(handleInput)
+    , handleInput_(std::make_shared<HandleInputSemantic>(handleInput))
 {
     init();
 }

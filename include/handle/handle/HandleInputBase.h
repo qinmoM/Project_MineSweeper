@@ -6,7 +6,7 @@
 class HandleInputBase
 {
 public:
-    virtual void update() = 0;
+    virtual void update(float delta) = 0;
 
     // keyboard
     virtual bool keyDown(Base::Key key) const = 0;

@@ -21,5 +21,5 @@ public:
 private:
     std::vector<std::unique_ptr<GameStateBase>> stateStack_;
     std::shared_ptr<RendererProxy> rendererProxy_;
-    std::shared_ptr<HandleInputBase> handleInput_;
+    std::shared_ptr<HandleInputSemantic> handleInput_;
 };
