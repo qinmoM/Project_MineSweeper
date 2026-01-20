@@ -1,12 +1,7 @@
 #pragma once
 
-#include "BaseColor.h"
-#include "TextureBase.h"
-#include "FontBase.h"
 #include "Sprite.h"
 #include "Text.h"
-#include <string>
-#include <memory>
 
 class RendererBase
 {

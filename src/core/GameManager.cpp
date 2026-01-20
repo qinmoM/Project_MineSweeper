@@ -9,36 +9,8 @@ GameManager::GameManager(RendererBase& renderer, std::shared_ptr<HandleInputBase
 
 void GameManager::init()
 {
-    std::unique_ptr<GameStateBase> newState = std::make_unique<GameStateMenu>(rendererProxy_, handleInput_);
-    pushState(std::move(newState));
-    stateStack_.back()->enter();
-}
-
-
-
-
-void GameManager::pushState(std::unique_ptr<GameStateBase> newState)
-{
-    if (!newState)
-        throw std::invalid_argument("newState is nullptr. | GameManager::changeState()\n");
-
-    stateStack_.push_back(std::move(newState));
-    stateStack_.back()->enter();
-}
-
-void GameManager::changeState(std::unique_ptr<GameStateBase> newState)
-{
-    if (!newState)
-        throw std::invalid_argument("newState is nullptr. | GameManager::changeState()\n");
-
-    if (!stateStack_.empty())
-    {
-        stateStack_.back()->exit();
-        stateStack_.pop_back();
-    }
-    
-    stateStack_.push_back(std::move(newState));
-    stateStack_.back()->enter();
+    stateManager_->pushState("Menu");
+    stateManager_->stateStack_.back()->enter();
 }
 
 
@@ -47,15 +19,15 @@ void GameManager::changeState(std::unique_ptr<GameStateBase> newState)
 void GameManager::update(float delta)
 {
     // update input io
-    handleInput_->update();
+    handleInput_->update(delta);
 
     // update game state
-    if (!stateStack_.empty())
-        stateStack_.back()->update(delta);
+    if (!stateManager_->stateStack_.empty())
+        stateManager_->stateStack_.back()->update(delta);
 }
 
 void GameManager::render()
 {
-    for (std::unique_ptr<GameStateBase>& state : stateStack_)
+    for (GameStateManager::stateType& state : stateManager_->stateStack_)
         state->render();
 }
