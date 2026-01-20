@@ -1,10 +1,8 @@
 #pragma once
 
 #include "HandleInputBase.h"
-#include "ToolClock.h"
 #include <memory>
 #include <unordered_map>
-#include <vector>
 
 class HandleInputSemantic
 {
