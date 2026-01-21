@@ -2,7 +2,9 @@
 
 #include "RendererProxy.h"
 #include "HandleInputSemantic.h"
+#include "ButtonBase.h"
 #include <memory>
+#include <vector>
 
 class GameStateManager;
 
@@ -34,4 +36,5 @@ public:
     virtual ~GameStateBase() = default;
 protected:
     GameStateContext context_;
+    std::vector<std::shared_ptr<ButtonBase>> button_;
 };
