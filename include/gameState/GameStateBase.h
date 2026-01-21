@@ -6,6 +6,19 @@
 
 class GameStateManager;
 
+struct GameStateContext
+{
+    GameStateContext(std::shared_ptr<RendererProxy> renderer, std::shared_ptr<HandleInputSemantic> handleInput, std::shared_ptr<GameStateManager> stateManager)
+        : renderer(renderer)
+        , handleInput(handleInput)
+        , stateManager(stateManager)
+    { }
+
+    std::shared_ptr<RendererProxy> renderer;
+    std::shared_ptr<HandleInputSemantic> handleInput;
+    std::shared_ptr<GameStateManager> stateManager;
+};
+
 class GameStateBase
 {
 public:
@@ -15,14 +28,10 @@ public:
     virtual void update(float delta) = 0;
     virtual void render() = 0;
 public:
-    GameStateBase(std::shared_ptr<RendererProxy> renderer, std::shared_ptr<HandleInputSemantic> handleInput, std::shared_ptr<GameStateManager> gameStateManager)
-        : renderer_(renderer)
-        , handleInput_(handleInput)
-        , stateManager_(gameStateManager)
+    GameStateBase(GameStateContext context)
+        : context_(context)
     { }
     virtual ~GameStateBase() = default;
 protected:
-    std::shared_ptr<RendererProxy> renderer_;
-    std::shared_ptr<HandleInputSemantic> handleInput_;
-    std::shared_ptr<GameStateManager> stateManager_;
+    GameStateContext context_;
 };

@@ -15,7 +15,5 @@ public:
     void update(float delta);
     void render();
 protected:
-    std::shared_ptr<RendererProxy> rendererProxy_;
-    std::shared_ptr<HandleInputSemantic> handleInput_;
-    std::shared_ptr<GameStateManager> stateManager_;
+    GameStateContext context_;
 };
