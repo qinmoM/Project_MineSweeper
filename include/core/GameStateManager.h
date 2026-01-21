@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameStateBase.h"
+#include <functional>
 #include <stdexcept>
 #include <vector>
 

@@ -1,15 +1,18 @@
 #include "GameManager.h"
 
-GameManager::GameManager(RendererBase& renderer, std::shared_ptr<HandleInputBase> handleInput)
+GameManager::GameManager(RendererBase& renderer, std::shared_ptr<HandleInputBase> handleInput, std::string state)
     : context_(std::make_shared<RendererProxy>(renderer), std::make_shared<HandleInputSemantic>(handleInput), std::make_shared<GameStateManager>())
 {
-    init();
+    init(state);
 }
 
-void GameManager::init()
+void GameManager::init(std::string state)
 {
-    context_.stateManager->pushState("Menu");
-    context_.stateManager->stateStack_.back()->enter();
+    context_.stateManager->registerState(
+        "Menu", [this]() -> GameStateManager::stateType { return std::make_unique<GameStateMenu>(context_); }
+    );
+
+    context_.stateManager->pushState(state);
 }
 
 
