@@ -1,4 +1,5 @@
-#include "GameStateBase.h"
+#include "GameStateManager.h"
+#include "ButtonImage.h"
 
 class GameStateMenu : public GameStateBase
 {
@@ -9,6 +10,6 @@ public:
     virtual void update(float delta) override;
     virtual void render() override;
 public:
-    GameStateMenu(std::shared_ptr<RendererProxy> rendererProxy, std::shared_ptr<HandleInputSemantic> handleInput) : GameStateBase(rendererProxy, handleInput) { };
+    GameStateMenu(GameStateContext context);
     virtual ~GameStateMenu() = default;
 };
