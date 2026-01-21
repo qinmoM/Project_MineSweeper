@@ -13,11 +13,15 @@ public:
 public:
     void setPosition(const Base::Point& position);
     void setScale(const Base::Point& scale);
+    void setOrigin(const Base::Point& origin);
+    void setRotation(float rotation);
     void setColor(const Base::Color& color);
     void setTexture(const std::shared_ptr<TextureBase>& texture);
 
     Base::Point getPosition() const;
     Base::Point getScale() const;
+    Base::Point getOrigin() const;
+    float getRotation() const;
     Base::Color getColor() const;
     std::shared_ptr<TextureBase> getTexture() const;
 

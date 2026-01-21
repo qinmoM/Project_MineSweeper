@@ -73,6 +73,11 @@ void RendererProxy::drawTexture(int posX, int posY, float scaleX, float scaleY, 
     renderer_.drawTexture(posX, posY, scaleX, scaleY, texture, color);
 }
 
+void RendererProxy::drawSprite(const Sprite& sprite)
+{
+    renderer_.drawSprite(sprite);
+}
+
 
 
 std::shared_ptr<FontBase> RendererProxy::loadFont(const std::string& path)
@@ -80,7 +85,12 @@ std::shared_ptr<FontBase> RendererProxy::loadFont(const std::string& path)
     return renderer_.loadFont(path);
 }
 
-void RendererProxy::drawText(int posX, int posY, int size, const std::string& text, const std::shared_ptr<FontBase>& font, const Base::Color& color)
+void RendererProxy::drawFont(int posX, int posY, int size, const std::string& text, const std::shared_ptr<FontBase>& font, const Base::Color& color)
 {
-    renderer_.drawText(posX, posY, size, text, font, color);
+    renderer_.drawFont(posX, posY, size, text, font, color);
+}
+
+void RendererProxy::drawText(const Text& text)
+{
+    renderer_.drawText(text);
 }

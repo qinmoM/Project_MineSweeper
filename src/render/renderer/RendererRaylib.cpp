@@ -143,6 +143,24 @@ void RendererRaylib::drawTexture(int posX, int posY, float scaleX, float scaleY,
     );
 }
 
+void RendererRaylib::drawSprite(const Sprite& sprite)
+{
+    Texture2D tex = static_cast<TextureRaylib*>(sprite.getTexture().get())->texture_;
+    Rectangle origin = {0.0f, 0.0f, static_cast<float>(tex.width), static_cast<float>(tex.height)};
+    Base::Point scale = sprite.getScale();
+    Rectangle next = {0.0f, 0.0f, origin.width * scale.x, origin.height * scale.y};
+    Base::Point originPoint = sprite.getOrigin();
+    Base::Color color = sprite.getColor();
+    DrawTexturePro(
+        tex,
+        origin,
+        next,
+        {originPoint.x, originPoint.y},
+        sprite.getRotation(),
+        {color.r, color.g, color.b, color.a}
+    );
+}
+
 
 
 
@@ -152,8 +170,12 @@ std::shared_ptr<FontBase> RendererRaylib::loadFont(const std::string& path)
     return std::make_shared<FontRaylib>(getFontToken(), *this, path);
 }
 
-void RendererRaylib::drawText(int posX, int posY, int size, const std::string& text, const std::shared_ptr<FontBase>& font, const Base::Color& color)
+void RendererRaylib::drawFont(int posX, int posY, int size, const std::string& text, const std::shared_ptr<FontBase>& font, const Base::Color& color)
 {
     DrawText(text.c_str(), posX, posY, size, {color.r, color.g, color.b, color.a});
 }
 
+void RendererRaylib::drawText(const Text& text)
+{
+    ;
+}

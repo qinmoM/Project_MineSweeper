@@ -106,6 +106,9 @@ public:
     /// @param texture image texture object shared pointer
     /// @param color color filter(weights for each of the three color channels)
     virtual void drawTexture(int posX, int posY, float scaleX, float scaleY, const std::shared_ptr<TextureBase>& texture, const Base::Color& color = {255, 255, 255, 255}) = 0;
+    /// @brief draw a image with sprite object
+    /// @param sprite sprite object
+    virtual void drawSprite(const Sprite& sprite) = 0;
 
     /// @brief load a font from path
     /// @param path font file path
@@ -118,7 +121,10 @@ public:
     /// @param text text to be drawn
     /// @param font font object shared pointer
     /// @param color font color
-    virtual void drawText(int posX, int posY, int size, const std::string& text, const std::shared_ptr<FontBase>& font, const Base::Color& color = {0, 0, 0, 255}) = 0;
+    virtual void drawFont(int posX, int posY, int size, const std::string& text, const std::shared_ptr<FontBase>& font, const Base::Color& color = {0, 0, 0, 255}) = 0;
+    /// @brief draw a text with text object
+    /// @param text text object
+    virtual void drawText(const Text& text) = 0;
 
 public:
     virtual ~RendererBase() = default;
@@ -139,6 +145,6 @@ public:
     };
 
 protected:
-    TextureToken getTextureToken();
-    FontToken getFontToken();
+    TextureToken getTextureToken() { return TextureToken(); }
+    FontToken getFontToken() { return FontToken(); }
 };

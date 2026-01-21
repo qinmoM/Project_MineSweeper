@@ -22,9 +22,11 @@ public:
 
     std::shared_ptr<TextureBase> loadTexture(const std::string& path);
     void drawTexture(int posX, int posY, float scaleX, float scaleY, const std::shared_ptr<TextureBase>& texture, const Base::Color& color = {255, 255, 255, 255});
+    void drawSprite(const Sprite& sprite);
 
     std::shared_ptr<FontBase> loadFont(const std::string& path);
-    void drawText(int posX, int posY, int size, const std::string& text, const std::shared_ptr<FontBase>& font, const Base::Color& color = {0, 0, 0, 255});
+    void drawFont(int posX, int posY, int size, const std::string& text, const std::shared_ptr<FontBase>& font, const Base::Color& color = {0, 0, 0, 255});
+    void drawText(const Text& text);
 
 public:
     RendererProxy(RendererBase& renderer) : renderer_(renderer) { }
