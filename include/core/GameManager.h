@@ -7,10 +7,10 @@
 class GameManager
 {
 public:
-    GameManager(RendererBase& renderer, std::shared_ptr<HandleInputBase> handleInput);
+    GameManager(RendererBase& renderer, std::shared_ptr<HandleInputBase> handleInput, std::string state);
     ~GameManager() = default;
 public:
-    void init();
+    void init(std::string state);
 
     void update(float delta);
     void render();

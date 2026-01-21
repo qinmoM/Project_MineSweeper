@@ -11,7 +11,9 @@ void Game::run()
         std::make_shared<HandleInputRaylib>(
             MouseRaylib::getInstance(),
             KeyboardRaylib::getInstance()
-        ));
+        ),
+        "Menu"
+    );
     while (window.windowExists())
     {
         window.drawingBegin();
