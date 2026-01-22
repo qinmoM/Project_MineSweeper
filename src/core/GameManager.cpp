@@ -1,18 +1,28 @@
 #include "GameManager.h"
 
-GameManager::GameManager(RendererBase& renderer, std::shared_ptr<HandleInputBase> handleInput, std::string state)
-    : context_(std::make_shared<RendererProxy>(renderer), std::make_shared<HandleInputSemantic>(handleInput), std::make_shared<GameStateManager>())
-{
-    init(state);
-}
+GameManager::GameManager(RendererBase& renderer,
+    std::shared_ptr<HandleInputBase> handleInput,
+    float maxClickTime,
+    float maxMoveDistance,
+    float minLongPressTime)
+    : context_(std::make_shared<RendererProxy>(renderer)
+    , std::make_shared<HandleInputSemantic>(
+        handleInput,
+        maxClickTime,
+        maxMoveDistance,
+        minLongPressTime)
+    , std::make_shared<GameStateManager>()
+    )
+{ }
 
 void GameManager::init(std::string state)
 {
-    context_.stateManager->registerState(
-        "Menu", [this]() -> GameStateManager::stateType { return std::make_unique<GameStateMenu>(context_); }
-    );
-
     context_.stateManager->pushState(state);
+}
+
+void GameManager::registerState(std::string state, GameStateManager::Creator creator)
+{
+    context_.stateManager->registerState(state, creator);
 }
 
 

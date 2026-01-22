@@ -12,8 +12,13 @@ void Game::run()
             MouseRaylib::getInstance(),
             KeyboardRaylib::getInstance()
         ),
-        "Menu"
+        1.0f,
+        15.0f,
+        1.0f
     );
+    gameManager.registerState("Menu", [&gameManager]() -> GameStateManager::stateType { return std::make_unique<GameStateMenu>(gameManager.getContext()); });
+    gameManager.init("Menu");
+
     while (window.windowExists())
     {
         window.drawingBegin();
