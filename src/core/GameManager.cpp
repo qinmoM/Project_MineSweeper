@@ -36,6 +36,14 @@ void GameManager::update(float delta)
     // update game state
     if (!context_.stateManager->stateStack_.empty())
         context_.stateManager->stateStack_.back()->update(delta);
+
+    // tasks queue
+    std::queue<std::function<void()>>& tasks = context_.stateManager->tasksQueue_;
+    while (tasks.size())
+    {
+        tasks.front()();
+        tasks.pop();
+    }
 }
 
 void GameManager::render()

@@ -56,7 +56,7 @@ void GameStateMenu::update(float delta)
     for (auto& button : button_)
     {
         if (context_.handleInput->mouseClicked(Base::MouseButton::Left) && button->contains(context_.handleInput->mousePosition()))
-            button->getCallback()();
+            context_.stateManager->addTask(button->getCallback());
         
         button->update(*context_.handleInput, delta);
     }
