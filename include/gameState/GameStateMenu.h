@@ -10,6 +10,6 @@ public:
     virtual void update(float delta) override;
     virtual void render() override;
 public:
-    GameStateMenu(GameStateContext context);
+    GameStateMenu(GameStateContext& context);
     virtual ~GameStateMenu() = default;
 };
