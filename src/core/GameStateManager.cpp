@@ -30,3 +30,23 @@ void GameStateManager::popState()
         stateStack_.pop_back();
     }
 }
+
+void GameStateManager::clearState()
+{
+    while (!stateStack_.empty())
+    {
+        stateStack_.back()->exit();
+        stateStack_.pop_back();
+    }
+}
+
+void GameStateManager::addTask(const std::function<void()>& task)
+{
+    tasksQueue_.push(task);
+}
+
+void GameStateManager::clearTask()
+{
+    while (!tasksQueue_.empty())
+        tasksQueue_.pop();
+}

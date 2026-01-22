@@ -4,6 +4,7 @@
 #include <functional>
 #include <stdexcept>
 #include <vector>
+#include <queue>
 
 class GameStateManager
 {
@@ -16,8 +17,13 @@ public:
 
     void pushState(std::string newState);
     void popState();
+    void clearState();
+
+    void addTask(const std::function<void()>& task);
+    void clearTask();
 protected:
     std::vector<stateType> stateStack_;
+    std::queue<std::function<void()>> tasksQueue_;
     std::unordered_map<std::string, Creator> registerCreators_;
     friend class GameManager;
 };
