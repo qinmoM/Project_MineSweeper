@@ -4,15 +4,17 @@ cmake_minimum_required(VERSION 3.10)
 get_filename_component(PROJECT_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 project(${PROJECT_NAME})
 # c++ 标准
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 
 # raylib路径
 set(path_raylib ${PROJECT_SOURCE_DIR}/external/open/raylib)
+# nlohmann_json路径
+set(path_nlohmann ${PROJECT_SOURCE_DIR}/external/open/nlohmann)
 
 
 # 头文件路径
-set(include_raylib ${path_raylib}/include)
+set(include_external ${path_raylib}/include ${path_nlohmann})
 set(include_project
     ${PROJECT_SOURCE_DIR}/include
     ${PROJECT_SOURCE_DIR}/include/core
@@ -32,7 +34,7 @@ set(include_project
 # 将头文件全部加入
 include_directories(
     ${include_project}
-    ${include_raylib}
+    ${include_external}
 )
 
 
