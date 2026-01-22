@@ -17,7 +17,7 @@ void Game::run()
     while (window.windowExists())
     {
         window.drawingBegin();
-        window.clearBackground(Base::Color{200, 200, 200, 0});
+        window.clearBackground(Base::Color{230, 230, 230, 0});
 
         gameManager.update(window.FPSgetFrameTime());
         gameManager.render();

@@ -146,18 +146,21 @@ void RendererRaylib::drawTexture(int posX, int posY, float scaleX, float scaleY,
 void RendererRaylib::drawSprite(const Sprite& sprite)
 {
     Texture2D tex = static_cast<TextureRaylib*>(sprite.getTexture().get())->texture_;
-    Rectangle origin = {0.0f, 0.0f, static_cast<float>(tex.width), static_cast<float>(tex.height)};
+    Rectangle origin = { 0.0f, 0.0f, static_cast<float>(tex.width), static_cast<float>(tex.height) };
     Base::Point scale = sprite.getScale();
-    Rectangle next = {0.0f, 0.0f, origin.width * scale.x, origin.height * scale.y};
+    Base::Point pos = sprite.getPosition();
     Base::Point originPoint = sprite.getOrigin();
+    originPoint.x *= scale.x;
+    originPoint.y *= scale.y;
+    Rectangle next = { pos.x, pos.y, origin.width * scale.x, origin.height * scale.y };
     Base::Color color = sprite.getColor();
     DrawTexturePro(
         tex,
         origin,
         next,
-        {originPoint.x, originPoint.y},
+        { originPoint.x, originPoint.y },
         sprite.getRotation(),
-        {color.r, color.g, color.b, color.a}
+        { color.r, color.g, color.b, color.a }
     );
 }
 
