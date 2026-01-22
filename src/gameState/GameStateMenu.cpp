@@ -9,57 +9,40 @@ GameStateMenu::GameStateMenu(GameStateContext context)
 
 void GameStateMenu::enter()
 {
-    // textures_.push_back(renderer_->loadTexture("../res/image/pauseOpen_ashen.png"));
-    // SetMouseCursor(MOUSE_CURSOR_RESIZE_ALL);
-    // IsWindowFocused()
-    // std::shared_ptr<EventMouse> event1 = std::make_shared<EventMouse>(
-    //     [this]() -> bool
-    //     {
-    //         return this->handleInput_->mouseDown(Base::MouseButton::Left);
-    //     },
-    //     nullptr, 1.0f
-    // );
-    // std::shared_ptr<EventMouse> event2 = std::make_shared<EventMouse>(
-    //     [this]() -> bool
-    //     {
-    //         return handleInput_->mouseReleased(Base::MouseButton::Left);
-    //     },
-    //     event1, 0.0f
-    // );
-    // handleInput_->addEvent(event2);
     std::shared_ptr<TextureBase> texture = context_.renderer->loadTexture("../res/image/return_ashen.png");
     Sprite sprite(texture);
-    sprite.setScale(Base::Point{0.2f, 0.2f});
+    sprite.setOrigin({ 500.0f, 500.0f });
+    sprite.setScale(Base::Point{ 0.2f, 0.2f });
+    Base::Point point{ 200.0f, 200.0f };
+    sprite.setPosition(point);
     button_.push_back(std::make_shared<ButtonImage>(
         sprite,
-        Base::Point{ 100, 100 },
+        point,
         [this]() -> void
         {
             std::cout << "Button clicked" << std::endl;
         },
         [this](const ButtonBase& button, const Base::Point pos) -> bool
         {
+            const ButtonImage& buttonImage = static_cast<const ButtonImage&>(button);
+            float radius = buttonImage.getSprite().getScale().x / 2 * 1000;
             Base::Point buttonPos = button.getPosition();
-            float dx = buttonPos.x - pos.x;
-            float dy = buttonPos.y - pos.y;
-            return dx * dx + dy * dy <= 100.0f * 100.0f;
+            float dx = buttonPos.x - pos.x + radius;
+            float dy = buttonPos.y - pos.y + radius;
+            return dx * dx + dy * dy <= radius * radius;
+        },
+        [this](ButtonBase& button, HandleInputSemantic& handle, float delta) -> void
+        {
+            ButtonImage& buttonImage = static_cast<ButtonImage&>(button);
+            Sprite& sprite = buttonImage.getSprite();
+            if (button.contains(handle.mousePosition()) && Base::Color{255, 255, 255, 255} == sprite.getColor())
+                sprite.setColor(Base::Color{100, 100, 100, 255});
+            else if (!button.contains(handle.mousePosition()) && Base::Color{100, 100, 100, 255} == sprite.getColor())
+                sprite.setColor(Base::Color{255, 255, 255, 255});
+
+            sprite.setRotation(sprite.getRotation() + delta * 50);
         }
     ));
-    // ButtonImage button(
-    //     sprite,
-    //     { 100, 100 },
-    //     [this]() -> void
-    //     {
-    //         context_.stateManager->pushState("Menu");
-    //     },
-    //     [this](const ButtonBase& button, const Base::Point pos) -> bool
-    //     {
-    //         Base::Point buttonPos = button.getPosition();
-    //         float dx = buttonPos.x - pos.x;
-    //         float dy = buttonPos.y - pos.y;
-    //         return dx * dx + dy * dy <= 100.0f * 100.0f;
-    //     }
-    // );
 }
 
 void GameStateMenu::exit()
@@ -71,8 +54,12 @@ void GameStateMenu::exit()
 void GameStateMenu::update(float delta)
 {
     for (auto& button : button_)
+    {
         if (context_.handleInput->mouseClicked(Base::MouseButton::Left) && button->contains(context_.handleInput->mousePosition()))
             button->getCallback()();
+        
+        button->update(*context_.handleInput, delta);
+    }
 }
 
 void GameStateMenu::render()
