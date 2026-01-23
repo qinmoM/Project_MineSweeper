@@ -23,4 +23,5 @@ public:
     void render();
 protected:
     GameStateContext context_;
+    bool isQuit_ = false;
 };
