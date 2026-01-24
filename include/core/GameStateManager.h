@@ -21,6 +21,8 @@ public:
 
     void addTask(const std::function<void()>& task);
     void clearTask();
+
+    void requestQuit();
 protected:
     std::vector<stateType> stateStack_;
     std::queue<std::function<void()>> tasksQueue_;
