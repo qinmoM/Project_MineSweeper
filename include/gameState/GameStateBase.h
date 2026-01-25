@@ -3,6 +3,7 @@
 #include "RendererProxy.h"
 #include "HandleInputSemantic.h"
 #include "ButtonBase.h"
+#include "Archive.h"
 #include <memory>
 #include <vector>
 

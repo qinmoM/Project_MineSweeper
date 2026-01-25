@@ -2,6 +2,9 @@
 
 void Game::run()
 {
+    std::unique_ptr<Archive> archive = std::make_unique<Archive>();
+    archive->registerSerializer("Json", std::make_unique<JsonSerialization>());
+
     WindowProxy window(RendererRaylib::getInstance());
     window.windowInit(1200, 1000, "test");
     window.FPSset(120);
