@@ -5,9 +5,12 @@ void Game::run()
     std::unique_ptr<Archive> archive = std::make_unique<Archive>();
     archive->registerSerializer("Json", std::make_unique<JsonSerialization>());
 
+    GlobalConfig globalConfig;
+    archive->deserialize("Json", "../data/global.json", globalConfig);
+
     WindowProxy window(RendererRaylib::getInstance());
-    window.windowInit(1200, 1000, "test");
-    window.FPSset(120);
+    window.windowInit(globalConfig.width_, globalConfig.height_, globalConfig.title_);
+    window.FPSset(globalConfig.fps_);
 
     GameManager gameManager(
         RendererRaylib::getInstance(),
