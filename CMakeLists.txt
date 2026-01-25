@@ -29,6 +29,8 @@ set(include_project
     ${PROJECT_SOURCE_DIR}/include/handle/handle
     ${PROJECT_SOURCE_DIR}/include/handle/keyboard
     ${PROJECT_SOURCE_DIR}/include/handle/mouse
+    ${PROJECT_SOURCE_DIR}/include/save/archive
+    ${PROJECT_SOURCE_DIR}/include/save/config
     ${PROJECT_SOURCE_DIR}/include/UI/button
 )
 # 将头文件全部加入
