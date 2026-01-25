@@ -20,33 +20,33 @@
 class jsonHandle
 {
 public:
-    jsonHandle();
-    ~jsonHandle();
+    inline jsonHandle();
+    inline ~jsonHandle();
 
 public:
     /// @brief  Read json file data
     /// @param file_path  file path
     /// @param json_object  json object for reception
     /// @return  Return true if read successful ;  return false if file opening fails or the format is incorrect.
-    bool read(const std::string& file_path, nlohmann::json& json_object) const;
+    inline bool read(const std::string& file_path, nlohmann::json& json_object) const;
 
     /// @brief  Read ordered_json file data
     /// @param file_path  file path
     /// @param json_object  ordered_json object for reception
     /// @return  Return true if read successful ;  return false if file opening fails or the format is incorrect.
-    bool read(const std::string& file_path, nlohmann::ordered_json& json_object) const;
+    inline bool read(const std::string& file_path, nlohmann::ordered_json& json_object) const;
 
     /// @brief  Write json file data (Cover)
     /// @param file_path  file path
     /// @param json_object  json object to be written into
     /// @return  Return true if write successful;  Otherwise, return false.
-    bool write(const std::string& file_path, const nlohmann::json& json_object) const;
+    inline bool write(const std::string& file_path, const nlohmann::json& json_object) const;
 
     /// @brief  Write ordered_json file data (Cover)
     /// @param file_path  file path
     /// @param json_object  ordered_json object to be written into
     /// @return  Return true if write successful;  Otherwise, return false.
-    bool write(const std::string& file_path, const nlohmann::ordered_json& json_object) const;
+    inline bool write(const std::string& file_path, const nlohmann::ordered_json& json_object) const;
 
 };
 
@@ -58,29 +58,29 @@ public:
 class jsonFile
 {
 public:
-    jsonFile(const std::string& file_path);
-    ~jsonFile();
+    inline jsonFile(const std::string& file_path);
+    inline ~jsonFile();
 
 public:
     /// @brief  Read json file data
     /// @param json_object  json object for reception
     /// @return  Return true if read successful ;  return false if file opening fails or the format is incorrect.
-    bool read(nlohmann::json& json_object) const;
+    inline bool read(nlohmann::json& json_object) const;
 
     /// @brief  Read ordered_json file data
     /// @param json_object  ordered_json object for reception
     /// @return  Return true if read successful ;  return false if file opening fails or the format is incorrect.
-    bool read(nlohmann::ordered_json& json_object) const;
+    inline bool read(nlohmann::ordered_json& json_object) const;
 
     /// @brief  Write json file data (Cover)
     /// @param json_object  json object to be written into
     /// @return  Return true if write successful;  Otherwise, return false.
-    bool write(const nlohmann::json& json_object) const;
+    inline bool write(const nlohmann::json& json_object) const;
 
     /// @brief  Write ordered_json file data (Cover)
     /// @param json_object  ordered_json object to be written into
     /// @return  Return true if write successful;  Otherwise, return false.
-    bool write(const nlohmann::ordered_json& json_object) const;
+    inline bool write(const nlohmann::ordered_json& json_object) const;
 
 private:
     std::string file_path_;
