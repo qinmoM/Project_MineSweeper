@@ -27,8 +27,8 @@ void GameStateMenu::enter()
             const ButtonImage& buttonImage = static_cast<const ButtonImage&>(button);
             float radius = buttonImage.getSprite().getScale().x / 2 * 1000;
             Base::Point buttonPos = button.getPosition();
-            float dx = buttonPos.x - pos.x + radius;
-            float dy = buttonPos.y - pos.y + radius;
+            float dx = buttonPos.x - pos.x;
+            float dy = buttonPos.y - pos.y;
             return dx * dx + dy * dy <= radius * radius;
         },
         [this](ButtonBase& button, HandleInputSemantic& handle, float delta) -> void
@@ -36,8 +36,8 @@ void GameStateMenu::enter()
             ButtonImage& buttonImage = static_cast<ButtonImage&>(button);
             Sprite& sprite = buttonImage.getSprite();
             if (button.contains(handle.mousePosition()) && Base::Color{255, 255, 255, 255} == sprite.getColor())
-                sprite.setColor(Base::Color{100, 100, 100, 255});
-            else if (!button.contains(handle.mousePosition()) && Base::Color{100, 100, 100, 255} == sprite.getColor())
+                sprite.setColor(Base::Color{150, 150, 150, 255});
+            else if (!button.contains(handle.mousePosition()) && Base::Color{150, 150, 150, 255} == sprite.getColor())
                 sprite.setColor(Base::Color{255, 255, 255, 255});
 
             sprite.setRotation(sprite.getRotation() + delta * 50);
