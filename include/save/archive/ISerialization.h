@@ -9,6 +9,7 @@
 class ISerialization
 {
 public:
+    inline bool isSavingMode() const { return saving_; };
     inline void setSavingMode() { saving_ = true; };
     inline void setLoadingMode() { saving_ = false; };
 
