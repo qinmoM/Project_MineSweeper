@@ -1,17 +1,19 @@
 #include "GameManager.h"
 
 GameManager::GameManager(RendererBase& renderer,
-    std::shared_ptr<HandleInputBase> handleInput,
+    std::unique_ptr<HandleInputBase> handleInput,
+    std::unique_ptr<Archive> archive,
     float maxClickTime,
     float maxMoveDistance,
     float minLongPressTime)
-    : context_(std::make_shared<RendererProxy>(renderer)
-    , std::make_shared<HandleInputSemantic>(
-        handleInput,
+    : context_(std::make_unique<RendererProxy>(renderer)
+    , std::make_unique<HandleInputSemantic>(
+        std::move(handleInput),
         maxClickTime,
         maxMoveDistance,
         minLongPressTime)
-    , std::make_shared<GameStateManager>()
+    , std::make_unique<GameStateManager>()
+    , std::move(archive)
     )
 { }
 

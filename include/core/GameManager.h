@@ -8,10 +8,12 @@ class GameManager
 {
 public:
     GameManager(RendererBase& renderer,
-        std::shared_ptr<HandleInputBase> handleInput,
+        std::unique_ptr<HandleInputBase> handleInput,
+        std::unique_ptr<Archive> archive,
         float maxClickTime = 0.5f,
         float maxMoveDistance = 5.0f,
-        float minLongPressTime = 1.0f);
+        float minLongPressTime = 1.0f
+    );
 
     ~GameManager() = default;
 public:
