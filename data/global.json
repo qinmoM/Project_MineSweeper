@@ -1,6 +1,10 @@
 {
-    "width": 1200,
+    "fps": 120,
     "height": 800,
+    "maxClickTime": 0.5,
+    "maxMoveDistance": 10.0,
+    "minLongPressTime": 0.5,
     "title": "MineSweeper",
-    "fps": 120
+    "version": 2,
+    "width": 1200
 }

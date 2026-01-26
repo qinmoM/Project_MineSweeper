@@ -14,13 +14,14 @@ void Game::run()
 
     GameManager gameManager(
         RendererRaylib::getInstance(),
-        std::make_shared<HandleInputRaylib>(
+        std::make_unique<HandleInputRaylib>(
             MouseRaylib::getInstance(),
             KeyboardRaylib::getInstance()
         ),
-        1.0f,
-        15.0f,
-        1.0f
+        std::move(archive),
+        globalConfig.maxClickTime_,
+        globalConfig.maxMoveDistance_,
+        globalConfig.minLongPressTime_
     );
     gameManager.registerState("Menu", [&gameManager]() -> GameStateManager::stateType { return std::make_unique<GameStateMenu>(gameManager.getContext()); });
     gameManager.init("Menu");
@@ -38,4 +39,6 @@ void Game::run()
     }
 
     window.windowClose();
+    gameManager.getContext().archive->serialize("Json", "../data/global.json", globalConfig);
+    gameManager.getContext().archive->flushAll();
 }
