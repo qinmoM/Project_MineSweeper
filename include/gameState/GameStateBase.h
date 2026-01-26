@@ -11,15 +11,17 @@ class GameStateManager;
 
 struct GameStateContext
 {
-    GameStateContext(std::shared_ptr<RendererProxy> renderer, std::shared_ptr<HandleInputSemantic> handleInput, std::shared_ptr<GameStateManager> stateManager)
-        : renderer(renderer)
-        , handleInput(handleInput)
-        , stateManager(stateManager)
+    GameStateContext(std::unique_ptr<RendererProxy> renderer, std::unique_ptr<HandleInputSemantic> handleInput, std::unique_ptr<GameStateManager> stateManager, std::unique_ptr<Archive> archive)
+        : renderer(std::move(renderer))
+        , handleInput(std::move(handleInput))
+        , stateManager(std::move(stateManager))
+        , archive(std::move(archive))
     { }
 
-    std::shared_ptr<RendererProxy> renderer;
-    std::shared_ptr<HandleInputSemantic> handleInput;
-    std::shared_ptr<GameStateManager> stateManager;
+    std::unique_ptr<RendererProxy> renderer;
+    std::unique_ptr<HandleInputSemantic> handleInput;
+    std::unique_ptr<GameStateManager> stateManager;
+    std::unique_ptr<Archive> archive;
 };
 
 class GameStateBase
