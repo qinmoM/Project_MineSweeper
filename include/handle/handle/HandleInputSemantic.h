@@ -30,7 +30,7 @@ public:
     float mouseWheelMove() const;
     void mouseSetCursor(Base::MouseCursor cursor);
 public:
-    HandleInputSemantic(std::shared_ptr<HandleInputBase> handle, float maxClickTime = 0.5f, float maxMoveDistance = 5.0f, float minLongPressTime = 1.0f);
+    HandleInputSemantic(std::unique_ptr<HandleInputBase> handle, float maxClickTime = 0.5f, float maxMoveDistance = 5.0f, float minLongPressTime = 1.0f);
 
 protected:
     struct ClickState
@@ -40,7 +40,7 @@ protected:
         bool thisFrame_ = false;
     };
 protected:
-    std::shared_ptr<HandleInputBase> handle_;
+    std::unique_ptr<HandleInputBase> handle_;
     std::unordered_map<Base::MouseButton, ClickState> mouseClickStates_;
     float maxClickTime_;
     float maxMoveDistance_;

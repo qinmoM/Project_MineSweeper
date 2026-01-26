@@ -1,8 +1,8 @@
 #include "HandleInputSemantic.h"
 
 
-HandleInputSemantic::HandleInputSemantic(std::shared_ptr<HandleInputBase> handle, float maxClickTime, float maxMoveDistance, float minLongPressTime)
-    : handle_(handle)
+HandleInputSemantic::HandleInputSemantic(std::unique_ptr<HandleInputBase> handle, float maxClickTime, float maxMoveDistance, float minLongPressTime)
+    : handle_(std::move(handle))
     , maxClickTime_(maxClickTime)
     , maxMoveDistance_(maxMoveDistance)
     , minLongPressTime_(minLongPressTime)
