@@ -4,7 +4,7 @@
 
 struct GlobalConfig
 {
-    static constexpr int VERSION = 2;
+    static constexpr int VERSION = 3;
 
     short width_;
     short height_;
@@ -14,11 +14,15 @@ struct GlobalConfig
     float minLongPressTime_;
     std::string title_;
 
+    // v3
+    short width2_;
+    short height2_;
+
     void serialize(ISerialization& serializer)
     {
         int version = VERSION;
         serializer.value("version", version);
-        
+
         if (!serializer.isSavingMode())
         {
             if (version < 1)
@@ -28,6 +32,11 @@ struct GlobalConfig
                 maxClickTime_ = 0.5f;
                 maxMoveDistance_ = 10.0f;
                 minLongPressTime_ = 0.5f;
+            }
+            if (version < 3)
+            {
+                width2_ = 1600;
+                height2_ = 1100;
             }
         }
 
@@ -43,5 +52,13 @@ struct GlobalConfig
             serializer.value("maxMoveDistance", maxMoveDistance_);
             serializer.value("minLongPressTime", minLongPressTime_);
         }
+        if (3 <= version)
+        {
+            serializer.value("width2", width2_);
+            serializer.value("height2", height2_);
+        }
+
+        width_ = width2_;
+        height_ = height2_;
     }
 };
