@@ -16,6 +16,9 @@ public:
     bool windowExists() override;
     bool windowFocused() override;
 
+    int getWidth() const override;
+    int getHeight() const override;
+
     void FPSset(int fps) override;
     void FPSDelay() override;
     int FPSget() override;

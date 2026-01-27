@@ -30,6 +30,18 @@ bool RendererRaylib::windowFocused()
 
 
 
+int RendererRaylib::getWidth() const
+{
+    return GetScreenWidth();
+}
+
+int RendererRaylib::getHeight() const
+{
+    return GetScreenHeight();
+}
+
+
+
 void RendererRaylib::FPSset(int fps)
 {
     SetTargetFPS(FPSmax_ = fps);

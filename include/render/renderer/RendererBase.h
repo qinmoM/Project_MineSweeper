@@ -18,6 +18,11 @@ public:
     /// @return true if the window is focused
     virtual bool windowFocused() = 0;
 
+    /// @brief get the width of the window
+    virtual int getWidth() const = 0;
+    /// @brief get the height of the window
+    virtual int getHeight() const = 0;
+
 
     /// @brief set the maximum FPS limit
     /// @param fps maximum FPS limit
