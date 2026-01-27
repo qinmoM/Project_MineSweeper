@@ -24,6 +24,7 @@ void Game::run()
         globalConfig.minLongPressTime_
     );
     gameManager.registerState("Menu", [&gameManager]() -> GameStateManager::stateType { return std::make_unique<GameStateMenu>(gameManager.getContext()); });
+    gameManager.registerState("Match", [&gameManager]() -> GameStateManager::stateType { return std::make_unique<GameStateMatch>(gameManager.getContext()); });
     gameManager.init("Menu");
 
     while (window.windowExists())

@@ -32,6 +32,8 @@ set(include_project
     ${PROJECT_SOURCE_DIR}/include/save/archive
     ${PROJECT_SOURCE_DIR}/include/save/config
     ${PROJECT_SOURCE_DIR}/include/UI/button
+
+    ${PROJECT_SOURCE_DIR}/include/game
 )
 # 将头文件全部加入
 include_directories(
