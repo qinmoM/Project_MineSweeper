@@ -5,10 +5,11 @@
 class RendererProxy final
 {
 public:
+    int getWidth() const;
+    int getHeight() const;
+
     int FPSget();
     int FPSsetValueGet();
-
-    void clearBackground(const Base::Color& color);
 
     void drawLine(int startX, int startY, int endX, int endY, int thick, const Base::Color& color);
     void drawLineAngle(int startX, int startY, float angle, float length, int thick, const Base::Color& color);

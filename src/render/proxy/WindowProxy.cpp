@@ -51,6 +51,19 @@ float WindowProxy::FPSgetFrameTime()
 
 
 
+int WindowProxy::getWidth() const
+{
+    return renderer_.getWidth();
+}
+
+int WindowProxy::getHeight() const
+{
+    return renderer_.getHeight();
+}
+
+
+
+
 void WindowProxy::drawingBegin()
 {
     renderer_.drawingBegin();

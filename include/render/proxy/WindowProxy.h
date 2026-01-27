@@ -16,6 +16,9 @@ public:
     int FPSsetValueGet();
     float FPSgetFrameTime();
 
+    int getWidth() const;
+    int getHeight() const;
+
     void drawingBegin();
     void drawingEnd();
 

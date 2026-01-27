@@ -1,5 +1,17 @@
 #include "RendererProxy.h"
 
+int RendererProxy::getWidth() const
+{
+    return renderer_.getWidth();
+}
+
+int RendererProxy::getHeight() const
+{
+    return renderer_.getHeight();
+}
+
+
+
 int RendererProxy::FPSget()
 {
     return renderer_.FPSget();
@@ -8,13 +20,6 @@ int RendererProxy::FPSget()
 int RendererProxy::FPSsetValueGet()
 {
     return renderer_.FPSsetValueGet();
-}
-
-
-
-void RendererProxy::clearBackground(const Base::Color& color)
-{
-    renderer_.clearBackground(color);
 }
 
 
