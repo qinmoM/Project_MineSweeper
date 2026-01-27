@@ -1,3 +1,5 @@
+#pragma once
+
 #include "GameManager.h"
 #include "RendererRaylib.h"
 #include "WindowProxy.h"
