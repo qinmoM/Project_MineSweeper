@@ -1,0 +1,100 @@
+#include "GameStateMatch.h"
+
+GameStateMatch::GameStateMatch(GameStateContext& context)
+    : GameStateBase(context), gridView_(nullptr), pos_({ 0.0f, 0.0f }), size_({ 0.0f, 0.0f })
+{
+    ;
+}
+
+void GameStateMatch::enter()
+{
+    srand(time(nullptr));
+    gridView_ = std::make_unique<GridView>(9, 15, 0);
+
+    std::shared_ptr<TextureBase> texture = context_.renderer->loadTexture("../res/image/return_ashen.png");
+    Sprite sprite(texture);
+    sprite.setOrigin({ 500.0f, 500.0f });
+    sprite.setScale(Base::Point{ 0.15f, 0.15f });
+    Base::Point point{ 100.0f, 100.0f };
+    sprite.setPosition(point);
+    button_.push_back(std::make_shared<ButtonImage>(
+        sprite,
+        point,
+        [this]() -> void
+        {
+            context_.stateManager->popState();
+        },
+        [this](const ButtonBase& button, const Base::Point pos) -> bool
+        {
+            const ButtonImage& buttonImage = static_cast<const ButtonImage&>(button);
+            float radius = buttonImage.getSprite().getScale().x / 2 * 1000;
+            Base::Point buttonPos = button.getPosition();
+            float dx = buttonPos.x - pos.x;
+            float dy = buttonPos.y - pos.y;
+            return dx * dx + dy * dy <= radius * radius;
+        },
+        [this](ButtonBase& button, HandleInputSemantic& handle, float delta) -> void
+        {
+            ButtonImage& buttonImage = static_cast<ButtonImage&>(button);
+            Sprite& sprite = buttonImage.getSprite();
+            if (button.contains(handle.mousePosition()) && Base::Color{255, 255, 255, 255} == sprite.getColor())
+                sprite.setColor(Base::Color{150, 150, 150, 255});
+            else if (!button.contains(handle.mousePosition()) && Base::Color{150, 150, 150, 255} == sprite.getColor())
+                sprite.setColor(Base::Color{255, 255, 255, 255});
+        }
+    ));
+}
+
+void GameStateMatch::exit()
+{
+    ;
+}
+
+void GameStateMatch::update(float delta)
+{
+    pos_ = { 200.0f, 180.0f };
+    size_ = { 1200.0f, 800.0f };
+
+    for (auto& button : button_)
+    {
+        if (context_.handleInput->mouseClicked(Base::MouseButton::Left) && button->contains(context_.handleInput->mousePosition()))
+            context_.stateManager->addTask(button->getCallback());
+        
+        button->update(*context_.handleInput, delta);
+    }
+}
+
+void GameStateMatch::render()
+{
+    context_.renderer->drawRectangleFill(0, 0, context_.renderer->getWidth(), context_.renderer->getHeight(), Base::Color{ 230, 230, 230, 255 });
+    context_.renderer->drawRectangleFill(pos_.x, pos_.y, size_.x, size_.y, Base::Color{ 255, 255, 255, 255 });
+
+    const MineField& field = gridView_->getField();
+    int rows = field.getRows();
+    int cols = field.getCols();
+
+    float cellwidth = size_.x / cols;
+    float cellheight = size_.y / rows;
+
+    for (int i = 0; i < rows; ++i)
+    {
+        for (int j = 0; j < cols; ++j)
+        {
+            if (!gridView_->getCell(i, j).isMine_)
+                context_.renderer->drawRectangleFill(pos_.x + j * cellwidth, pos_.y + i * cellheight, cellwidth, cellheight, Base::Color{ 160, 160, 160, 255 });
+            else
+                context_.renderer->drawRectangleFill(pos_.x + j * cellwidth, pos_.y + i * cellheight, cellwidth, cellheight, Base::Color{ 255, 0, 0, 255 });
+        }
+    }
+
+    context_.renderer->drawRectangle(pos_.x, pos_.y, size_.x, size_.y, 2, Base::Color{ 0, 0, 0, 255 });
+
+    for (int i = 1; i < rows; ++i)
+        context_.renderer->drawLine(pos_.x, pos_.y + i * cellheight, pos_.x + size_.x, pos_.y + i * cellheight, 2, Base::Color{ 0, 0, 0, 255 });
+
+    for (int i = 1; i < cols; ++i)
+        context_.renderer->drawLine(pos_.x + i * cellwidth, pos_.y, pos_.x + i * cellwidth, pos_.y + size_.y, 2, Base::Color{ 0, 0, 0, 255 });
+
+    for (auto& button : button_)
+        button->render(*context_.renderer);
+}
