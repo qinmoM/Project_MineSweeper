@@ -44,7 +44,7 @@ public:
     void drawTexture(int posX, int posY, float scaleX, float scaleY, const std::shared_ptr<TextureBase>& texture, const Base::Color& color = {255, 255, 255, 255}) override;
     void drawSprite(const Sprite& sprite) override;
 
-    std::shared_ptr<FontBase> loadFont(const std::string& path) override;
+    std::shared_ptr<FontBase> loadFont(const std::string& path, int size) override;
     void drawFont(int posX, int posY, int size, const std::string& text, const std::shared_ptr<FontBase>& font, const Base::Color& color = {0, 0, 0, 255}) override;
     void drawText(const Text& text) override;
 public:

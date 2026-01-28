@@ -117,8 +117,9 @@ public:
 
     /// @brief load a font from path
     /// @param path font file path
+    /// @param size precision of the font
     /// @return a font object shared pointer
-    virtual std::shared_ptr<FontBase> loadFont(const std::string& path) = 0;
+    virtual std::shared_ptr<FontBase> loadFont(const std::string& path, int size) = 0;
     /// @brief draw a text with font object shared pointer
     /// @param posX X-coordinate
     /// @param posY Y-coordinate

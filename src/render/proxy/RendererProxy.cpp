@@ -85,9 +85,9 @@ void RendererProxy::drawSprite(const Sprite& sprite)
 
 
 
-std::shared_ptr<FontBase> RendererProxy::loadFont(const std::string& path)
+std::shared_ptr<FontBase> RendererProxy::loadFont(const std::string& path, int size)
 {
-    return renderer_.loadFont(path);
+    return renderer_.loadFont(path, size);
 }
 
 void RendererProxy::drawFont(int posX, int posY, int size, const std::string& text, const std::shared_ptr<FontBase>& font, const Base::Color& color)

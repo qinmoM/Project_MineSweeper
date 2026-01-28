@@ -180,9 +180,9 @@ void RendererRaylib::drawSprite(const Sprite& sprite)
 
 
 
-std::shared_ptr<FontBase> RendererRaylib::loadFont(const std::string& path)
+std::shared_ptr<FontBase> RendererRaylib::loadFont(const std::string& path, int size)
 {
-    return std::make_shared<FontRaylib>(getFontToken(), *this, path);
+    return std::make_shared<FontRaylib>(getFontToken(), *this, path, size);
 }
 
 void RendererRaylib::drawFont(int posX, int posY, int size, const std::string& text, const std::shared_ptr<FontBase>& font, const Base::Color& color)
