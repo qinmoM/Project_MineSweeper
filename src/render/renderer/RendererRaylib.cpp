@@ -187,7 +187,9 @@ std::shared_ptr<FontBase> RendererRaylib::loadFont(const std::string& path, int 
 
 void RendererRaylib::drawFont(int posX, int posY, int size, const std::string& text, const std::shared_ptr<FontBase>& font, const Base::Color& color)
 {
-    DrawText(text.c_str(), posX, posY, size, {color.r, color.g, color.b, color.a});
+    Vector2 position = { static_cast<float>(posX), static_cast<float>(posY) };
+    Font fontRaylib = static_cast<FontRaylib*>(font.get())->font_;
+    DrawTextEx(fontRaylib, text.c_str(), position, size, 0.0f, { color.r, color.g, color.b, color.a });
 }
 
 void RendererRaylib::drawText(const Text& text)
