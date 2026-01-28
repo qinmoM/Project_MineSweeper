@@ -9,7 +9,11 @@ GameStateMatch::GameStateMatch(GameStateContext& context)
 void GameStateMatch::enter()
 {
     srand(time(nullptr));
-    gridView_ = std::make_unique<GridView>(9, 15, 0);
+    gridView_ = std::make_unique<GridView>(9, 15, 20);
+
+    font_.push_back(
+        context_.renderer->loadFont("../res/font/Boogaloo/Boogaloo-Regular.ttf", 36)
+    );
 
     std::shared_ptr<TextureBase> texture = context_.renderer->loadTexture("../res/image/return_ashen.png");
     Sprite sprite(texture);
@@ -52,8 +56,8 @@ void GameStateMatch::exit()
 
 void GameStateMatch::update(float delta)
 {
-    pos_ = { 200.0f, 180.0f };
-    size_ = { 1200.0f, 800.0f };
+    pos_ = { 100.0f, 230.0f };
+    size_ = { 1400.0f, 800.0f };
 
     for (auto& button : button_)
     {
@@ -62,36 +66,48 @@ void GameStateMatch::update(float delta)
         
         button->update(*context_.handleInput, delta);
     }
+
+    Base::Point mousePos = context_.handleInput->mousePosition() - pos_;
+    const MineField& field = gridView_->getField();
+    int rows = field.getRows();
+    int cols = field.getCols();
+    float cellwidth = size_.x / cols;
+    float cellheight = size_.y / rows;
+    if (context_.handleInput->mouseClicked(Base::MouseButton::Left) && mousePos.x >= 0 && mousePos.x <= size_.x && mousePos.y >= 0 && mousePos.y <= size_.y)
+        gridView_->reveal(mousePos.y / cellheight, mousePos.x / cellwidth);
+
+    if (gridView_->isGameWin())
+        context_.stateManager->addTask([this]() -> void { context_.stateManager->popState(); });
+    if (gridView_->isGameOver())
+        context_.stateManager->addTask([this]() -> void { context_.stateManager->popState(); });
 }
 
 void GameStateMatch::render()
 {
     context_.renderer->drawRectangleFill(0, 0, context_.renderer->getWidth(), context_.renderer->getHeight(), Base::Color{ 230, 230, 230, 255 });
+
+    context_.renderer->drawRectangleRoundFill(pos_.x - 20, pos_.y - 20, size_.x + 40, size_.y + 40, 0.04f, Base::Color{ 140, 180, 190, 255 });
     context_.renderer->drawRectangleFill(pos_.x, pos_.y, size_.x, size_.y, Base::Color{ 255, 255, 255, 255 });
 
     const MineField& field = gridView_->getField();
     int rows = field.getRows();
     int cols = field.getCols();
-
     float cellwidth = size_.x / cols;
     float cellheight = size_.y / rows;
-
     for (int i = 0; i < rows; ++i)
     {
         for (int j = 0; j < cols; ++j)
         {
-            if (!gridView_->getCell(i, j).isMine_)
-                context_.renderer->drawRectangleFill(pos_.x + j * cellwidth, pos_.y + i * cellheight, cellwidth, cellheight, Base::Color{ 160, 160, 160, 255 });
+            if (!gridView_->getCell(i, j).isRevealed_)
+                context_.renderer->drawRectangleFill(pos_.x + j * cellwidth, pos_.y + i * cellheight, cellwidth, cellheight, Base::Color{ 180, 220, 230, 255 });
             else
-                context_.renderer->drawRectangleFill(pos_.x + j * cellwidth, pos_.y + i * cellheight, cellwidth, cellheight, Base::Color{ 255, 0, 0, 255 });
+                context_.renderer->drawFont(pos_.x + j * cellwidth + cellwidth / 2 - 18, pos_.y + i * cellheight + cellheight / 2 - 18, 36, std::to_string(gridView_->getCell(i, j).numMinesNearby_), font_[0], Base::Color{ 0, 0, 0, 255 });
         }
     }
 
     context_.renderer->drawRectangle(pos_.x, pos_.y, size_.x, size_.y, 2, Base::Color{ 0, 0, 0, 255 });
-
     for (int i = 1; i < rows; ++i)
         context_.renderer->drawLine(pos_.x, pos_.y + i * cellheight, pos_.x + size_.x, pos_.y + i * cellheight, 2, Base::Color{ 0, 0, 0, 255 });
-
     for (int i = 1; i < cols; ++i)
         context_.renderer->drawLine(pos_.x + i * cellwidth, pos_.y, pos_.x + i * cellwidth, pos_.y + size_.y, 2, Base::Color{ 0, 0, 0, 255 });
 

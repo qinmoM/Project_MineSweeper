@@ -2,6 +2,7 @@
 
 #include "GameStateManager.h"
 #include "ButtonImage.h"
+#include "FontBase.h"
 #include "GridView.h"
 
 class GameStateMatch : public GameStateBase
@@ -18,6 +19,7 @@ public:
 protected:
     std::vector<std::shared_ptr<ButtonBase>> button_;
     std::unique_ptr<GridView> gridView_;
+    std::vector<std::shared_ptr<FontBase>> font_;
     Base::Point pos_;
     Base::Point size_;
 };
