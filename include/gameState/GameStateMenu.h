@@ -2,6 +2,7 @@
 
 #include "GameStateManager.h"
 #include "ButtonImage.h"
+#include "ButtonText.h"
 
 class GameStateMenu : public GameStateBase
 {
