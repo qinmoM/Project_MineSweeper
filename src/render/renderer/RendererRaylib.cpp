@@ -192,5 +192,18 @@ void RendererRaylib::drawFont(int posX, int posY, int size, const std::string& t
 
 void RendererRaylib::drawText(const Text& text)
 {
-    ;
+    Font font = static_cast<FontRaylib*>(text.getFont().get())->font_;
+    Base::Point pos = text.getPosition();
+    Base::Point origin = text.getOrigin();
+    Base::Color color = text.getColor();
+    DrawTextPro(
+        font,
+        text.getText().c_str(),
+        { pos.x, pos.y },
+        { origin.x, origin.y },
+        text.getRotation(),
+        text.getSize(),
+        static_cast<float>(text.getSpacing()),
+        { color.r, color.g, color.b, color.a }
+    );
 }
