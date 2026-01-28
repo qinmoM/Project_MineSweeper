@@ -7,9 +7,9 @@ MineField::MineField(int rows, int cols) : rows_(rows), cols_(cols), mines_(0)
 
 void MineField::flushNearbyNum()
 {
-    for (int i = 1; i < rows_ - 1; ++i)
+    for (int i = 1; i <= rows_; ++i)
     {
-        for (int j = 1; j < cols_ - 1; ++j)
+        for (int j = 1; j <= cols_; ++j)
             field_[i][j].numMinesNearby_ = countMines(i, j);
     }
 }
