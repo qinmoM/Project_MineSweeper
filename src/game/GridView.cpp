@@ -12,6 +12,7 @@ GridView::GridView(int rows, int cols, int numMines)
 void GridView::regenerateMines(int numMines)
 {
     field_->reset();
+    field_->setNumMines(numMines);
     for (int i = 0; i < field_->getNumMines(); )
     {
         int index = rand() % (field_->getRows() * field_->getCols());
@@ -32,7 +33,10 @@ void GridView::reveal(int row, int col)
         return;
 
     if (field_->getCell(row, col).isMine_)
+    {
         gameOver_ = true;
+        return;
+    }
 
     field_->getCell(row, col).isRevealed_ = true;
     revealCount_ += 1;
@@ -48,6 +52,16 @@ void GridView::reveal(int row, int col)
         reveal(row + 1, col);
         reveal(row + 1, col + 1);
     }
+}
+
+bool GridView::isGameWin() const
+{
+    return !gameOver_ && field_->getRows() * field_->getCols() - field_->getNumMines() == revealCount_;
+}
+
+bool GridView::isGameOver() const
+{
+    return gameOver_;
 }
 
 const Cell& GridView::getCell(int row, int col) const
