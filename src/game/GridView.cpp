@@ -64,6 +64,11 @@ bool GridView::isGameOver() const
     return gameOver_;
 }
 
+int GridView::getRevealCount() const
+{
+    return revealCount_;
+}
+
 const Cell& GridView::getCell(int row, int col) const
 {
     return field_->getCell(row, col);
