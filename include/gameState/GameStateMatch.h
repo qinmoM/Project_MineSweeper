@@ -17,9 +17,12 @@ public:
     GameStateMatch(GameStateContext& context);
     virtual ~GameStateMatch() = default;
 protected:
-    std::vector<std::shared_ptr<ButtonBase>> button_;
     std::unique_ptr<GridView> gridView_;
     std::vector<std::shared_ptr<FontBase>> font_;
     Base::Point pos_;
     Base::Point size_;
+private:
+    float fontSize() const;
+    int mineCount() const;
+    Base::Color fontColor(int num) const;
 };

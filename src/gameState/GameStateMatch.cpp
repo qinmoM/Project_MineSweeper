@@ -3,16 +3,21 @@
 GameStateMatch::GameStateMatch(GameStateContext& context)
     : GameStateBase(context), gridView_(nullptr), pos_({ 0.0f, 0.0f }), size_({ 0.0f, 0.0f })
 {
-    ;
+    pos_ = { 100.0f, 230.0f };
+    size_ = { 1400.0f, 800.0f };
 }
 
 void GameStateMatch::enter()
 {
     srand(time(nullptr));
-    gridView_ = std::make_unique<GridView>(9, 15, 20);
+    gridView_ = std::make_unique<GridView>(
+        context_.configSystem->gameSetting().rows_,
+        context_.configSystem->gameSetting().cols_,
+        mineCount()
+    );
 
     font_.push_back(
-        context_.renderer->loadFont("../res/font/Boogaloo/Boogaloo-Regular.ttf", 36)
+        context_.renderer->loadFont("../res/font/Sniglet/Sniglet-Regular.ttf", fontSize())
     );
 
     std::shared_ptr<TextureBase> texture = context_.renderer->loadTexture("../res/image/return_ashen.png");
@@ -56,9 +61,6 @@ void GameStateMatch::exit()
 
 void GameStateMatch::update(float delta)
 {
-    pos_ = { 100.0f, 230.0f };
-    size_ = { 1400.0f, 800.0f };
-
     for (auto& button : button_)
     {
         if (context_.handleInput->mouseClicked(Base::MouseButton::Left) && button->contains(context_.handleInput->mousePosition()))
@@ -100,8 +102,18 @@ void GameStateMatch::render()
         {
             if (!gridView_->getCell(i, j).isRevealed_)
                 context_.renderer->drawRectangleFill(pos_.x + j * cellwidth, pos_.y + i * cellheight, cellwidth, cellheight, Base::Color{ 180, 220, 230, 255 });
-            else
-                context_.renderer->drawFont(pos_.x + j * cellwidth + cellwidth / 2 - 18, pos_.y + i * cellheight + cellheight / 2 - 18, 36, std::to_string(gridView_->getCell(i, j).numMinesNearby_), font_[0], Base::Color{ 0, 0, 0, 255 });
+            else if (gridView_->getCell(i, j).numMinesNearby_)
+            {
+                Text text(font_[0]);
+                text.setText(std::to_string(gridView_->getCell(i, j).numMinesNearby_));
+                text.setSize(fontSize());
+                text.setSpacing(0.0f);
+                Base::Point temp = text.getBounderies();
+                text.setOrigin({ temp.x / 2, temp.y / 2 });
+                text.setColor(fontColor(gridView_->getCell(i, j).numMinesNearby_));
+                text.setPosition({ pos_.x + j * cellwidth + cellwidth / 2, pos_.y + i * cellheight + cellheight / 2 });
+                context_.renderer->drawText(text);
+            }
         }
     }
 
@@ -113,4 +125,48 @@ void GameStateMatch::render()
 
     for (auto& button : button_)
         button->render(*context_.renderer);
+
+    context_.renderer->drawFont(200, 80, 56, std::to_string(rows * cols - mineCount() - gridView_->getRevealCount()), font_[0], Base::Color{ 0, 0, 0, 255 });
+}
+
+
+
+float GameStateMatch::fontSize() const
+{
+    if (context_.configSystem->gameSetting().rows_ == 9 && context_.configSystem->gameSetting().cols_ == 15)
+        return 56.0f;
+
+    return 56.0f;
+}
+
+int GameStateMatch::mineCount() const
+{
+    if (context_.configSystem->gameSetting().rows_ == 9 && context_.configSystem->gameSetting().cols_ == 15)
+        return 20;
+
+    return 10;
+}
+
+Base::Color GameStateMatch::fontColor(int num) const
+{
+    switch (num)
+    {
+    case 1:
+        return Base::Color{ 0, 0, 0, 255 };
+    case 2:
+        return Base::Color{ 0, 170, 0, 255 };
+    case 3:
+        return Base::Color{ 0, 170, 190, 255 };
+    case 4:
+        return Base::Color{ 190, 155, 10, 255 };
+    case 5:
+        return Base::Color{ 0, 100, 230, 255 };
+    case 6:
+        return Base::Color{ 205, 0, 205, 255 };
+    case 7:
+        return Base::Color{ 120, 15, 155, 255 };
+    case 8:
+        return Base::Color{ 225, 0, 0, 255 };
+    }
+    return Base::Color{ 0, 0, 0, 255 };
 }
