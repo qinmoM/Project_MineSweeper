@@ -30,6 +30,7 @@ public:
     int getSpacing() const;
     std::shared_ptr<FontBase> getFont() const;
 
+    Base::Point getBounderies() const;
 private:
     std::string text_;
     std::shared_ptr<FontBase> font_;

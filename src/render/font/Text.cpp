@@ -83,3 +83,8 @@ int Text::getSpacing() const
 {
     return spacing_;
 }
+
+Base::Point Text::getBounderies() const
+{
+    return font_->getBoundaries(text_, size_, spacing_);
+}
