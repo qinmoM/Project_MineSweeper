@@ -10,4 +10,11 @@ class Game
 {
 public:
     void run();
+private:
+    std::unique_ptr<RendererProxy> renderer_;
+    std::unique_ptr<WindowProxy> window_;
+    std::unique_ptr<HandleInputSemantic> handleInput_;
+    std::unique_ptr<GameStateManager> stateManager_;
+    std::unique_ptr<Archive> archive_;
+    std::unique_ptr<ConfigSystem> configSystem_;
 };

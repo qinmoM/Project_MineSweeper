@@ -11,16 +11,16 @@ void GameStateMatch::enter()
 {
     srand(time(nullptr));
     gridView_ = std::make_unique<GridView>(
-        context_.configSystem->gameSetting().rows_,
-        context_.configSystem->gameSetting().cols_,
+        context_.configSystem.gameSetting().rows_,
+        context_.configSystem.gameSetting().cols_,
         mineCount()
     );
 
     font_.push_back(
-        context_.renderer->loadFont("../res/font/Sniglet/Sniglet-Regular.ttf", fontSize())
+        context_.renderer.loadFont("../res/font/Sniglet/Sniglet-Regular.ttf", fontSize())
     );
 
-    std::shared_ptr<TextureBase> texture = context_.renderer->loadTexture("../res/image/return_ashen.png");
+    std::shared_ptr<TextureBase> texture = context_.renderer.loadTexture("../res/image/return_ashen.png");
     Sprite sprite(texture);
     sprite.setOrigin({ 500.0f, 500.0f });
     sprite.setScale(Base::Point{ 0.15f, 0.15f });
@@ -31,7 +31,7 @@ void GameStateMatch::enter()
         point,
         [this]() -> void
         {
-            context_.stateManager->popState();
+            context_.stateManager.popState();
         },
         [this](const ButtonBase& button, const Base::Point pos) -> bool
         {
@@ -63,33 +63,33 @@ void GameStateMatch::update(float delta)
 {
     for (auto& button : button_)
     {
-        if (context_.handleInput->mouseClicked(Base::MouseButton::Left) && button->contains(context_.handleInput->mousePosition()))
-            context_.stateManager->addTask(button->getCallback());
+        if (context_.handleInput.mouseClicked(Base::MouseButton::Left) && button->contains(context_.handleInput.mousePosition()))
+            context_.stateManager.addTask(button->getCallback());
         
-        button->update(*context_.handleInput, delta);
+        button->update(context_.handleInput, delta);
     }
 
-    Base::Point mousePos = context_.handleInput->mousePosition() - pos_;
+    Base::Point mousePos = context_.handleInput.mousePosition() - pos_;
     const MineField& field = gridView_->getField();
     int rows = field.getRows();
     int cols = field.getCols();
     float cellwidth = size_.x / cols;
     float cellheight = size_.y / rows;
-    if (context_.handleInput->mouseClicked(Base::MouseButton::Left) && mousePos.x >= 0 && mousePos.x <= size_.x && mousePos.y >= 0 && mousePos.y <= size_.y)
+    if (context_.handleInput.mouseClicked(Base::MouseButton::Left) && mousePos.x >= 0 && mousePos.x <= size_.x && mousePos.y >= 0 && mousePos.y <= size_.y)
         gridView_->reveal(mousePos.y / cellheight, mousePos.x / cellwidth);
 
     if (gridView_->isGameWin())
-        context_.stateManager->addTask([this]() -> void { context_.stateManager->popState(); });
+        context_.stateManager.addTask([this]() -> void { context_.stateManager.popState(); });
     if (gridView_->isGameOver())
-        context_.stateManager->addTask([this]() -> void { context_.stateManager->popState(); });
+        context_.stateManager.addTask([this]() -> void { context_.stateManager.popState(); });
 }
 
 void GameStateMatch::render()
 {
-    context_.renderer->drawRectangleFill(0, 0, context_.renderer->getWidth(), context_.renderer->getHeight(), Base::Color{ 230, 230, 230, 255 });
+    context_.renderer.drawRectangleFill(0, 0, context_.renderer.getWidth(), context_.renderer.getHeight(), Base::Color{ 230, 230, 230, 255 });
 
-    context_.renderer->drawRectangleRoundFill(pos_.x - 20, pos_.y - 20, size_.x + 40, size_.y + 40, 0.04f, Base::Color{ 140, 180, 190, 255 });
-    context_.renderer->drawRectangleFill(pos_.x, pos_.y, size_.x, size_.y, Base::Color{ 255, 255, 255, 255 });
+    context_.renderer.drawRectangleRoundFill(pos_.x - 20, pos_.y - 20, size_.x + 40, size_.y + 40, 0.04f, Base::Color{ 140, 180, 190, 255 });
+    context_.renderer.drawRectangleFill(pos_.x, pos_.y, size_.x, size_.y, Base::Color{ 255, 255, 255, 255 });
 
     const MineField& field = gridView_->getField();
     int rows = field.getRows();
@@ -101,7 +101,7 @@ void GameStateMatch::render()
         for (int j = 0; j < cols; ++j)
         {
             if (!gridView_->getCell(i, j).isRevealed_)
-                context_.renderer->drawRectangleFill(pos_.x + j * cellwidth, pos_.y + i * cellheight, cellwidth, cellheight, Base::Color{ 180, 220, 230, 255 });
+                context_.renderer.drawRectangleFill(pos_.x + j * cellwidth, pos_.y + i * cellheight, cellwidth, cellheight, Base::Color{ 180, 220, 230, 255 });
             else if (gridView_->getCell(i, j).numMinesNearby_)
             {
                 Text text(font_[0]);
@@ -112,28 +112,28 @@ void GameStateMatch::render()
                 text.setOrigin({ temp.x / 2, temp.y / 2 });
                 text.setColor(fontColor(gridView_->getCell(i, j).numMinesNearby_));
                 text.setPosition({ pos_.x + j * cellwidth + cellwidth / 2, pos_.y + i * cellheight + cellheight / 2 });
-                context_.renderer->drawText(text);
+                context_.renderer.drawText(text);
             }
         }
     }
 
-    context_.renderer->drawRectangle(pos_.x, pos_.y, size_.x, size_.y, 2, Base::Color{ 0, 0, 0, 255 });
+    context_.renderer.drawRectangle(pos_.x, pos_.y, size_.x, size_.y, 2, Base::Color{ 0, 0, 0, 255 });
     for (int i = 1; i < rows; ++i)
-        context_.renderer->drawLine(pos_.x, pos_.y + i * cellheight, pos_.x + size_.x, pos_.y + i * cellheight, 2, Base::Color{ 0, 0, 0, 255 });
+        context_.renderer.drawLine(pos_.x, pos_.y + i * cellheight, pos_.x + size_.x, pos_.y + i * cellheight, 2, Base::Color{ 0, 0, 0, 255 });
     for (int i = 1; i < cols; ++i)
-        context_.renderer->drawLine(pos_.x + i * cellwidth, pos_.y, pos_.x + i * cellwidth, pos_.y + size_.y, 2, Base::Color{ 0, 0, 0, 255 });
+        context_.renderer.drawLine(pos_.x + i * cellwidth, pos_.y, pos_.x + i * cellwidth, pos_.y + size_.y, 2, Base::Color{ 0, 0, 0, 255 });
 
     for (auto& button : button_)
-        button->render(*context_.renderer);
+        button->render(context_.renderer);
 
-    context_.renderer->drawFont(200, 80, 56, std::to_string(rows * cols - mineCount() - gridView_->getRevealCount()), font_[0], Base::Color{ 0, 0, 0, 255 });
+    context_.renderer.drawFont(600, 80, 56, "Till Beat:     " + std::to_string(rows * cols - mineCount() - gridView_->getRevealCount()), font_[0], Base::Color{ 0, 0, 0, 255 });
 }
 
 
 
 float GameStateMatch::fontSize() const
 {
-    if (context_.configSystem->gameSetting().rows_ == 9 && context_.configSystem->gameSetting().cols_ == 15)
+    if (context_.configSystem.gameSetting().rows_ == 9 && context_.configSystem.gameSetting().cols_ == 15)
         return 56.0f;
 
     return 56.0f;
@@ -141,7 +141,7 @@ float GameStateMatch::fontSize() const
 
 int GameStateMatch::mineCount() const
 {
-    if (context_.configSystem->gameSetting().rows_ == 9 && context_.configSystem->gameSetting().cols_ == 15)
+    if (context_.configSystem.gameSetting().rows_ == 9 && context_.configSystem.gameSetting().cols_ == 15)
         return 20;
 
     return 10;

@@ -2,47 +2,55 @@
 
 void Game::run()
 {
-    std::unique_ptr<Archive> archive = std::make_unique<Archive>();
-    archive->registerSerializer("Json", std::make_unique<JsonSerialization>());
+    renderer_ = std::make_unique<RendererProxy>(RendererRaylib::getInstance());
+    window_ = std::make_unique<WindowProxy>(RendererRaylib::getInstance());
+    archive_ = std::make_unique<Archive>();
+    configSystem_ = std::make_unique<ConfigSystem>();
 
-    std::unique_ptr<ConfigSystem> configSystem = std::make_unique<ConfigSystem>();
-    archive->deserialize("Json", "../data/global.json", configSystem->globalConfig());
-    archive->deserialize("Json", "../data/setting.json", configSystem->gameSetting());
+    archive_->registerSerializer("Json", std::make_unique<JsonSerialization>());
 
-    WindowProxy window(RendererRaylib::getInstance());
-    window.windowInit(configSystem->globalConfig().width_, configSystem->globalConfig().height_, configSystem->globalConfig().title_);
-    window.FPSset(configSystem->globalConfig().fps_);
+    archive_->deserialize("Json", "../data/global.json", configSystem_->globalConfig());
+    archive_->deserialize("Json", "../data/setting.json", configSystem_->gameSetting());
 
-    GameManager gameManager(
-        RendererRaylib::getInstance(),
+    handleInput_ = std::make_unique<HandleInputSemantic>(
         std::make_unique<HandleInputRaylib>(
             MouseRaylib::getInstance(),
             KeyboardRaylib::getInstance()
         ),
-        std::move(archive),
-        std::move(configSystem),
-        configSystem->globalConfig().maxClickTime_,
-        configSystem->globalConfig().maxMoveDistance_,
-        configSystem->globalConfig().minLongPressTime_
+        configSystem_->globalConfig().maxClickTime_,
+        configSystem_->globalConfig().maxMoveDistance_,
+        configSystem_->globalConfig().minLongPressTime_
     );
+
+    window_->windowInit(configSystem_->globalConfig().width_, configSystem_->globalConfig().height_, configSystem_->globalConfig().title_);
+    window_->FPSset(configSystem_->globalConfig().fps_);
+
+    GameManager gameManager(GameStateContext{
+        *renderer_,
+        *handleInput_,
+        *stateManager_,
+        *archive_,
+        *configSystem_
+    });
     gameManager.registerState("Menu", [&gameManager]() -> GameStateManager::stateType { return std::make_unique<GameStateMenu>(gameManager.getContext()); });
     gameManager.registerState("Match", [&gameManager]() -> GameStateManager::stateType { return std::make_unique<GameStateMatch>(gameManager.getContext()); });
+    gameManager.registerState("Result", [&gameManager]() -> GameStateManager::stateType { return std::make_unique<GameStateResult>(gameManager.getContext()); });
     gameManager.init("Menu");
 
-    while (window.windowExists())
+    while (window_->windowExists())
     {
-        window.drawingBegin();
-        window.clearBackground(Base::Color{230, 230, 230, 0});
+        window_->drawingBegin();
+        window_->clearBackground(Base::Color{230, 230, 230, 0});
 
-        gameManager.update(window.FPSgetFrameTime());
+        gameManager.update(window_->FPSgetFrameTime());
         gameManager.render();
 
-        window.drawingEnd();
-        window.FPSDelay();
+        window_->drawingEnd();
+        window_->FPSDelay();
     }
 
-    window.windowClose();
-    gameManager.getContext().archive->serialize("Json", "../data/global.json", gameManager.getContext().configSystem->globalConfig());
-    gameManager.getContext().archive->serialize("Json", "../data/setting.json", gameManager.getContext().configSystem->gameSetting());
-    gameManager.getContext().archive->flushAll();
+    window_->windowClose();
+    gameManager.getContext().archive.serialize("Json", "../data/global.json", gameManager.getContext().configSystem.globalConfig());
+    gameManager.getContext().archive.serialize("Json", "../data/setting.json", gameManager.getContext().configSystem.gameSetting());
+    gameManager.getContext().archive.flushAll();
 }
