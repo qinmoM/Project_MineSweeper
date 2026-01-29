@@ -4,6 +4,7 @@
 #include "HandleInputSemantic.h"
 #include "ButtonBase.h"
 #include "Archive.h"
+#include "ConfigSystem.h"
 #include <memory>
 #include <vector>
 
@@ -11,17 +12,19 @@ class GameStateManager;
 
 struct GameStateContext
 {
-    GameStateContext(std::unique_ptr<RendererProxy> renderer, std::unique_ptr<HandleInputSemantic> handleInput, std::unique_ptr<GameStateManager> stateManager, std::unique_ptr<Archive> archive)
+    GameStateContext(std::unique_ptr<RendererProxy> renderer, std::unique_ptr<HandleInputSemantic> handleInput, std::unique_ptr<GameStateManager> stateManager, std::unique_ptr<Archive> archive, std::unique_ptr<ConfigSystem> configSystem)
         : renderer(std::move(renderer))
         , handleInput(std::move(handleInput))
         , stateManager(std::move(stateManager))
         , archive(std::move(archive))
+        , configSystem(std::move(configSystem))
     { }
 
     std::unique_ptr<RendererProxy> renderer;
     std::unique_ptr<HandleInputSemantic> handleInput;
     std::unique_ptr<GameStateManager> stateManager;
     std::unique_ptr<Archive> archive;
+    std::unique_ptr<ConfigSystem> configSystem;
 };
 
 class GameStateBase

@@ -11,6 +11,7 @@ public:
     GameManager(RendererBase& renderer,
         std::unique_ptr<HandleInputBase> handleInput,
         std::unique_ptr<Archive> archive,
+        std::unique_ptr<ConfigSystem> ConfigSystem,
         float maxClickTime = 0.5f,
         float maxMoveDistance = 5.0f,
         float minLongPressTime = 1.0f

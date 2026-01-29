@@ -5,12 +5,13 @@ void Game::run()
     std::unique_ptr<Archive> archive = std::make_unique<Archive>();
     archive->registerSerializer("Json", std::make_unique<JsonSerialization>());
 
-    GlobalConfig globalConfig;
-    archive->deserialize("Json", "../data/global.json", globalConfig);
+    std::unique_ptr<ConfigSystem> configSystem = std::make_unique<ConfigSystem>();
+    archive->deserialize("Json", "../data/global.json", configSystem->globalConfig());
+    archive->deserialize("Json", "../data/setting.json", configSystem->gameSetting());
 
     WindowProxy window(RendererRaylib::getInstance());
-    window.windowInit(globalConfig.width_, globalConfig.height_, globalConfig.title_);
-    window.FPSset(globalConfig.fps_);
+    window.windowInit(configSystem->globalConfig().width_, configSystem->globalConfig().height_, configSystem->globalConfig().title_);
+    window.FPSset(configSystem->globalConfig().fps_);
 
     GameManager gameManager(
         RendererRaylib::getInstance(),
@@ -19,9 +20,10 @@ void Game::run()
             KeyboardRaylib::getInstance()
         ),
         std::move(archive),
-        globalConfig.maxClickTime_,
-        globalConfig.maxMoveDistance_,
-        globalConfig.minLongPressTime_
+        std::move(configSystem),
+        configSystem->globalConfig().maxClickTime_,
+        configSystem->globalConfig().maxMoveDistance_,
+        configSystem->globalConfig().minLongPressTime_
     );
     gameManager.registerState("Menu", [&gameManager]() -> GameStateManager::stateType { return std::make_unique<GameStateMenu>(gameManager.getContext()); });
     gameManager.registerState("Match", [&gameManager]() -> GameStateManager::stateType { return std::make_unique<GameStateMatch>(gameManager.getContext()); });
@@ -40,6 +42,7 @@ void Game::run()
     }
 
     window.windowClose();
-    gameManager.getContext().archive->serialize("Json", "../data/global.json", globalConfig);
+    gameManager.getContext().archive->serialize("Json", "../data/global.json", gameManager.getContext().configSystem->globalConfig());
+    gameManager.getContext().archive->serialize("Json", "../data/setting.json", gameManager.getContext().configSystem->gameSetting());
     gameManager.getContext().archive->flushAll();
 }

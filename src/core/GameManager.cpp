@@ -3,6 +3,7 @@
 GameManager::GameManager(RendererBase& renderer,
     std::unique_ptr<HandleInputBase> handleInput,
     std::unique_ptr<Archive> archive,
+    std::unique_ptr<ConfigSystem> configConfig,
     float maxClickTime,
     float maxMoveDistance,
     float minLongPressTime)
@@ -14,6 +15,7 @@ GameManager::GameManager(RendererBase& renderer,
         minLongPressTime)
     , std::make_unique<GameStateManager>()
     , std::move(archive)
+    , std::move(configConfig)
     )
 { }
 
