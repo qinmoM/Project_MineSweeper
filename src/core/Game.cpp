@@ -30,6 +30,7 @@ void Game::run()
     GameManager gameManager(GameStateContext{
         *renderer_,
         *handleInput_,
+        RaylibAudio::getInstance(),
         *stateManager_,
         *archive_,
         *configSystem_,

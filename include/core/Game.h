@@ -5,6 +5,7 @@
 #include "WindowProxy.h"
 #include "HandleInputRaylib.h"
 #include "JsonSerialization.h"
+#include "RaylibAudio.h"
 
 class Game
 {

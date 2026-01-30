@@ -5,6 +5,8 @@
 #include "ButtonBase.h"
 #include "Archive.h"
 #include "ConfigSystem.h"
+#include "Blackboard.h"
+#include "IAudioSystem.h"
 #include <memory>
 #include <vector>
 
@@ -12,19 +14,23 @@ class GameStateManager;
 
 struct GameStateContext
 {
-    GameStateContext(RendererProxy& renderer, HandleInputSemantic& handleInput, GameStateManager& stateManager, Archive& archive, ConfigSystem& configSystem)
+    GameStateContext(RendererProxy& renderer, HandleInputSemantic& handleInput, IAudioSystem& audioSystem, GameStateManager& stateManager, Archive& archive, ConfigSystem& configSystem, Blackboard& blackboard)
         : renderer(renderer)
         , handleInput(handleInput)
+        , audio(audioSystem)
         , stateManager(stateManager)
         , archive(archive)
         , configSystem(configSystem)
+        , blackboard(blackboard)
     { }
     
     RendererProxy& renderer;
     HandleInputSemantic& handleInput;
+    IAudioSystem& audio;
     GameStateManager& stateManager;
     Archive& archive;
     ConfigSystem& configSystem;
+    Blackboard& blackboard;
 };
 
 class GameStateBase
