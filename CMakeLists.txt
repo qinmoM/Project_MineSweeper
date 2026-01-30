@@ -21,6 +21,9 @@ set(include_project
     ${PROJECT_SOURCE_DIR}/include/common/base
     ${PROJECT_SOURCE_DIR}/include/common/tool
     ${PROJECT_SOURCE_DIR}/include/gameState
+    ${PROJECT_SOURCE_DIR}/include/audio/device
+    ${PROJECT_SOURCE_DIR}/include/audio/music
+    ${PROJECT_SOURCE_DIR}/include/audio/sound
     ${PROJECT_SOURCE_DIR}/include/render/renderer
     ${PROJECT_SOURCE_DIR}/include/render/proxy
     ${PROJECT_SOURCE_DIR}/include/render/texture
