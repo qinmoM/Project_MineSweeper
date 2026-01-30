@@ -17,4 +17,5 @@ private:
     std::unique_ptr<GameStateManager> stateManager_;
     std::unique_ptr<Archive> archive_;
     std::unique_ptr<ConfigSystem> configSystem_;
+    std::unique_ptr<Blackboard> blackboard_;
 };

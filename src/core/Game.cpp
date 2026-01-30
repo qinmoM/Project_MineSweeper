@@ -4,8 +4,10 @@ void Game::run()
 {
     renderer_ = std::make_unique<RendererProxy>(RendererRaylib::getInstance());
     window_ = std::make_unique<WindowProxy>(RendererRaylib::getInstance());
+    stateManager_ = std::make_unique<GameStateManager>();
     archive_ = std::make_unique<Archive>();
     configSystem_ = std::make_unique<ConfigSystem>();
+    blackboard_ = std::make_unique<Blackboard>();
 
     archive_->registerSerializer("Json", std::make_unique<JsonSerialization>());
 
@@ -30,7 +32,8 @@ void Game::run()
         *handleInput_,
         *stateManager_,
         *archive_,
-        *configSystem_
+        *configSystem_,
+        *blackboard_
     });
     gameManager.registerState("Menu", [&gameManager]() -> GameStateManager::stateType { return std::make_unique<GameStateMenu>(gameManager.getContext()); });
     gameManager.registerState("Match", [&gameManager]() -> GameStateManager::stateType { return std::make_unique<GameStateMatch>(gameManager.getContext()); });
