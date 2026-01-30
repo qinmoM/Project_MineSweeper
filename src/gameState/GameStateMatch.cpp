@@ -78,10 +78,11 @@ void GameStateMatch::update(float delta)
     if (context_.handleInput.mouseClicked(Base::MouseButton::Left) && mousePos.x >= 0 && mousePos.x <= size_.x && mousePos.y >= 0 && mousePos.y <= size_.y)
         gridView_->reveal(mousePos.y / cellheight, mousePos.x / cellwidth);
 
-    if (gridView_->isGameWin())
-        context_.stateManager.addTask([this]() -> void { context_.stateManager.popState(); });
-    if (gridView_->isGameOver())
-        context_.stateManager.addTask([this]() -> void { context_.stateManager.popState(); });
+    if (gridView_->isGameWin() || gridView_->isGameOver())
+    {
+        context_.stateManager.addTask([this]() -> void { context_.stateManager.pushState("Result"); });
+        context_.blackboard.set("GameStateMatch.gameResult", gridView_->isGameWin());
+    }
 }
 
 void GameStateMatch::render()
