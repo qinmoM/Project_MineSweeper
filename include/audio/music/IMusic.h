@@ -19,6 +19,7 @@ public:
     virtual void resume() = 0;
     virtual bool isPlaying() = 0;
 
+    virtual void setLoop(bool loop) = 0;
     virtual void seek(float seconds) = 0;
     virtual void setVolume(float volume) = 0;
     virtual void setPitch(float pitch) = 0;
