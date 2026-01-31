@@ -26,6 +26,9 @@ void GameManager::update(float delta)
     if (!context_.stateManager.stateStack_.empty())
         context_.stateManager.stateStack_.back()->update(delta);
 
+    // update audio
+    context_.audio.update();
+
     // tasks queue
     std::queue<std::function<void()>>& tasks = context_.stateManager.tasksQueue_;
     while (tasks.size())

@@ -41,6 +41,9 @@ void Game::run()
     gameManager.registerState("Result", [&gameManager]() -> GameStateManager::stateType { return std::make_unique<GameStateResult>(gameManager.getContext()); });
     gameManager.init("Menu");
 
+    gameManager.getContext().audio.loadBGM("../res/audio/music/840648__visidy__joyful-game-loop-kitty-yarn-play.wav");
+    gameManager.getContext().audio.playBGM();
+
     while (window_->windowExists())
     {
         window_->drawingBegin();
