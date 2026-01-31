@@ -9,6 +9,8 @@ class RaylibAudio;
 class RaylibMusic final : public IMusic
 {
 public:
+    static constexpr float VOLUME_RATIO = 0.01f;
+
     RaylibMusic(IAudioSystem::MusicToken, RaylibAudio& audioSystem, const std::string& filename);
     ~RaylibMusic();
 public:
@@ -23,6 +25,7 @@ public:
     void resume() override;
     bool isPlaying() override;
 
+    void setLoop(bool loop) override;
     void seek(float seconds) override;
     void setVolume(float volume) override;
     void setPitch(float pitch) override;

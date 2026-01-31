@@ -5,6 +5,8 @@ RaylibMusic::RaylibMusic(IAudioSystem::MusicToken, RaylibAudio& audioSystem, con
     music_ = LoadMusicStream(filename.c_str());
     if (!IsMusicValid(music_))
         throw std::runtime_error("Failed to load music stream:" + filename + ". | RaylibMusic::RaylibMusic");
+
+    music_.looping = true;
 }
 
 RaylibMusic::~RaylibMusic()
@@ -60,6 +62,11 @@ bool RaylibMusic::isPlaying()
 
 
 
+void RaylibMusic::setLoop(bool loop)
+{
+    music_.looping = loop;
+}
+
 void RaylibMusic::seek(float seconds)
 {
     SeekMusicStream(music_, seconds);
@@ -67,7 +74,10 @@ void RaylibMusic::seek(float seconds)
 
 void RaylibMusic::setVolume(float volume)
 {
-    SetMusicVolume(music_, volume);
+    if (volume < 0.0f || volume > 100.0f)
+        throw std::invalid_argument("Volume must be between 0.0 and 100.0. | RaylibMusic::setVolume");
+
+    SetMusicVolume(music_, volume * VOLUME_RATIO);
 }
 
 void RaylibMusic::setPitch(float pitch)

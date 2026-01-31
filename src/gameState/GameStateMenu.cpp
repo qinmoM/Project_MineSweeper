@@ -117,7 +117,7 @@ void GameStateMenu::update(float delta)
     {
         if (context_.handleInput.mouseClicked(Base::MouseButton::Left) && button->contains(context_.handleInput.mousePosition()))
             context_.stateManager.addTask(button->getCallback());
-        
+
         button->update(context_.handleInput, delta);
     }
 }
