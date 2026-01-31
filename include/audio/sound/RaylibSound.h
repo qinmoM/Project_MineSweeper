@@ -9,6 +9,8 @@ class RaylibAudio;
 class RaylibSound : public ISound
 {
 public:
+    static constexpr float VOLUME_RATIO = 0.01f;
+
     RaylibSound(IAudioSystem::SoundToken, RaylibAudio& audioSystem, const std::string& filePath);
     ~RaylibSound();
 public:
