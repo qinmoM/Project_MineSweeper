@@ -1,9 +1,9 @@
 #pragma once
 
 #include "BasePoint.h"
-#include "EventSubject.h"
 #include "RendererProxy.h"
 #include "HandleInputSemantic.h"
+#include <functional>
 
 class ButtonBase
 {

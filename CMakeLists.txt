@@ -28,7 +28,6 @@ set(include_project
     ${PROJECT_SOURCE_DIR}/include/render/proxy
     ${PROJECT_SOURCE_DIR}/include/render/texture
     ${PROJECT_SOURCE_DIR}/include/render/font
-    ${PROJECT_SOURCE_DIR}/include/handle/event
     ${PROJECT_SOURCE_DIR}/include/handle/handle
     ${PROJECT_SOURCE_DIR}/include/handle/keyboard
     ${PROJECT_SOURCE_DIR}/include/handle/mouse
