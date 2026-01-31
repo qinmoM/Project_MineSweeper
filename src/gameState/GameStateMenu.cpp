@@ -66,7 +66,7 @@ void GameStateMenu::enter()
         std::make_shared<ButtonImage>(
             sprite,
             point,
-            [this]() -> void { ; },
+            [this]() -> void { context_.stateManager.requestQuit(); },
             imageButton_contains_radius150,
             imageButton_update_colorExchanged
         )

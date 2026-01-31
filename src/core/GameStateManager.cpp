@@ -50,3 +50,13 @@ void GameStateManager::clearTask()
     while (!tasksQueue_.empty())
         tasksQueue_.pop();
 }
+
+void GameStateManager::requestQuit()
+{
+    requestQuit_ = true;
+}
+
+bool GameStateManager::shouldQuit() const
+{
+    return requestQuit_;
+}

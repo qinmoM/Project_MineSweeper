@@ -36,6 +36,12 @@ void GameManager::update(float delta)
         tasks.front()();
         tasks.pop();
     }
+
+    if (context_.stateManager.shouldQuit())
+    {
+        while (!context_.stateManager.stateStack_.empty())
+            context_.stateManager.popState();
+    }
 }
 
 void GameManager::render()

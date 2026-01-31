@@ -23,9 +23,11 @@ public:
     void clearTask();
 
     void requestQuit();
+    bool shouldQuit() const;
 protected:
     std::vector<stateType> stateStack_;
     std::queue<std::function<void()>> tasksQueue_;
     std::unordered_map<std::string, Creator> registerCreators_;
+    bool requestQuit_ = false;
     friend class GameManager;
 };

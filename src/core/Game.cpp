@@ -44,7 +44,7 @@ void Game::run()
     gameManager.getContext().audio.loadBGM("../res/audio/music/840648__visidy__joyful-game-loop-kitty-yarn-play.wav");
     gameManager.getContext().audio.playBGM();
 
-    while (window_->windowExists())
+    while (window_->windowExists() && !gameManager.getContext().stateManager.shouldQuit())
     {
         window_->drawingBegin();
         window_->clearBackground(Base::Color{230, 230, 230, 0});
