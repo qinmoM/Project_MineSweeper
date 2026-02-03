@@ -32,13 +32,14 @@ void GridView::reveal(int row, int col)
     if (row < 0 || row >= field_->getRows() || col < 0 || col >= field_->getCols() || field_->getCell(row, col).isRevealed_ || gameOver_)
         return;
 
+    field_->getCell(row, col).isRevealed_ = true;
+
     if (field_->getCell(row, col).isMine_)
     {
         gameOver_ = true;
         return;
     }
 
-    field_->getCell(row, col).isRevealed_ = true;
     revealCount_ += 1;
 
     if (0 == field_->getCell(row, col).numMinesNearby_)
