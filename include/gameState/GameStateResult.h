@@ -19,4 +19,6 @@ private:
     bool isGameWin_;
     int width_;
     int height_;
+    int revealCount_;
+    int needRevealCount_;
 };
