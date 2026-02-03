@@ -1,8 +1,6 @@
 #pragma once
 
-#include "GameStateMenu.h"
-#include "GameStateMatch.h"
-#include "GameStateResult.h"
+#include "GameStateManager.h"
 #include <stdexcept>
 #include <vector>
 

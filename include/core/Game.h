@@ -1,5 +1,9 @@
 #pragma once
 
+#include "GameStateMenu.h"
+#include "GameStateMatch.h"
+#include "GameStateResult.h"
+
 #include "GameManager.h"
 #include "RendererRaylib.h"
 #include "WindowProxy.h"
