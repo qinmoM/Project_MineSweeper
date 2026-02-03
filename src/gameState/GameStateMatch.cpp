@@ -5,6 +5,7 @@ GameStateMatch::GameStateMatch(GameStateContext& context)
 {
     pos_ = { 100.0f, 230.0f };
     size_ = { 1400.0f, 800.0f };
+    wait_ = false;
 }
 
 void GameStateMatch::enter()
@@ -61,6 +62,9 @@ void GameStateMatch::exit()
 
 void GameStateMatch::update(float delta)
 {
+    if (wait_)
+        return;
+
     for (auto& button : button_)
     {
         if (context_.handleInput.mouseClicked(Base::MouseButton::Left) && button->contains(context_.handleInput.mousePosition()))
@@ -80,7 +84,8 @@ void GameStateMatch::update(float delta)
 
     if (gridView_->isGameWin() || gridView_->isGameOver())
     {
-        context_.stateManager.addTask([this]() -> void { context_.stateManager.pushState("Result"); });
+        wait_ = true;
+        context_.stateManager.addTask([this]() -> void { context_.stateManager.pushState("Result"); }, 0.1f, 1.5f);
         context_.blackboard.set("GameStateMatch.gameResult", gridView_->isGameWin());
     }
 }
@@ -103,17 +108,22 @@ void GameStateMatch::render()
         {
             if (!gridView_->getCell(i, j).isRevealed_)
                 context_.renderer.drawRectangleFill(pos_.x + j * cellwidth, pos_.y + i * cellheight, cellwidth, cellheight, Base::Color{ 180, 220, 230, 255 });
-            else if (gridView_->getCell(i, j).numMinesNearby_)
+            else
             {
-                Text text(font_[0]);
-                text.setText(std::to_string(gridView_->getCell(i, j).numMinesNearby_));
-                text.setSize(fontSize());
-                text.setSpacing(0.0f);
-                Base::Point temp = text.getBounderies();
-                text.setOrigin({ temp.x / 2, temp.y / 2 });
-                text.setColor(fontColor(gridView_->getCell(i, j).numMinesNearby_));
-                text.setPosition({ pos_.x + j * cellwidth + cellwidth / 2, pos_.y + i * cellheight + cellheight / 2 });
-                context_.renderer.drawText(text);
+                if (gridView_->getCell(i, j).isMine_)
+                    context_.renderer.drawRectangleFill(pos_.x + j * cellwidth, pos_.y + i * cellheight, cellwidth, cellheight, Base::Color{ 220, 0, 0, 255 });
+                else if (gridView_->getCell(i, j).numMinesNearby_)
+                {
+                    Text text(font_[0]);
+                    text.setText(std::to_string(gridView_->getCell(i, j).numMinesNearby_));
+                    text.setSize(fontSize());
+                    text.setSpacing(0.0f);
+                    Base::Point temp = text.getBounderies();
+                    text.setOrigin({ temp.x / 2, temp.y / 2 });
+                    text.setColor(fontColor(gridView_->getCell(i, j).numMinesNearby_));
+                    text.setPosition({ pos_.x + j * cellwidth + cellwidth / 2, pos_.y + i * cellheight + cellheight / 2 });
+                    context_.renderer.drawText(text);
+                }
             }
         }
     }
