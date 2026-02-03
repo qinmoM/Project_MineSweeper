@@ -21,6 +21,7 @@ protected:
     std::vector<std::shared_ptr<FontBase>> font_;
     Base::Point pos_;
     Base::Point size_;
+    bool wait_;
 private:
     float fontSize() const;
     int mineCount() const;
