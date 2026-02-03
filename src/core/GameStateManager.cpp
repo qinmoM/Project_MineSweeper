@@ -40,15 +40,14 @@ void GameStateManager::clearState()
     }
 }
 
-void GameStateManager::addTask(const std::function<void()>& task)
+void GameStateManager::addTask(const std::function<void()>& task, float priority, float frameDelay)
 {
-    tasksQueue_.push(task);
+    tasksQueue_.emplace(priority, Task(task, frameDelay));
 }
 
 void GameStateManager::clearTask()
 {
-    while (!tasksQueue_.empty())
-        tasksQueue_.pop();
+    tasksQueue_.clear();
 }
 
 void GameStateManager::requestQuit()
