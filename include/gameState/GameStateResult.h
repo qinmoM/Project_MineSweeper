@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GameStateManager.h"
-#include "ButtonText.h"
+#include "ButtonImage.h"
 
 class GameStateResult : public GameStateBase
 {
@@ -15,5 +15,8 @@ public:
     GameStateResult(GameStateContext& context);
     virtual ~GameStateResult() = default;
 private:
+    std::vector<std::shared_ptr<FontBase>> fonts_;
     bool isGameWin_;
+    int width_;
+    int height_;
 };
