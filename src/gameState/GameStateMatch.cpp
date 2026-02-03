@@ -82,11 +82,21 @@ void GameStateMatch::update(float delta)
     if (context_.handleInput.mouseClicked(Base::MouseButton::Left) && mousePos.x >= 0 && mousePos.x <= size_.x && mousePos.y >= 0 && mousePos.y <= size_.y)
         gridView_->reveal(mousePos.y / cellheight, mousePos.x / cellwidth);
 
-    if (gridView_->isGameWin() || gridView_->isGameOver())
+    if (gridView_->isGameOver())
     {
         wait_ = true;
         context_.stateManager.addTask([this]() -> void { context_.stateManager.pushState("Result"); }, 0.1f, 1.5f);
         context_.blackboard.set("GameStateMatch.gameResult", gridView_->isGameWin());
+        context_.blackboard.set("GameStateMatch.revealedCount", gridView_->getRevealCount());
+        context_.blackboard.set("GameStateMatch.needRevealedCount", gridView_->getField().getRows() * gridView_->getField().getCols() - mineCount());
+    }
+    if (gridView_->isGameWin())
+    {
+        wait_ = true;
+        context_.stateManager.addTask([this]() -> void { context_.stateManager.pushState("Result"); }, 0.1f);
+        context_.blackboard.set("GameStateMatch.gameResult", gridView_->isGameWin());
+        context_.blackboard.set("GameStateMatch.revealedCount", gridView_->getRevealCount());
+        context_.blackboard.set("GameStateMatch.needRevealedCount", gridView_->getField().getRows() * gridView_->getField().getCols() - mineCount());
     }
 }
 
