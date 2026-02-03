@@ -30,11 +30,19 @@ void GameManager::update(float delta)
     context_.audio.update();
 
     // tasks queue
-    std::queue<std::function<void()>>& tasks = context_.stateManager.tasksQueue_;
-    while (tasks.size())
+    auto& tasks = context_.stateManager.tasksQueue_;
+    for (auto it = tasks.begin(); it != tasks.end(); )
     {
-        tasks.front()();
-        tasks.pop();
+        if (it->second.frameDelay_ <= 0.0f)
+        {
+            it->second.task_();
+            it = tasks.erase(it);
+        }
+        else
+        {
+            it->second.frameDelay_ -= delta;
+            ++it;
+        }
     }
 
     if (context_.stateManager.shouldQuit())
