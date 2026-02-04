@@ -3,6 +3,7 @@
 #include "GameStateMenu.h"
 #include "GameStateMatch.h"
 #include "GameStateResult.h"
+#include "GameStateSetting.h"
 
 #include "GameManager.h"
 #include "RendererRaylib.h"
