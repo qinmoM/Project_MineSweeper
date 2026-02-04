@@ -57,6 +57,7 @@ void GameStateMenu::enter()
     ;
 
     std::shared_ptr<TextureBase> texture = context_.renderer.loadTexture("../res/image/return_ashen.png");
+    context_.blackboard.set("button.return_ashen", texture);
     Sprite sprite(texture);
     sprite.setOrigin({ 500.0f, 500.0f });
     sprite.setScale(Base::Point{ 0.25f, 0.25f });
