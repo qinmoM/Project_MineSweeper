@@ -54,6 +54,7 @@ void GameStateSetting::enter()
     Base::Point point1{ 500.0f, 300.0f };
     text1.setPosition(point1);
     text1.setText("6 x 9");
+    text1.setSpacing(0.0f);
     Base::Point text1Boundaries = fonts_[0]->getBoundaries(text1.getText(), text1.getSize(), 0);
     button_.push_back(
         std::make_shared<ButtonText>(
@@ -81,6 +82,7 @@ void GameStateSetting::enter()
     Base::Point point2{ 800.0f, 300.0f };
     text2.setPosition(point2);
     text2.setText("9 x 15");
+    text2.setSpacing(0.0f);
     Base::Point text2Boundaries = fonts_[0]->getBoundaries(text2.getText(), text2.getSize(), 0);
     button_.push_back(
         std::make_shared<ButtonText>(
@@ -108,6 +110,7 @@ void GameStateSetting::enter()
     Base::Point point3{ 1100.0f, 300.0f };
     text3.setPosition(point3);
     text3.setText("15 x 20");
+    text3.setSpacing(0.0f);
     Base::Point text3Boundaries = fonts_[0]->getBoundaries(text3.getText(), text3.getSize(), 0);
     button_.push_back(
         std::make_shared<ButtonText>(
