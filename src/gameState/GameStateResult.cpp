@@ -53,7 +53,10 @@ void GameStateResult::enter()
         }
     ;
 
-    std::shared_ptr<TextureBase> texture = context_.renderer.loadTexture("../res/image/return_ashen.png");
+    std::shared_ptr<TextureBase>* temp = context_.blackboard.tryGet<std::shared_ptr<TextureBase>>("button.return_ashen");
+    if (!temp)
+        throw std::runtime_error("Texture not found in blackboard. | GameStateResult::enter()");
+    std::shared_ptr<TextureBase> texture = *temp;
     Sprite sprite(texture);
     sprite.setOrigin({ 500.0f, 500.0f });
     sprite.setScale(Base::Point{ 0.17f, 0.17f });

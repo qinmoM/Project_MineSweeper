@@ -21,7 +21,10 @@ void GameStateMatch::enter()
         context_.renderer.loadFont("../res/font/Sniglet/Sniglet-Regular.ttf", fontSize())
     );
 
-    std::shared_ptr<TextureBase> texture = context_.renderer.loadTexture("../res/image/return_ashen.png");
+    std::shared_ptr<TextureBase>* temp = context_.blackboard.tryGet<std::shared_ptr<TextureBase>>("button.return_ashen");
+    if (!temp)
+        throw std::runtime_error("Texture not found in blackboard. | GameStateMatch::enter()");
+    std::shared_ptr<TextureBase> texture = *temp;
     Sprite sprite(texture);
     sprite.setOrigin({ 500.0f, 500.0f });
     sprite.setScale(Base::Point{ 0.15f, 0.15f });
