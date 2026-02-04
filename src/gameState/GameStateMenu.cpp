@@ -99,7 +99,7 @@ void GameStateMenu::enter()
         std::make_shared<ButtonImage>(
             sprite3,
             point3,
-            [this]() -> void { ; },
+            [this]() -> void { context_.stateManager.pushState("Setting"); },
             imageButton_contains_radius150,
             imageButton_update_colorExchanged
         )
