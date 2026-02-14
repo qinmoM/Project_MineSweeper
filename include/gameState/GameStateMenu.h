@@ -13,6 +13,6 @@ public:
     virtual void update(float delta) override;
     virtual void render() override;
 public:
-    GameStateMenu(GameStateContext& context);
+    GameStateMenu(GameStateContext& context, const std::string& stateName);
     virtual ~GameStateMenu() = default;
 };

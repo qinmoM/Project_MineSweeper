@@ -14,7 +14,7 @@ public:
     virtual void render() override;
 
 public:
-    GameStateSetting(GameStateContext &context);
+    GameStateSetting(GameStateContext &context, const std::string& stateName);
     virtual ~GameStateSetting() = default;
 
 private:

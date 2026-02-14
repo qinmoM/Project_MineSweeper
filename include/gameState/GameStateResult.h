@@ -12,7 +12,7 @@ public:
     virtual void update(float delta) override;
     virtual void render() override;
 public:
-    GameStateResult(GameStateContext& context);
+    GameStateResult(GameStateContext& context, const std::string& stateName);
     virtual ~GameStateResult() = default;
 private:
     std::vector<std::shared_ptr<FontBase>> fonts_;

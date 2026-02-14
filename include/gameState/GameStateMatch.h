@@ -14,7 +14,7 @@ public:
     virtual void update(float delta) override;
     virtual void render() override;
 public:
-    GameStateMatch(GameStateContext& context);
+    GameStateMatch(GameStateContext& context, const std::string& stateName);
     virtual ~GameStateMatch() = default;
 protected:
     std::unique_ptr<GridView> gridView_;
