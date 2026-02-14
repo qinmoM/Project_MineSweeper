@@ -41,6 +41,8 @@ public:
 
     virtual void update(float delta) = 0;
     virtual void render() = 0;
+
+    inline const std::string& getStateName() { return stateName_; }
 public:
     GameStateBase(GameStateContext& context, const std::string& stateName)
         : context_(context)
