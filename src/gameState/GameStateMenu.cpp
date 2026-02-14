@@ -1,7 +1,7 @@
 #include "GameStateMenu.h"
 
-GameStateMenu::GameStateMenu(GameStateContext& context)
-        : GameStateBase(context)
+GameStateMenu::GameStateMenu(GameStateContext& context, const std::string& stateName)
+        : GameStateBase(context, stateName)
 {
     ;
 }

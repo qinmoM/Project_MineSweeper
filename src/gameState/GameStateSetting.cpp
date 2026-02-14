@@ -1,6 +1,8 @@
 #include "GameStateSetting.h"
 
-GameStateSetting::GameStateSetting(GameStateContext &context) : GameStateBase(context) { }
+GameStateSetting::GameStateSetting(GameStateContext &context, const std::string& stateName)
+    : GameStateBase(context, stateName)
+{ }
 
 
 

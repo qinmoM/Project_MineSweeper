@@ -10,7 +10,7 @@
 - **Feedback Mechanism:**  
 - **反馈机制**  
   When a square is selected,it will show the number of mines around it.  
-  选中格子时，显示周围雷的数量。    
+  选中格子时，显示周围雷的数量。  
   User can switch between multable color themes.  
   用户可以选择不同的颜色主题。  
 ---

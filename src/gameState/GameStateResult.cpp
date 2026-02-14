@@ -1,7 +1,7 @@
 #include "GameStateResult.h"
 
-GameStateResult::GameStateResult(GameStateContext& context)
-    : GameStateBase(context)
+GameStateResult::GameStateResult(GameStateContext& context, const std::string& stateName)
+    : GameStateBase(context, stateName)
 {
     bool* result = context_.blackboard.tryGet<bool>("GameStateMatch.gameResult");
     if (result)

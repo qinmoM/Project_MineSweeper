@@ -1,7 +1,7 @@
 #include "GameStateMatch.h"
 
-GameStateMatch::GameStateMatch(GameStateContext& context)
-    : GameStateBase(context), gridView_(nullptr), pos_({ 0.0f, 0.0f }), size_({ 0.0f, 0.0f })
+GameStateMatch::GameStateMatch(GameStateContext& context, const std::string& stateName)
+    : GameStateBase(context, stateName), gridView_(nullptr), pos_({ 0.0f, 0.0f }), size_({ 0.0f, 0.0f })
 {
     pos_ = { 100.0f, 230.0f };
     size_ = { 1400.0f, 800.0f };
