@@ -1,3 +1,6 @@
+# linux下还需要安装 libx11:
+#   sudo apt install libx11-dev
+
 # 能兼容的最小 cmake 版本
 cmake_minimum_required(VERSION 3.10)
 # 定义项目名称
@@ -8,7 +11,11 @@ set(CMAKE_CXX_STANDARD 17)
 
 
 # raylib路径
-set(path_raylib ${PROJECT_SOURCE_DIR}/external/open/raylib)
+if (WIN32)
+    set(path_raylib ${PROJECT_SOURCE_DIR}/external/open/raylib)
+elseif (UNIX)
+    set(path_raylib ${PROJECT_SOURCE_DIR}/external/open/raylib-5.5_linux_amd64)
+endif()
 # nlohmann_json路径
 set(path_nlohmann ${PROJECT_SOURCE_DIR}/external/open/nlohmann)
 
@@ -54,14 +61,33 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 add_executable(${PROJECT_NAME} ${SOURCES} ./main.cpp)
 
 
-# 指定库路径
 target_link_directories(${PROJECT_NAME} PRIVATE ${path_raylib}/lib)
-# 链接静态库
-target_link_libraries(
-    ${PROJECT_NAME} PRIVATE
-    raylib
-    winmm
-)
+if (WIN32)
+    target_link_libraries(
+        ${PROJECT_NAME} PRIVATE
+        raylib
+        winmm
+    )
+elseif (UNIX)
+    target_link_libraries(
+        ${PROJECT_NAME} PRIVATE
+        raylib
+        m
+        pthread
+        dl
+        X11
+    )
+endif()
+
+
+# # 指定库路径
+# target_link_directories(${PROJECT_NAME} PRIVATE ${path_raylib}/lib)
+# # 链接静态库
+# target_link_libraries(
+#     ${PROJECT_NAME} PRIVATE
+#     raylib
+#     winmm
+# )
 
 # # 链接动态库
 # target_link_libraries(
