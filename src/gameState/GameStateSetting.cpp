@@ -105,13 +105,13 @@ void GameStateSetting::enter()
 
     Text text3(fonts_[0]);
     text3.setSize(72);
-    if (context_.configSystem.gameSetting().rows_ == 15 && context_.configSystem.gameSetting().cols_ == 20)
+    if (context_.configSystem.gameSetting().rows_ == 13 && context_.configSystem.gameSetting().cols_ == 20)
         text3.setColor(Base::Color{ 150, 150, 150, 255 });
     else
         text3.setColor(Base::Color{ 0, 0, 0, 255 });
     Base::Point point3{ 1100.0f, 300.0f };
     text3.setPosition(point3);
-    text3.setText("15 x 20");
+    text3.setText("13 x 20");
     text3.setSpacing(0.0f);
     Base::Point text3Boundaries = fonts_[0]->getBoundaries(text3.getText(), text3.getSize(), 0);
     button_.push_back(
@@ -120,7 +120,7 @@ void GameStateSetting::enter()
             point3,
             [this]() -> void
             {
-                context_.configSystem.gameSetting().rows_ = 15;
+                context_.configSystem.gameSetting().rows_ = 13;
                 context_.configSystem.gameSetting().cols_ = 20;
                 static_cast<ButtonText*>(button_[1].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
                 static_cast<ButtonText*>(button_[2].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
