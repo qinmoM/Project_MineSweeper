@@ -45,11 +45,16 @@ void GameManager::update(float delta)
         }
     }
 
+    // determine if exit is necessary
     if (context_.stateManager.shouldQuit())
     {
         while (!context_.stateManager.stateStack_.empty())
             context_.stateManager.popState();
     }
+
+    // clear blackboard
+    if (context_.stateManager.tasksQueue_.empty())
+        context_.blackboard.clear();
 }
 
 void GameManager::render()
