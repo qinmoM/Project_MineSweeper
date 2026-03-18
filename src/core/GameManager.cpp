@@ -51,10 +51,6 @@ void GameManager::update(float delta)
         while (!context_.stateManager.stateStack_.empty())
             context_.stateManager.popState();
     }
-
-    // clear blackboard
-    if (context_.stateManager.tasksQueue_.empty())
-        context_.blackboard.clear();
 }
 
 void GameManager::render()

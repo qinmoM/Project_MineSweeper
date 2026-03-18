@@ -57,6 +57,9 @@ void Game::run()
         window_->FPSDelay();
     }
 
+    // clear blackboard
+    gameManager.getContext().blackboard.clear();
+    // close window
     window_->windowClose();
     gameManager.getContext().archive.serialize("Json", "../data/global.json", gameManager.getContext().configSystem.globalConfig());
     gameManager.getContext().archive.serialize("Json", "../data/setting.json", gameManager.getContext().configSystem.gameSetting());
