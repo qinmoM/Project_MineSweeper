@@ -61,6 +61,30 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 add_executable(${PROJECT_NAME} ${SOURCES} ./main.cpp)
 
 
+if (CMAKE_BUILD_TYPE MATCHES "Debug")
+    target_compile_options(${PROJECT_NAME} PRIVATE
+        -O0
+        -g
+    )
+    message(STATUS " -- Debug Model -- ")
+elseif (CMAKE_BUILD_TYPE MATCHES "Release")
+    target_compile_options(
+        ${PROJECT_NAME} PRIVATE
+        -O2
+        -march=native
+        -DNDEBUG
+    )
+    message(STATUS " -- Release Model -- ")
+elseif (CMAKE_BUILD_TYPE MATCHES "RelWithDebInfo")
+    target_compile_options(${PROJECT_NAME} PRIVATE
+        -O2
+        -march=native
+        -g
+    )
+    message(STATUS " -- RelWithDebInfo Model -- ")
+endif()
+
+
 target_link_directories(${PROJECT_NAME} PRIVATE ${path_raylib}/lib)
 if (WIN32)
     target_link_libraries(
@@ -68,6 +92,7 @@ if (WIN32)
         raylib
         winmm
     )
+    message(STATUS " -- WIN32 Type -- ")
 elseif (UNIX)
     target_link_libraries(
         ${PROJECT_NAME} PRIVATE
@@ -77,6 +102,7 @@ elseif (UNIX)
         dl
         X11
     )
+    message(STATUS " -- UNIX Type -- ")
 endif()
 
 
