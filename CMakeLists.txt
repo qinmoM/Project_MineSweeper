@@ -71,14 +71,12 @@ elseif (CMAKE_BUILD_TYPE MATCHES "Release")
     target_compile_options(
         ${PROJECT_NAME} PRIVATE
         -O2
-        -march=native
         -DNDEBUG
     )
     message(STATUS " -- Release Model -- ")
 elseif (CMAKE_BUILD_TYPE MATCHES "RelWithDebInfo")
     target_compile_options(${PROJECT_NAME} PRIVATE
         -O2
-        -march=native
         -g
     )
     message(STATUS " -- RelWithDebInfo Model -- ")
