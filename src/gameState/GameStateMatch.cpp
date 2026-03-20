@@ -83,7 +83,10 @@ void GameStateMatch::update(float delta)
     float cellwidth = size_.x / cols;
     float cellheight = size_.y / rows;
     if (context_.handleInput.mouseClicked(Base::MouseButton::Left) && mousePos.x >= 0 && mousePos.x <= size_.x && mousePos.y >= 0 && mousePos.y <= size_.y)
-        gridView_->reveal(mousePos.y / cellheight, mousePos.x / cellwidth);
+    {
+        if (gridView_->reveal(mousePos.y / cellheight, mousePos.x / cellwidth))
+            context_.audio.playSFX("Cell");
+    }
 
     if (gridView_->isGameOver())
     {
