@@ -35,6 +35,7 @@ void GameStateMatch::enter()
         point,
         [this]() -> void
         {
+            context_.audio.playSFX("Button");
             context_.stateManager.popState();
         },
         [this](const ButtonBase& button, const Base::Point pos) -> bool

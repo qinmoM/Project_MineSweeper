@@ -25,7 +25,11 @@ void GameStateSetting::enter()
         std::make_shared<ButtonImage>(
             sprite,
             point,
-            [this]() -> void { context_.stateManager.popState(); },
+            [this]() -> void
+            {
+                context_.audio.playSFX("Button");
+                context_.stateManager.popState();
+            },
             [this](const ButtonBase& button, const Base::Point pos) -> bool
             {
                 const ButtonImage& buttonImage = static_cast<const ButtonImage&>(button);

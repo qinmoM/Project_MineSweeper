@@ -83,7 +83,11 @@ void GameStateMenu::enter()
         std::make_shared<ButtonImage>(
             sprite2,
             point2,
-            [this]() -> void { context_.stateManager.pushState("Match"); },
+            [this]() -> void
+            {
+                context_.audio.playSFX("Button");
+                context_.stateManager.pushState("Match");
+            },
             imageButton_contains_radius150,
             imageButton_update_colorExchanged
         )
@@ -99,7 +103,11 @@ void GameStateMenu::enter()
         std::make_shared<ButtonImage>(
             sprite3,
             point3,
-            [this]() -> void { context_.stateManager.pushState("Setting"); },
+            [this]() -> void
+            {
+                context_.audio.playSFX("Button");
+                context_.stateManager.pushState("Setting");
+            },
             imageButton_contains_radius150,
             imageButton_update_colorExchanged
         )

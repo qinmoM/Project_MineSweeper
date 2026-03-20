@@ -45,7 +45,7 @@ void Game::run()
     gameManager.getContext().audio.loadBGM("../res/audio/music/840648__visidy__joyful-game-loop-kitty-yarn-play.wav");
     gameManager.getContext().audio.playBGM();
     gameManager.getContext().audio.registerSFX("Cell", "../res/audio/sound/844619__dioram__switch-3.wav", 1);
-    gameManager.getContext().audio.registerSFX("button", "../res/audio/sound/833601__subquire__aggressive-button-tap-ui-tap-hit.wav", 1);
+    gameManager.getContext().audio.registerSFX("Button", "../res/audio/sound/833601__subquire__aggressive-button-tap-ui-tap-hit.wav", 1);
 
     while (window_->windowExists() && !gameManager.getContext().stateManager.shouldQuit())
     {

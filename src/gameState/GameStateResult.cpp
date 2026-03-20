@@ -66,7 +66,9 @@ void GameStateResult::enter()
         std::make_shared<ButtonImage>(
             sprite,
             point,
-            [this]() -> void {
+            [this]() -> void
+            {
+                context_.audio.playSFX("Button");
                 GameStateManager& context = context_.stateManager;
                 context.popState();
                 context.popState();
