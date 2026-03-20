@@ -46,6 +46,7 @@ void Game::run()
     gameManager.getContext().audio.playBGM();
     gameManager.getContext().audio.registerSFX("Cell", "../res/audio/sound/844619__dioram__switch-3.wav", 1);
     gameManager.getContext().audio.registerSFX("Button", "../res/audio/sound/833601__subquire__aggressive-button-tap-ui-tap-hit.wav", 1);
+    gameManager.getContext().audio.registerSFX("TextButton", "../res/audio/sound/844617__dioram__switch-1.wav", 1);
 
     while (window_->windowExists() && !gameManager.getContext().stateManager.shouldQuit())
     {
