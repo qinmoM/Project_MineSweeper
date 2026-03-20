@@ -9,7 +9,7 @@ class GridView
 {
 public:
     void regenerateMines(int numMines);
-    void reveal(int row, int col);
+    bool reveal(int row, int col);
     bool isGameWin() const;
     bool isGameOver() const;
     int getRevealCount() const;

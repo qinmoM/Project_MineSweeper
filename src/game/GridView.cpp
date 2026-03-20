@@ -27,17 +27,17 @@ void GridView::regenerateMines(int numMines)
     field_->flushNearbyNum();
 }
 
-void GridView::reveal(int row, int col)
+bool GridView::reveal(int row, int col)
 {
     if (row < 0 || row >= field_->getRows() || col < 0 || col >= field_->getCols() || field_->getCell(row, col).isRevealed_ || gameOver_)
-        return;
+        return false;
 
     field_->getCell(row, col).isRevealed_ = true;
 
     if (field_->getCell(row, col).isMine_)
     {
         gameOver_ = true;
-        return;
+        return true;
     }
 
     revealCount_ += 1;
@@ -53,6 +53,8 @@ void GridView::reveal(int row, int col)
         reveal(row + 1, col);
         reveal(row + 1, col + 1);
     }
+
+    return true;
 }
 
 bool GridView::isGameWin() const
