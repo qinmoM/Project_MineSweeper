@@ -68,6 +68,7 @@ void GameStateSetting::enter()
             point1,
             [this]() -> void
             {
+                context_.audio.playSFX("TextButton");
                 context_.configSystem.gameSetting().rows_ = 6;
                 context_.configSystem.gameSetting().cols_ = 9;
                 static_cast<ButtonText*>(button_[1].get())->getText().setColor(Base::Color{ 150, 150, 150, 255 });
@@ -96,6 +97,7 @@ void GameStateSetting::enter()
             point2,
             [this]() -> void
             {
+                context_.audio.playSFX("TextButton");
                 context_.configSystem.gameSetting().rows_ = 9;
                 context_.configSystem.gameSetting().cols_ = 15;
                 static_cast<ButtonText*>(button_[1].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
@@ -124,6 +126,7 @@ void GameStateSetting::enter()
             point3,
             [this]() -> void
             {
+                context_.audio.playSFX("TextButton");
                 context_.configSystem.gameSetting().rows_ = 13;
                 context_.configSystem.gameSetting().cols_ = 20;
                 static_cast<ButtonText*>(button_[1].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
