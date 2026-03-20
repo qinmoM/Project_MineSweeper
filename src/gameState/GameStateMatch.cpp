@@ -83,6 +83,15 @@ void GameStateMatch::update(float delta)
     int cols = field.getCols();
     float cellwidth = size_.x / cols;
     float cellheight = size_.y / rows;
+
+    if (context_.handleInput.mouseClicked(Base::MouseButton::Right) && mousePos.x >= 0 && mousePos.x <= size_.x && mousePos.y >= 0 && mousePos.y <= size_.y)
+    {
+        int row = mousePos.y / cellheight;
+        int col = mousePos.x / cellwidth;
+        if (gridView_->mark(row, col, !gridView_->getCell(row, col).isMarked_))
+            context_.audio.playSFX("TextButton");
+    }
+
     if (context_.handleInput.mouseClicked(Base::MouseButton::Left) && mousePos.x >= 0 && mousePos.x <= size_.x && mousePos.y >= 0 && mousePos.y <= size_.y)
     {
         if (gridView_->reveal(mousePos.y / cellheight, mousePos.x / cellwidth))
@@ -124,7 +133,11 @@ void GameStateMatch::render()
         for (int j = 0; j < cols; ++j)
         {
             if (!gridView_->getCell(i, j).isRevealed_)
+            {
                 context_.renderer.drawRectangleFill(pos_.x + j * cellwidth, pos_.y + i * cellheight, cellwidth, cellheight, Base::Color{ 180, 220, 230, 255 });
+                if (gridView_->getCell(i, j).isMarked_)
+                    context_.renderer.drawCircleFill(pos_.x + j * cellwidth + cellwidth / 2, pos_.y + i * cellheight + cellheight / 2, 4.0f, Base::Color{0, 0, 0, 255});
+            }
             else
             {
                 if (gridView_->getCell(i, j).isMine_)
