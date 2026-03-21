@@ -120,32 +120,38 @@ void GameStateMatch::render()
 {
     context_.renderer.drawRectangleFill(0, 0, context_.renderer.getWidth(), context_.renderer.getHeight(), Base::Color{ 230, 230, 230, 255 });
 
-    Base::Color rectangleColor{ 140, 180, 190, 255 };
-    Base::Color blockColor{ 180, 220, 230, 255 };
+    Base::Color rectangleColor;
+    Base::Color blockColor;
+    Base::Color xmarkColor;
     if (context_.configSystem.gameSetting().theme_ == "Bule")
     {
         rectangleColor = Base::Color{ 140, 180, 190, 255 };
         blockColor = Base::Color{ 180, 220, 230, 255 };
+        xmarkColor = Base::Color{ 80, 100, 120, 255 };
     }
     else if (context_.configSystem.gameSetting().theme_ == "Green")
     {
         rectangleColor = Base::Color{ 160, 190, 160, 255 };
         blockColor = Base::Color{ 200, 230, 200, 255 };
+        xmarkColor = Base::Color{ 90, 120, 90, 255 };
     }
     else if (context_.configSystem.gameSetting().theme_ == "Yellow")
     {
         rectangleColor = Base::Color{ 190, 190, 130, 255 };
         blockColor = Base::Color{ 230, 230, 170, 255 };
+        xmarkColor = Base::Color{ 120, 100, 80, 255 };
     }
     else if (context_.configSystem.gameSetting().theme_ == "Purple")
     {
         rectangleColor = Base::Color{ 160, 150, 200, 255 };
         blockColor = Base::Color{ 200, 190, 240, 255 };
+        xmarkColor = Base::Color{ 100, 80, 120, 255 };
     }
     else if (context_.configSystem.gameSetting().theme_ == "Pink")
     {
         rectangleColor = Base::Color{ 190, 150, 170, 255 };
         blockColor = Base::Color{ 230, 190, 210, 255 };
+        xmarkColor = Base::Color{ 120, 80, 100, 255 };
     }
 
     context_.renderer.drawRectangleRoundFill(pos_.x - 20, pos_.y - 20, size_.x + 40, size_.y + 40, 0.04f, rectangleColor);
@@ -165,8 +171,8 @@ void GameStateMatch::render()
                 context_.renderer.drawRectangleFill(pos_.x + j * cellwidth, pos_.y + i * cellheight, cellwidth, cellheight, blockColor);
                 if (gridView_->getCell(i, j).isMarked_)
                 {
-                    context_.renderer.drawLine(pos_.x + j * cellwidth + cellwidth / 4, pos_.y + i * cellheight + cellheight / 4, pos_.x + j * cellwidth + cellwidth * 3 / 4, pos_.y + i * cellheight + cellheight * 3 / 4, 14.0f, Base::Color{80, 100, 120, 255});
-                    context_.renderer.drawLine(pos_.x + j * cellwidth + cellwidth * 3 / 4, pos_.y + i * cellheight + cellheight / 4, pos_.x + j * cellwidth + cellwidth / 4, pos_.y + i * cellheight + cellheight * 3 / 4, 14.0f, Base::Color{80, 100, 120, 255});
+                    context_.renderer.drawLine(pos_.x + j * cellwidth + cellwidth / 4, pos_.y + i * cellheight + cellheight / 4, pos_.x + j * cellwidth + cellwidth * 3 / 4, pos_.y + i * cellheight + cellheight * 3 / 4, 14.0f, xmarkColor);
+                    context_.renderer.drawLine(pos_.x + j * cellwidth + cellwidth * 3 / 4, pos_.y + i * cellheight + cellheight / 4, pos_.x + j * cellwidth + cellwidth / 4, pos_.y + i * cellheight + cellheight * 3 / 4, 14.0f, xmarkColor);
                 }
             }
             else
