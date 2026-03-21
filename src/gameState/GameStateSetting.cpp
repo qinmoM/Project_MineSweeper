@@ -55,6 +55,7 @@ void GameStateSetting::enter()
         model
     */
     float baselineY = 300.0f;
+
     Text text1(fonts_[0]);
     text1.setSize(72);
     if (context_.configSystem.gameSetting().rows_ == 6 && context_.configSystem.gameSetting().cols_ == 9)
@@ -146,6 +147,7 @@ void GameStateSetting::enter()
         theme
     */
     baselineY = 500.0f;
+
     Text text4(fonts_[0]);
     text4.setSize(72);
     if (context_.configSystem.gameSetting().theme_ == "Bule")
@@ -168,6 +170,8 @@ void GameStateSetting::enter()
                 static_cast<ButtonText*>(button_[4].get())->getText().setColor(Base::Color{ 150, 150, 150, 255 });
                 static_cast<ButtonText*>(button_[5].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
                 static_cast<ButtonText*>(button_[6].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
+                static_cast<ButtonText*>(button_[7].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
+                static_cast<ButtonText*>(button_[8].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
             },
             [this, text4Boundaries](const ButtonBase& button, const Base::Point pos) -> bool { return button.getPosition() <= pos && pos <= button.getPosition() + text4Boundaries; },
             [this](ButtonBase& button, HandleInputSemantic& handle, float delta) -> void { ; }
@@ -196,6 +200,8 @@ void GameStateSetting::enter()
                 static_cast<ButtonText*>(button_[4].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
                 static_cast<ButtonText*>(button_[5].get())->getText().setColor(Base::Color{ 150, 150, 150, 255 });
                 static_cast<ButtonText*>(button_[6].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
+                static_cast<ButtonText*>(button_[7].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
+                static_cast<ButtonText*>(button_[8].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
             },
             [this, text5Boundaries](const ButtonBase& button, const Base::Point pos) -> bool { return button.getPosition() <= pos && pos <= button.getPosition() + text5Boundaries; },
             [this](ButtonBase& button, HandleInputSemantic& handle, float delta) -> void { ; }
@@ -224,8 +230,70 @@ void GameStateSetting::enter()
                 static_cast<ButtonText*>(button_[4].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
                 static_cast<ButtonText*>(button_[5].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
                 static_cast<ButtonText*>(button_[6].get())->getText().setColor(Base::Color{ 150, 150, 150, 255 });
+                static_cast<ButtonText*>(button_[7].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
+                static_cast<ButtonText*>(button_[8].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
             },
             [this, text6Boundaries](const ButtonBase& button, const Base::Point pos) -> bool { return button.getPosition() <= pos && pos <= button.getPosition() + text6Boundaries; },
+            [this](ButtonBase& button, HandleInputSemantic& handle, float delta) -> void { ; }
+        )
+    );
+
+    Text text7(fonts_[0]);
+    text7.setSize(72);
+    if (context_.configSystem.gameSetting().theme_ == "Purple")
+        text7.setColor(Base::Color{ 150, 150, 150, 255 });
+    else
+        text7.setColor(Base::Color{ 0, 0, 0, 255 });
+    Base::Point point7{ 500.0f, baselineY + 200.0f };
+    text7.setPosition(point7);
+    text7.setText("Purple");
+    text7.setSpacing(0.0f);
+    Base::Point text7Boundaries = fonts_[0]->getBoundaries(text7.getText(), text7.getSize(), 0);
+    button_.push_back(
+        std::make_shared<ButtonText>(
+            text7,
+            point7,
+            [this]() -> void
+            {
+                context_.audio.playSFX("TextButton");
+                context_.configSystem.gameSetting().theme_ = "Purple";
+                static_cast<ButtonText*>(button_[4].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
+                static_cast<ButtonText*>(button_[5].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
+                static_cast<ButtonText*>(button_[6].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
+                static_cast<ButtonText*>(button_[7].get())->getText().setColor(Base::Color{ 150, 150, 150, 255 });
+                static_cast<ButtonText*>(button_[8].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
+            },
+            [this, text7Boundaries](const ButtonBase& button, const Base::Point pos) -> bool { return button.getPosition() <= pos && pos <= button.getPosition() + text7Boundaries; },
+            [this](ButtonBase& button, HandleInputSemantic& handle, float delta) -> void { ; }
+        )
+    );
+
+    Text text8(fonts_[0]);
+    text8.setSize(72);
+    if (context_.configSystem.gameSetting().theme_ == "Pink")
+        text8.setColor(Base::Color{ 150, 150, 150, 255 });
+    else
+        text8.setColor(Base::Color{ 0, 0, 0, 255 });
+    Base::Point point8{ 800.0f, baselineY + 200.0f };
+    text8.setPosition(point8);
+    text8.setText("Pink");
+    text8.setSpacing(0.0f);
+    Base::Point text8Boundaries = fonts_[0]->getBoundaries(text8.getText(), text8.getSize(), 0);
+    button_.push_back(
+        std::make_shared<ButtonText>(
+            text8,
+            point8,
+            [this]() -> void
+            {
+                context_.audio.playSFX("TextButton");
+                context_.configSystem.gameSetting().theme_ = "Pink";
+                static_cast<ButtonText*>(button_[4].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
+                static_cast<ButtonText*>(button_[5].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
+                static_cast<ButtonText*>(button_[6].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
+                static_cast<ButtonText*>(button_[7].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
+                static_cast<ButtonText*>(button_[8].get())->getText().setColor(Base::Color{ 150, 150, 150, 255 });
+            },
+            [this, text8Boundaries](const ButtonBase& button, const Base::Point pos) -> bool { return button.getPosition() <= pos && pos <= button.getPosition() + text8Boundaries; },
             [this](ButtonBase& button, HandleInputSemantic& handle, float delta) -> void { ; }
         )
     );
