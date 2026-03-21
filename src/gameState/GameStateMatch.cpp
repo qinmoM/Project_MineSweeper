@@ -132,6 +132,11 @@ void GameStateMatch::render()
         rectangleColor = Base::Color{ 160, 190, 160, 255 };
         blockColor = Base::Color{ 200, 230, 200, 255 };
     }
+    else if (context_.configSystem.gameSetting().theme_ == "Yellow")
+    {
+        rectangleColor = Base::Color{ 190, 190, 130, 255 };
+        blockColor = Base::Color{ 230, 230, 170, 255 };
+    }
 
     context_.renderer.drawRectangleRoundFill(pos_.x - 20, pos_.y - 20, size_.x + 40, size_.y + 40, 0.04f, rectangleColor);
     context_.renderer.drawRectangleFill(pos_.x, pos_.y, size_.x, size_.y, Base::Color{ 255, 255, 255, 255 });
