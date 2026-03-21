@@ -187,7 +187,9 @@ float GameStateMatch::fontSize() const
 
 int GameStateMatch::mineCount() const
 {
-    if (context_.configSystem.gameSetting().rows_ == 9 && context_.configSystem.gameSetting().cols_ == 15)
+    if (context_.configSystem.gameSetting().rows_ == 6 && context_.configSystem.gameSetting().cols_ == 9)
+        return 8;
+    else if (context_.configSystem.gameSetting().rows_ == 9 && context_.configSystem.gameSetting().cols_ == 15)
         return 20;
     else if (context_.configSystem.gameSetting().rows_ == 13 && context_.configSystem.gameSetting().cols_ == 20)
         return 40;
