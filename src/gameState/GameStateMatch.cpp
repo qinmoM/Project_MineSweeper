@@ -136,7 +136,10 @@ void GameStateMatch::render()
             {
                 context_.renderer.drawRectangleFill(pos_.x + j * cellwidth, pos_.y + i * cellheight, cellwidth, cellheight, Base::Color{ 180, 220, 230, 255 });
                 if (gridView_->getCell(i, j).isMarked_)
-                    context_.renderer.drawCircleFill(pos_.x + j * cellwidth + cellwidth / 2, pos_.y + i * cellheight + cellheight / 2, 4.0f, Base::Color{0, 0, 0, 255});
+                {
+                    context_.renderer.drawLine(pos_.x + j * cellwidth + cellwidth / 4, pos_.y + i * cellheight + cellheight / 4, pos_.x + j * cellwidth + cellwidth * 3 / 4, pos_.y + i * cellheight + cellheight * 3 / 4, 14.0f, Base::Color{80, 100, 120, 255});
+                    context_.renderer.drawLine(pos_.x + j * cellwidth + cellwidth * 3 / 4, pos_.y + i * cellheight + cellheight / 4, pos_.x + j * cellwidth + cellwidth / 4, pos_.y + i * cellheight + cellheight * 3 / 4, 14.0f, Base::Color{80, 100, 120, 255});
+                }
             }
             else
             {
