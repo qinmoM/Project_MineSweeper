@@ -54,13 +54,14 @@ void GameStateSetting::enter()
     /*
         model
     */
+    float baselineY = 300.0f;
     Text text1(fonts_[0]);
     text1.setSize(72);
     if (context_.configSystem.gameSetting().rows_ == 6 && context_.configSystem.gameSetting().cols_ == 9)
         text1.setColor(Base::Color{ 150, 150, 150, 255 });
     else
         text1.setColor(Base::Color{ 0, 0, 0, 255 });
-    Base::Point point1{ 500.0f, 300.0f };
+    Base::Point point1{ 500.0f, baselineY };
     text1.setPosition(point1);
     text1.setText("6 x 9");
     text1.setSpacing(0.0f);
@@ -89,7 +90,7 @@ void GameStateSetting::enter()
         text2.setColor(Base::Color{ 150, 150, 150, 255 });
     else
         text2.setColor(Base::Color{ 0, 0, 0, 255 });
-    Base::Point point2{ 800.0f, 300.0f };
+    Base::Point point2{ 800.0f, baselineY };
     text2.setPosition(point2);
     text2.setText("9 x 15");
     text2.setSpacing(0.0f);
@@ -118,7 +119,7 @@ void GameStateSetting::enter()
         text3.setColor(Base::Color{ 150, 150, 150, 255 });
     else
         text3.setColor(Base::Color{ 0, 0, 0, 255 });
-    Base::Point point3{ 1100.0f, 300.0f };
+    Base::Point point3{ 1100.0f, baselineY };
     text3.setPosition(point3);
     text3.setText("13 x 20");
     text3.setSpacing(0.0f);
@@ -144,13 +145,14 @@ void GameStateSetting::enter()
     /*
         theme
     */
+    baselineY = 500.0f;
     Text text4(fonts_[0]);
     text4.setSize(72);
     if (context_.configSystem.gameSetting().theme_ == "Bule")
         text4.setColor(Base::Color{ 150, 150, 150, 255 });
     else
         text4.setColor(Base::Color{ 0, 0, 0, 255 });
-    Base::Point point4{ 500.0f, 500.0f };
+    Base::Point point4{ 500.0f, baselineY };
     text4.setPosition(point4);
     text4.setText("Bule");
     text4.setSpacing(0.0f);
@@ -178,7 +180,7 @@ void GameStateSetting::enter()
         text5.setColor(Base::Color{ 150, 150, 150, 255 });
     else
         text5.setColor(Base::Color{ 0, 0, 0, 255 });
-    Base::Point point5{ 800.0f, 500.0f };
+    Base::Point point5{ 800.0f, baselineY };
     text5.setPosition(point5);
     text5.setText("Green");
     text5.setSpacing(0.0f);
@@ -206,7 +208,7 @@ void GameStateSetting::enter()
         text6.setColor(Base::Color{ 150, 150, 150, 255 });
     else
         text6.setColor(Base::Color{ 0, 0, 0, 255 });
-    Base::Point point6{ 1100.0f, 500.0f };
+    Base::Point point6{ 1100.0f, baselineY };
     text6.setPosition(point6);
     text6.setText("Yellow");
     text6.setSpacing(0.0f);
