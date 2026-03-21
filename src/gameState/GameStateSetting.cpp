@@ -51,6 +51,9 @@ void GameStateSetting::enter()
         )
     );
 
+    /*
+        model
+    */
     Text text1(fonts_[0]);
     text1.setSize(72);
     if (context_.configSystem.gameSetting().rows_ == 6 && context_.configSystem.gameSetting().cols_ == 9)
@@ -137,6 +140,65 @@ void GameStateSetting::enter()
             [this](ButtonBase& button, HandleInputSemantic& handle, float delta) -> void { ; }
         )
     );
+
+    /*
+        theme
+    */
+    Text text4(fonts_[0]);
+    text4.setSize(72);
+    if (context_.configSystem.gameSetting().theme_ == "Bule")
+        text4.setColor(Base::Color{ 150, 150, 150, 255 });
+    else
+        text4.setColor(Base::Color{ 0, 0, 0, 255 });
+    Base::Point point4{ 500.0f, 500.0f };
+    text4.setPosition(point4);
+    text4.setText("Bule");
+    text4.setSpacing(0.0f);
+    Base::Point text4Boundaries = fonts_[0]->getBoundaries(text4.getText(), text4.getSize(), 0);
+    button_.push_back(
+        std::make_shared<ButtonText>(
+            text4,
+            point4,
+            [this]() -> void
+            {
+                context_.audio.playSFX("TextButton");
+                context_.configSystem.gameSetting().theme_ = "Bule";
+                // static_cast<ButtonText*>(button_[1].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
+                static_cast<ButtonText*>(button_[4].get())->getText().setColor(Base::Color{ 150, 150, 150, 255 });
+                static_cast<ButtonText*>(button_[5].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
+            },
+            [this, text4Boundaries](const ButtonBase& button, const Base::Point pos) -> bool { return button.getPosition() <= pos && pos <= button.getPosition() + text4Boundaries; },
+            [this](ButtonBase& button, HandleInputSemantic& handle, float delta) -> void { ; }
+        )
+    );
+
+    Text text5(fonts_[0]);
+    text5.setSize(72);
+    if (context_.configSystem.gameSetting().theme_ == "Green")
+        text5.setColor(Base::Color{ 150, 150, 150, 255 });
+    else
+        text5.setColor(Base::Color{ 0, 0, 0, 255 });
+    Base::Point point5{ 800.0f, 500.0f };
+    text5.setPosition(point5);
+    text5.setText("Green");
+    text5.setSpacing(0.0f);
+    Base::Point text5Boundaries = fonts_[0]->getBoundaries(text5.getText(), text5.getSize(), 0);
+    button_.push_back(
+        std::make_shared<ButtonText>(
+            text5,
+            point5,
+            [this]() -> void
+            {
+                context_.audio.playSFX("TextButton");
+                context_.configSystem.gameSetting().theme_ = "Green";
+                // static_cast<ButtonText*>(button_[1].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
+                static_cast<ButtonText*>(button_[4].get())->getText().setColor(Base::Color{ 0, 0, 0, 255 });
+                static_cast<ButtonText*>(button_[5].get())->getText().setColor(Base::Color{ 150, 150, 150, 255 });
+            },
+            [this, text5Boundaries](const ButtonBase& button, const Base::Point pos) -> bool { return button.getPosition() <= pos && pos <= button.getPosition() + text5Boundaries; },
+            [this](ButtonBase& button, HandleInputSemantic& handle, float delta) -> void { ; }
+        )
+    );
 }
 
 void GameStateSetting::exit()
@@ -162,8 +224,8 @@ void GameStateSetting::render()
     context_.renderer.drawRectangleFill(0, 0, context_.renderer.getWidth(), context_.renderer.getHeight(), Base::Color{ 230, 230, 230, 255 });
 
     context_.renderer.drawFont(200, 300, 72, "Model:", fonts_[0], Base::Color{ 0, 0, 0, 255 });
-    // context_.renderer.drawFont(200, 500, 72, "Level:", fonts_[0], Base::Color{ 0, 0, 0, 255 });
-    // context_.renderer.drawFont(200, 700, 72, "Theme:", fonts_[0], Base::Color{ 0, 0, 0, 255 });
+    context_.renderer.drawFont(200, 500, 72, "Theme:", fonts_[0], Base::Color{ 0, 0, 0, 255 });
+    // context_.renderer.drawFont(200, 700, 72, "Level:", fonts_[0], Base::Color{ 0, 0, 0, 255 });
 
     // button
     for (auto& button : button_)

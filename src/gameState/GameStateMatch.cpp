@@ -120,7 +120,20 @@ void GameStateMatch::render()
 {
     context_.renderer.drawRectangleFill(0, 0, context_.renderer.getWidth(), context_.renderer.getHeight(), Base::Color{ 230, 230, 230, 255 });
 
-    context_.renderer.drawRectangleRoundFill(pos_.x - 20, pos_.y - 20, size_.x + 40, size_.y + 40, 0.04f, Base::Color{ 140, 180, 190, 255 });
+    Base::Color rectangleColor{ 140, 180, 190, 255 };
+    Base::Color blockColor{ 180, 220, 230, 255 };
+    if (context_.configSystem.gameSetting().theme_ == "Bule")
+    {
+        rectangleColor = Base::Color{ 140, 180, 190, 255 };
+        blockColor = Base::Color{ 180, 220, 230, 255 };
+    }
+    else if (context_.configSystem.gameSetting().theme_ == "Green")
+    {
+        rectangleColor = Base::Color{ 160, 190, 160, 255 };
+        blockColor = Base::Color{ 200, 230, 200, 255 };
+    }
+
+    context_.renderer.drawRectangleRoundFill(pos_.x - 20, pos_.y - 20, size_.x + 40, size_.y + 40, 0.04f, rectangleColor);
     context_.renderer.drawRectangleFill(pos_.x, pos_.y, size_.x, size_.y, Base::Color{ 255, 255, 255, 255 });
 
     const MineField& field = gridView_->getField();
@@ -134,7 +147,7 @@ void GameStateMatch::render()
         {
             if (!gridView_->getCell(i, j).isRevealed_)
             {
-                context_.renderer.drawRectangleFill(pos_.x + j * cellwidth, pos_.y + i * cellheight, cellwidth, cellheight, Base::Color{ 180, 220, 230, 255 });
+                context_.renderer.drawRectangleFill(pos_.x + j * cellwidth, pos_.y + i * cellheight, cellwidth, cellheight, blockColor);
                 if (gridView_->getCell(i, j).isMarked_)
                 {
                     context_.renderer.drawLine(pos_.x + j * cellwidth + cellwidth / 4, pos_.y + i * cellheight + cellheight / 4, pos_.x + j * cellwidth + cellwidth * 3 / 4, pos_.y + i * cellheight + cellheight * 3 / 4, 14.0f, Base::Color{80, 100, 120, 255});
