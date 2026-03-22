@@ -40,6 +40,7 @@ void Game::run()
     gameManager.registerState("Match", [&gameManager]() -> GameStateManager::stateType { return std::make_unique<GameStateMatch>(gameManager.getContext(), "Match"); });
     gameManager.registerState("Result", [&gameManager]() -> GameStateManager::stateType { return std::make_unique<GameStateResult>(gameManager.getContext(), "Result"); });
     gameManager.registerState("Setting", [&gameManager]() -> GameStateManager::stateType { return std::make_unique<GameStateSetting>(gameManager.getContext(), "Setting"); });
+    gameManager.registerState("Help", [&gameManager]() -> GameStateManager::stateType { return std::make_unique<GameStateHelp>(gameManager.getContext(), "Help"); });
     gameManager.init("Menu");
 
     gameManager.getContext().audio.loadBGM("../res/audio/music/840648__visidy__joyful-game-loop-kitty-yarn-play.wav");

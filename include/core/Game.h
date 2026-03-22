@@ -4,6 +4,7 @@
 #include "GameStateMatch.h"
 #include "GameStateResult.h"
 #include "GameStateSetting.h"
+#include "GameStateHelp.h"
 
 #include "GameManager.h"
 #include "RendererRaylib.h"
