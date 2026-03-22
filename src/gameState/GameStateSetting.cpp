@@ -146,7 +146,7 @@ void GameStateSetting::enter()
     /*
         theme
     */
-    baselineY = 500.0f;
+    baselineY = 550.0f;
 
     Text text4(fonts_[0]);
     text4.setSize(72);
@@ -244,7 +244,7 @@ void GameStateSetting::enter()
         text7.setColor(Base::Color{ 150, 150, 150, 255 });
     else
         text7.setColor(Base::Color{ 0, 0, 0, 255 });
-    Base::Point point7{ 500.0f, baselineY + 200.0f };
+    Base::Point point7{ 500.0f, baselineY + 150.0f };
     text7.setPosition(point7);
     text7.setText("Purple");
     text7.setSpacing(0.0f);
@@ -274,7 +274,7 @@ void GameStateSetting::enter()
         text8.setColor(Base::Color{ 150, 150, 150, 255 });
     else
         text8.setColor(Base::Color{ 0, 0, 0, 255 });
-    Base::Point point8{ 800.0f, baselineY + 200.0f };
+    Base::Point point8{ 800.0f, baselineY + 150.0f };
     text8.setPosition(point8);
     text8.setText("Pink");
     text8.setSpacing(0.0f);
@@ -322,7 +322,7 @@ void GameStateSetting::render()
     context_.renderer.drawRectangleFill(0, 0, context_.renderer.getWidth(), context_.renderer.getHeight(), Base::Color{ 230, 230, 230, 255 });
 
     context_.renderer.drawFont(200, 300, 72, "Model:", fonts_[0], Base::Color{ 0, 0, 0, 255 });
-    context_.renderer.drawFont(200, 500, 72, "Theme:", fonts_[0], Base::Color{ 0, 0, 0, 255 });
+    context_.renderer.drawFont(200, 550, 72, "Theme:", fonts_[0], Base::Color{ 0, 0, 0, 255 });
     // context_.renderer.drawFont(200, 700, 72, "Level:", fonts_[0], Base::Color{ 0, 0, 0, 255 });
 
     // button

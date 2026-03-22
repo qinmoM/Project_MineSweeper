@@ -75,6 +75,12 @@ void GameStateHelp::render()
     // background
     context_.renderer.drawRectangleFill(0, 0, context_.renderer.getWidth(), context_.renderer.getHeight(), Base::Color{ 230, 230, 230, 255 });
 
+    // text
+    context_.renderer.drawFont(200, 300, 56, "github:   https://github.com/qinmoM/Project_MineSweeper", fonts_[0], Base::Color{ 0, 0, 0, 255 });
+    context_.renderer.drawFont(200, 430, 56, "author:   qinmoM", fonts_[0], Base::Color{ 0, 0, 0, 255 });
+    context_.renderer.drawFont(200, 560, 56, "e-mail:   qinmo666@outlook.com", fonts_[0], Base::Color{ 0, 0, 0, 255 });
+    context_.renderer.drawFont(200, 690, 56, "license:   MIT License Copyright (c) 2026 qinmoM", fonts_[0], Base::Color{ 0, 0, 0, 255 });
+
     // button
     for (auto& button : button_)
         button->render(context_.renderer);
