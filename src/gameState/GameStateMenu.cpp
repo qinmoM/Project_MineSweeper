@@ -112,6 +112,31 @@ void GameStateMenu::enter()
             imageButton_update_colorExchanged
         )
     );
+
+    // help button
+    std::shared_ptr<FontBase> font1 = context_.renderer.loadFont("../res/font/Sniglet/Sniglet-Regular.ttf", 72);
+
+    Text text1(font1);
+    text1.setSize(56);
+    text1.setColor(Base::Color{ 70, 50, 60, 255 });
+    Base::Point point1{ 1470.0f, 1000.0f };
+    text1.setPosition(point1);
+    text1.setText("help");
+    text1.setSpacing(0.0f);
+    Base::Point text1Boundaries = font1->getBoundaries(text1.getText(), text1.getSize(), 0);
+    button_.push_back(
+        std::make_shared<ButtonText>(
+            text1,
+            point1,
+            [this]() -> void
+            {
+                context_.audio.playSFX("TextButton");
+                context_.stateManager.pushState("Help");
+            },
+            [this, text1Boundaries](const ButtonBase& button, const Base::Point pos) -> bool { return button.getPosition() <= pos && pos <= button.getPosition() + text1Boundaries; },
+            [this](ButtonBase& button, HandleInputSemantic& handle, float delta) -> void { ; }
+        )
+    );
 }
 
 void GameStateMenu::exit()
