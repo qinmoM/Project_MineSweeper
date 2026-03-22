@@ -18,7 +18,7 @@ void GameStateMatch::enter()
     );
 
     font_.push_back(
-        context_.renderer.loadFont("../res/font/Sniglet/Sniglet-Regular.ttf", fontSize())
+        context_.renderer.loadFont(context_.configSystem.execPath() + "res/font/Sniglet/Sniglet-Regular.ttf", fontSize())
     );
 
     std::shared_ptr<TextureBase>* temp = context_.blackboard.tryGet<std::shared_ptr<TextureBase>>("button.return_ashen");

@@ -78,7 +78,7 @@ void GameStateResult::enter()
         )
     );
 
-    fonts_.push_back(context_.renderer.loadFont("../res/font/Sniglet/Sniglet-Regular.ttf", 112));
+    fonts_.push_back(context_.renderer.loadFont(context_.configSystem.execPath() + "res/font/Sniglet/Sniglet-Regular.ttf", 112));
 }
 
 void GameStateResult::exit()

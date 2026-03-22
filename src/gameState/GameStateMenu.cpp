@@ -16,7 +16,7 @@ void GameStateMenu::enter()
         [](ButtonBase& button, HandleInputSemantic& handle, float delta) -> void { ; }
     ;
 
-    std::shared_ptr<FontBase> font = context_.renderer.loadFont("../res/font/Flavors/Flavors-Regular.ttf", 250);
+    std::shared_ptr<FontBase> font = context_.renderer.loadFont(context_.configSystem.execPath() + "res/font/Flavors/Flavors-Regular.ttf", 250);
     Text text(font);
     text.setText("Mine Sweeper\n                  `");
     text.setSize(250.0f);
@@ -56,7 +56,7 @@ void GameStateMenu::enter()
         }
     ;
 
-    std::shared_ptr<TextureBase> texture = context_.renderer.loadTexture("../res/image/return_ashen.png");
+    std::shared_ptr<TextureBase> texture = context_.renderer.loadTexture(context_.configSystem.execPath() + "res/image/return_ashen.png");
     context_.blackboard.set("button.return_ashen", texture);
     Sprite sprite(texture);
     sprite.setOrigin({ 500.0f, 500.0f });
@@ -73,7 +73,7 @@ void GameStateMenu::enter()
         )
     );
 
-    std::shared_ptr<TextureBase> texture2 = context_.renderer.loadTexture("../res/image/pauseOpen_ashen.png");
+    std::shared_ptr<TextureBase> texture2 = context_.renderer.loadTexture(context_.configSystem.execPath() + "res/image/pauseOpen_ashen.png");
     Sprite sprite2(texture2);
     sprite2.setOrigin({ 500.0f, 500.0f });
     sprite2.setScale(Base::Point{ 0.25f, 0.25f });
@@ -93,7 +93,7 @@ void GameStateMenu::enter()
         )
     );
 
-    std::shared_ptr<TextureBase> texture3 = context_.renderer.loadTexture("../res/image/option_ashen.png");
+    std::shared_ptr<TextureBase> texture3 = context_.renderer.loadTexture(context_.configSystem.execPath() + "res/image/option_ashen.png");
     Sprite sprite3(texture3);
     sprite3.setOrigin({ 500.0f, 500.0f });
     sprite3.setScale(Base::Point{ 0.25f, 0.25f });
@@ -114,7 +114,7 @@ void GameStateMenu::enter()
     );
 
     // help button
-    std::shared_ptr<FontBase> font1 = context_.renderer.loadFont("../res/font/Sniglet/Sniglet-Regular.ttf", 72);
+    std::shared_ptr<FontBase> font1 = context_.renderer.loadFont(context_.configSystem.execPath() + "res/font/Sniglet/Sniglet-Regular.ttf", 72);
 
     Text text1(font1);
     text1.setSize(56);

@@ -9,7 +9,7 @@ GameStateSetting::GameStateSetting(GameStateContext &context, const std::string&
 void GameStateSetting::enter()
 {
     // init
-    fonts_.push_back(context_.renderer.loadFont("../res/font/Sniglet/Sniglet-Regular.ttf", 72));
+    fonts_.push_back(context_.renderer.loadFont(context_.configSystem.execPath() + "res/font/Sniglet/Sniglet-Regular.ttf", 72));
 
     // button
     std::shared_ptr<TextureBase>* temp = context_.blackboard.tryGet<std::shared_ptr<TextureBase>>("button.return_ashen");
